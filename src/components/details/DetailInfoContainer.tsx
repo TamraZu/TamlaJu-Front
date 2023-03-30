@@ -1,32 +1,37 @@
 import React from 'react'
 import styled from '@emotion/styled'
+import { DetailData } from 'apis'
 
-function DetailInfoContainer() {
+interface DetailInfoContainerProps {
+  detailData: DetailData
+}
+
+function DetailInfoContainer({ detailData }: DetailInfoContainerProps) {
   return (
     <StyledContainer>
       <DetailInfo>
         <DetailInfoKey>가격 </DetailInfoKey>
-        <DetailInfoValue>13000원</DetailInfoValue>
+        <DetailInfoValue>{detailData.price}원</DetailInfoValue>
       </DetailInfo>
-      <DetailInfo>
-        <DetailInfoKey>생산자</DetailInfoKey>
-        <DetailInfoValue>제주본초협동조합</DetailInfoValue>
-      </DetailInfo>
+      <DetailInfoAddress>
+        <DetailInfoAddressKey>생산자</DetailInfoAddressKey>
+        <DetailInfoAddressValue>{detailData.address}</DetailInfoAddressValue>
+      </DetailInfoAddress>
       <DetailInfo>
         <DetailInfoKey>지역 </DetailInfoKey>
-        <DetailInfoValue>제주시 한경면</DetailInfoValue>
+        <DetailInfoValue>{detailData.region}</DetailInfoValue>
       </DetailInfo>
       <DetailInfo>
         <DetailInfoKey>용량</DetailInfoKey>
-        <DetailInfoValue>365ml</DetailInfoValue>
+        <DetailInfoValue>{detailData.volume}ml</DetailInfoValue>
       </DetailInfo>
       <DetailInfo>
         <DetailInfoKey>도수 </DetailInfoKey>
-        <DetailInfoValue>16도</DetailInfoValue>
+        <DetailInfoValue>{detailData.level}도</DetailInfoValue>
       </DetailInfo>
       <DetailInfo>
         <DetailInfoKey>품종 </DetailInfoKey>
-        <DetailInfoValue>기타주류</DetailInfoValue>
+        <DetailInfoValue>{detailData.category}</DetailInfoValue>
       </DetailInfo>
     </StyledContainer>
   )
@@ -56,14 +61,38 @@ const DetailInfoKey = styled.div`
   font-size: 16px;
   line-height: 24px;
   width: 48px;
+  height: 24px;
   letter-spacing: -0.003em;
 `
 
-const DetailInfoValue = styled.div`
-  height: 24px;
+const DetailInfoAddress = styled(DetailInfo)`
+  margin-bottom: 20px;
+`
+
+const DetailInfoAddressKey = styled.div`
+  color: #858899;
+  white-space: nowrap;
   font-weight: 500;
   font-size: 16px;
   line-height: 24px;
+  width: 48px;
+  height: 24px;
+  letter-spacing: -0.003em;
+`
+const DetailInfoAddressValue = styled.div`
+  height: 50px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  word-wrap: break-word;
+  letter-spacing: -0.003em;
+`
+const DetailInfoValue = styled.div`
+  height: 50px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: -0.003em;
 `
 
 export default DetailInfoContainer
