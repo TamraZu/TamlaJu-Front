@@ -1,7 +1,41 @@
-import React from "react";
+import React from 'react'
+import Category from 'components/List/Category'
+import Header from 'components/common/Header'
+import NavBar from 'components/common/NavBar'
+import ListCard from 'components/List/ListCard'
+import styled from '@emotion/styled'
+import ListCardContainer from 'components/List/ListCardContainer'
 
-function List() {
-  return <div>List</div>;
+const ListCardExample = {
+  drinkImage: 'https://company.lottechilsung.co.kr/common/images/product_view0204_bh2.jpg',
+  drinkName: '동백꽃, 제주',
+  drinkSize: 365,
+  drinkLevel: 16,
+  drinkPrice: 13000,
+  drinkAteCount: 33,
+  drinkIsAte: true,
 }
 
-export default List;
+function List() {
+  return (
+    <ListLayout>
+      <Header>제주도감</Header>
+      <Category />
+      <ListCardContainer>
+        <ListCard drink={ListCardExample} />
+        <ListCard drink={ListCardExample} />
+        <ListCard drink={ListCardExample} />
+        <ListCard drink={ListCardExample} />
+        <ListCard drink={ListCardExample} />
+        <ListCard drink={ListCardExample} />
+      </ListCardContainer>
+      <NavBar />
+    </ListLayout>
+  )
+}
+
+export default List
+
+const ListLayout = styled.div`
+  padding: 0 16px;
+`
