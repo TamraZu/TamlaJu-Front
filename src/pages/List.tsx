@@ -1,11 +1,15 @@
 import React from 'react'
-import Category from 'components/Category'
+import Category from 'components/List/Category'
+import ListHeader from 'components/List/ListHeader'
+import NavBar from 'components/common/NavBar'
 
 function List() {
   return (
-    <div>
+    <>
+      <ListHeader />
       <Category />
-    </div>
+      <NavBar />
+    </>
   )
 }
 
