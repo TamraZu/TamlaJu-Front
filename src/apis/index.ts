@@ -44,3 +44,8 @@ export const getDetailAlcohol = async (alcoholId: number, memberId: number) => {
   const response = await Axios.get(`/api/v1/alcohols/${alcoholId}?memberId=${memberId}`)
   return response.data.data
 }
+
+export const getListAlcohol = async (memberId: number, category: string) => {
+  const response = await Axios.get(`/api/v1/alcohols?memberId=${memberId}&category=${category}`)
+  return response.data.data
+}
