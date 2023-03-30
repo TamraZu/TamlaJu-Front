@@ -1,37 +1,7 @@
 {
   "presets": [
-    [
-      "@babel/env",
-      {
-        "targets": {
-          "node": "current"
-        }
-      }
-    ],
-    "@babel/typescript"
+    ["@babel/preset-react", { "runtime": "automatic", "importSource": "@emotion/react" }],
+    ["@emotion/babel-preset-css-prop"]
   ],
-  "plugins": [
-    [
-      "module-resolver",
-      {
-        "extensions": [
-          ".ts",
-          ".tsx"
-        ],
-        "root": [
-          "."
-        ],
-        "alias": {
-          "@": "./src",
-          "@utils": "./src/utils",
-          "@pages": "./src/pages",
-          "@entities": "./src/entities"
-        }
-      }
-    ]
-  ],
-  "comments": false,
-  "ignore": [
-    "./src/__tests__"
-  ]
+  "plugins": ["@emotion/babel-plugin"]
 }
