@@ -3,6 +3,7 @@ import styled from '@emotion/styled'
 import { ReactComponent as IsDrinkedIcon } from 'atoms/icons/IsDrinkedIcon.svg'
 import { useNavigate } from 'react-router-dom'
 import { ListAlcoholData } from 'pages/List'
+import { postEatingCount } from 'apis'
 
 export interface ListCardProps {
   drink: ListAlcoholData
@@ -10,6 +11,9 @@ export interface ListCardProps {
 
 function ListCard({ drink }: ListCardProps) {
   const navigate = useNavigate()
+  const onClickHandler = async () => {
+    await postEatingCount(1, drink.alcoholId)
+  }
   return (
     <CardContainer>
       <CardImage onClick={() => navigate(`/details/${drink.alcoholId}`)}>
@@ -27,7 +31,7 @@ function ListCard({ drink }: ListCardProps) {
           <CardButton>
             <IsDrinkedIcon width={32} height={32} fill={drink.hasAte ? '#FD6E21' : '#858899'} />
           </CardButton>
-          <CardCount>{drink.ateCount}</CardCount>
+          <CardCount onClick={onClickHandler}>{drink.ateCount}</CardCount>
         </CardRight>
       </CardContent>
     </CardContainer>
