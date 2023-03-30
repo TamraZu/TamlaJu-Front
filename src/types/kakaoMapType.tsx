@@ -1,8 +1,8 @@
 import { ReactNode } from 'react';
 
-export type latLngType = {
-  La: number;
-  Ma: number;
+export interface latLngType {
+  lat: number;
+  lng: number;
 };
 
 export type pointType = {
@@ -10,15 +10,21 @@ export type pointType = {
   y: number;
 };
 
+export interface mapOptionType {
+  center: latLngType;
+  zoom: number
+}
+
 export type locationDataType = {
   latLng: latLngType;
   point: pointType;
 };
 
 export type MarkerDataType = {
-  key: number;
-  children: ReactNode;
+  key?: number;
+  children?: ReactNode;
   lat: number;
   lng: number;
   visited?: boolean;
+  onClick?: () => void;
 };

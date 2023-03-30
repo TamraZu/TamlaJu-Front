@@ -1,4 +1,4 @@
-import Detail from "./pages/Detail";
+import Detail from "pages/Detail";
 import List from "./pages/List";
 import Main from "./pages/Main";
 import SignIn from "./pages/SignIn";

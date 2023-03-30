@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { MapMarker } from 'react-kakao-maps-sdk';
-import { MarkerDataType } from '~types/kakaoMapType';
+import { MarkerDataType } from 'types/kakaoMapType';
 import { useQuery } from '@tanstack/react-query';
-import axios from '../../../services';
+import axios from 'services';
 
 const visitedMarker = {
   src: 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png',
