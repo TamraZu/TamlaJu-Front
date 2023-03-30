@@ -21,12 +21,13 @@ const Card = styled.div`
     border: #ffe9d4 1px solid ;
     background-color: #fff7f0;
 `
+interface BrewerlydetailCardViewProps {
+    alcohols:alcoholType[]
+}
 
-const BrewerlyDetailCardView = ({ factoryId, name, address, alcohols }: brewerlyType) => {
+const BrewerlyDetailCardView = ({alcohols}:BrewerlydetailCardViewProps) => {
     return (<CardWrapper>
         <>
-            <h1>name</h1>
-            <p>address</p>
             {alcohols.map((t: alcoholType) => {
                 return (<Card key={t.alcoholId}>
                     <img src={t.imageUrl} />

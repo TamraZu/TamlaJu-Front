@@ -31,6 +31,14 @@ export type MarkerDataType = {
   setCenter:(a:latLngType) => void
 };
 
+export type tempType = {
+  factoryId: number;
+  name: string;
+  address: string;
+  latLng?:latLngType;
+  // alcohols: alcoholType[];
+}
+
 export interface apiConnectType<T> {
   success : boolean,
   message : string,

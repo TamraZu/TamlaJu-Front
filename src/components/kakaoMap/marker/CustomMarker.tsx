@@ -1,12 +1,14 @@
 import { useState, useContext, useEffect } from 'react';
 import { MapMarker } from 'react-kakao-maps-sdk';
-import { latLngType, MarkerDataType } from 'types/kakaoMapType';
+import { apiConnectType, latLngType, MarkerDataType } from 'types/kakaoMapType';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'services';
 import { MapContext } from 'pages/Main';
 import markerSelectedImage from 'atoms/png/BrewerySelectedIcon.png'
 import markerAteImage from 'atoms/png/BreweryCheckedIcon.png'
 import markerDefaultImage from 'atoms/png/BreweryIcon.png'
+import { brewerlyType } from 'types/drinkType';
+import { AxiosResponse } from 'axios';
 
 const ateMarker = {
   src: markerAteImage,
@@ -36,6 +38,7 @@ const selectedMarker = {
   },
 }
 
+
 const defaultMarker = {
   src: markerDefaultImage,
   size: {
@@ -51,39 +54,59 @@ const defaultMarker = {
 }
 export default function CustomMarker({ factoryId, latitude, longitude, hasAte, address, setCenter }: MarkerDataType) {
   const data = useContext(MapContext)
-
-  const [isVisited, setIsVisited] = useState(hasAte);
+  const [response, setResponse] = useState<apiConnectType<brewerlyType>>();
   const [isOpen, setIsOpen] = useState(false);
-  const [isSelected, setIsSelected] = useState(data?.data?.selectedId === factoryId);
-  const [image, setImage] = useState(defaultMarker)
-  useEffect(() => {
-    setImage(isSelected ? selectedMarker : isVisited ? ateMarker : defaultMarker)
-  })
+  const [enabled, setEnabled] = useState(false);
+  // const [isVisited, setIsVisited] = useState(hasAte);
+  // const [isSelected, setIsSelected] = useState(data?.data?.factoryId === factoryId);
+  // const [image, setImage] = useState(defaultMarker);
+  // useEffect(() => {
+  // setImage(isSelected ? selectedMarker : isVisited ? ateMarker : defaultMarker)
+  // })
 
+
+  // useQuery(
+  //   ['kakaomap', 'request', 'factories', 'details'],
+  //   () => {
+  //     return axios.get<apiConnectType<brewerlyType>>(`api/v1/factories/${factoryId}`);
+  //   },
+  //   {
+  //     enabled: enabled,
+  //     onSuccess: (response) => {
+  //       setResponse(response.data.data);
+  //     },
+  //   }
+  // );
+
+
+  useEffect(() => {
+    if (response) {
+      data?.onDataChange(response.data)
+      console.log(response, 'set')
+    }
+  }, [response])
 
   return (
     <MapMarker
       position={{ lat: latitude, lng: longitude }}
       clickable={true}
-      image={image}
+      image={defaultMarker}
       onClick={(e) => {
-        data?.onDataChange({
-          selectedId: factoryId!,
-          name: 'test',
-          address: address,
-          LatLng: { lat: latitude, lng: longitude }
+        axios.get<apiConnectType<brewerlyType>>(`api/v1/factories/${factoryId}`)
+          .then(t => {
+            setResponse(t.data);
+          }).catch(e => {
+          alert('네트워크 통신 실패')
         })
+
         const pos = {
           lat: e.getPosition().getLat(),
           lng: e.getPosition().getLng()
         }
 
-
         setCenter({ lat: pos.lat, lng: pos.lng })
         data?.toggleBottomSheet(isOpen);
-
         setIsOpen(!isOpen);
-        setIsSelected(data?.data?.selectedId === factoryId && isOpen);
 
       }
         // 커스텀 마커에서 클릭했을때 지도의 중심으로 이동

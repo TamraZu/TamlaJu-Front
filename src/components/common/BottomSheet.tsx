@@ -2,12 +2,13 @@
 
 import React, { useState, useEffect, useContext, useRef } from 'react';
 import { css } from '@emotion/react';
-import { ReactComponent as BrewerlyIcon } from 'atoms/icons/BrewerlyIcon.svg';
+import styled from '@emotion/styled'
+import { ReactComponent as MapIcon } from 'atoms/icons/MapIcon.svg';
 import { useSpring, animated } from 'react-spring';
 import { BottomSheetControlType } from 'types/layoutControlType';
 import { MapContext } from 'pages/Main';
 import BrewerlyDetailCardView from './BrewerlyDetailCardView';
-import { brewerlyType } from 'types/drinkType';
+import { alcoholType, brewerlyType } from 'types/drinkType';
 
 const container = css({
     maxWidth: 375,
@@ -24,6 +25,19 @@ const container = css({
     zIndex: 2
 })
 
+const mapIcon = css`
+float:left
+`
+
+const closeBtn = css`
+float:right
+`
+
+const BottomSheetHeader = styled.h3`
+display: flex;
+`
+
+
 export default function BottomSheetContainer({ isOpen, onClose }: BottomSheetControlType) {
     const [open, setOpen] = useState<boolean>(isOpen);
     const [isAnimating, setIsAnimating] = useState(false);
@@ -36,21 +50,43 @@ export default function BottomSheetContainer({ isOpen, onClose }: BottomSheetCon
     });
 
     const handleClose = () => {
-        if (!isAnimating && onClose) {
-            onClose();
+        if (!isAnimating) {
+            // onClose();
+            setOpen(false);
         }
     };
-    const contextData = useContext(MapContext);
 
-    useEffect(() => {
-        if(isOpen){
-            // setData(contextData?.data!)
+
+    const BottomSheetGenerate = () => {
+        if(!data?.alcohols){
+            const alcohol : alcoholType[] = data?.alcohols;
+            console.log(alcohol)
+            return null;
         }
-        // if (isOpen) {
-        // isOpen()
-        // }
-    }, [isOpen])
 
+        return (
+            <div style={{ margin: '0 0 0 16px' }}>
+                <MapIcon css={mapIcon} title='map' fill='#000' width={20} height={20}> </MapIcon>
+                <MapIcon css={closeBtn} onClick={() => { setOpen(false) }} title='map' fill='#000' width={20} height={20}> </MapIcon>
+
+                <div>
+                    <h3>{data?.name}</h3>
+                    <p>{data?.address}</p>
+                </div>
+
+                <BrewerlyDetailCardView alcohols={data.alcohols}/>
+
+            </div>
+        )
+    }
+
+    const contextData = useContext(MapContext);
+    useEffect(() => {
+        if(contextData?.data){
+            setData(contextData.data)
+        }
+        console.log(contextData);
+    }, [contextData])
     return (
         <>
             {isOpen && <div className="bottom-sheet-backdrop" onClick={handleClose} />}
@@ -61,21 +97,7 @@ export default function BottomSheetContainer({ isOpen, onClose }: BottomSheetCon
                     transform: y.interpolate((y: number) => `translateY(${y}%)`),
                 }}
             >
-
-                <div css={css`
-                    display: flex;
-                `}>
-                    {/* <BrewerlyIcon width="20" height="20" fill={'#09121F'}>
-
-                    </BrewerlyIcon> */}
-                </div>
-                <BrewerlyDetailCardView factoryId={1} name='dummy' address='dummy' alcohols={[{
-                    alcoholId: 1,
-                    name: 'test',
-                    imageUrl: 'string' 
-                }]}></BrewerlyDetailCardView>
-
-
+                {BottomSheetGenerate()}
             </animated.div>
         </>
     )

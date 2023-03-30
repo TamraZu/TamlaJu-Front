@@ -1,4 +1,5 @@
-import { ReactNode } from 'react';
+import { ReactNode, SetStateAction } from 'react';
+import { brewerlyType } from './drinkType';
 import { latLngType } from './kakaoMapType';
 
 export interface BottomSheetControlType {
@@ -6,7 +7,7 @@ export interface BottomSheetControlType {
     isOpen: boolean;
     onClose?: () => void;
     onOpen?: () => void;
-    data?:BottomSheetDataType;
+    data?:brewerlyType;
 }
 
 export interface BottomSheetDataType {
@@ -17,8 +18,8 @@ export interface BottomSheetDataType {
 }
 
 export interface BottomSheetRecoilPropType {
-    data:BottomSheetDataType|null;
-    onDataChange:(data:BottomSheetDataType) => void;
+    data:SetStateAction<brewerlyType>;
+    onDataChange:(data:brewerlyType) => void;
     toggleBottomSheet:(data:boolean) => void;
     children?:ReactNode;
 }

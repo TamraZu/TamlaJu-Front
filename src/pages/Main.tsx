@@ -1,10 +1,11 @@
 import { latLngType } from "types/kakaoMapType";
 import React, { useState, createContext, useEffect } from 'react'
-import { BottomSheetDataType, BottomSheetRecoilPropType } from "types/layoutControlType";
+import {BottomSheetRecoilPropType } from "types/layoutControlType";
 import KakaoMap from "components/kakaoMap/KakaoMap";
 import BottomSheetContainer from "components/common/BottomSheet";
 import NavBar from "components/common/NavBar";
 import styled from '@emotion/styled';
+import { brewerlyType } from "types/drinkType";
 
 const defaultPosition: latLngType = { lat: 33.3764, lng: 126.5377 };
 
@@ -17,7 +18,7 @@ const Header = styled.h1`
 
 function Main() {
     const data: BottomSheetRecoilPropType | null = null;
-    const [btmSheetData, setBtmSheetData] = useState<BottomSheetDataType | null>(null);
+    const [btmSheetData, setBtmSheetData] = useState<brewerlyType|undefined>();
     const [isOpen, setIsOpen] = useState(false);
 
 

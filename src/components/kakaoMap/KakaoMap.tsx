@@ -41,10 +41,6 @@ function KakaoMap({ center, zoom }: mapOptionType) {
             level={zoomLevel}
             isPanto
             onClick={(_t, mouseEvent) => {
-                setPosition({
-                    lat: mouseEvent.latLng.getLat(),
-                    lng: mouseEvent.latLng.getLng()
-                })
                 data?.toggleBottomSheet(false);
             }
             }>
