@@ -49,7 +49,7 @@ const Container = styled.div`
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   box-shadow: 0px -2px 2px rgba(0, 0, 0, 0.04);
-  /* background: #fdf9f1; */
+  background: #ffffff;
 `
 const NavBox = styled.div`
   display: flex;
