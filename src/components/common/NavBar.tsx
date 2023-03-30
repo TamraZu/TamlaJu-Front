@@ -12,12 +12,12 @@ function NavBar() {
       <NavBox>
         <nav>
           <NavLink to={'/'}>
-            <MapIcon width="20" height="20" fill={pathname === '/' ? '#09121F' : 'blue'} />
+            <MapIcon width="20" height="20" fill={pathname === '/' ? '#09121F' : '#A9ABB8'} />
           </NavLink>
         </nav>
         <nav>
           <NavLink to={'/list'}>
-            <DrinkIcon width="20" height="20" fill={pathname === '/list' ? '#09121F' : 'blue'} />
+            <DrinkIcon width="20" height="20" fill={pathname === '/list' ? '#09121F' : '#A9ABB8'} />
           </NavLink>
         </nav>
         <nav>
@@ -25,7 +25,7 @@ function NavBar() {
             <ProfileIcon
               width="20"
               height="20"
-              fill={pathname === '/mypage' ? '#09121F' : 'blue'}
+              fill={pathname === '/mypage' ? '#09121F' : '#A9ABB8'}
             />
           </NavLink>
         </nav>
@@ -38,7 +38,7 @@ export default NavBar
 
 const Container = styled.div`
   position: fixed;
-  bottom: 15px;
+  bottom: 0px;
   left: 0;
   right: 0;
   margin: auto;
