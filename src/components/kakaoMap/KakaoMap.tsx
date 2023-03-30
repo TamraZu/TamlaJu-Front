@@ -4,10 +4,9 @@ import { Map } from 'react-kakao-maps-sdk';
 import { css, jsx } from '@emotion/react';
 import { latLngType, MarkerDataType, mapOptionType } from 'types/kakaoMapType';
 import { useState, useEffect } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import {useQuery} from '@tanstack/react-query'
 import axios from 'services';
 import CustomMarker from "./marker/CustomMarker";
-
 const container = css({
     width: '100%',
     height: '360px',
@@ -22,17 +21,18 @@ function KakaoMap({center, zoom}: mapOptionType) {
         console.log(position)
     }, [position])
 
-    // useQuery(
-    //     ['kakaomap', 'request', 'markers'],
-    //     () => {
-    //         return axios.get<MarkerDataType[]>('/marker/list');
-    //     },
-    //     {
-    //         onSuccess: (data) => {
-    //             setMarkers(data.data);
-    //         },
-    //     }
-    // );
+    useQuery(
+        ['kakaomap', 'request', 'factories'],
+        () => {
+            return axios.get<MarkerDataType[]>('api/v1/factories?memberId=1');
+        },
+        {
+            onSuccess: (data) => {
+                setMarkers(data.data);
+                console.log(data)
+            },
+        }
+    );
 
     return (
         <Map css={container} center={center}
@@ -43,9 +43,11 @@ function KakaoMap({center, zoom}: mapOptionType) {
             })
             }>
 
-                <CustomMarker lat={center.lat} lng={center.lng}>
-                    <div>ㅎㅎ</div>
-                </CustomMarker>
+                {/* <CustomMarker latitude={center.lat} longitude={center.lng} onClick={() => {
+                    // console.log()
+                }}>
+                    
+                </CustomMarker> */}
             {/* {markers.map((t) => {
                 return (
                     <CustomMarker key={t.key} lat={t.lat} lng={t.lng} visited={t.visited}>

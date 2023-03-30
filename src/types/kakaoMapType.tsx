@@ -21,10 +21,11 @@ export type locationDataType = {
 };
 
 export type MarkerDataType = {
-  key?: number;
+  factoryId?: number;
   children?: ReactNode;
-  lat: number;
-  lng: number;
+  latitude: number;
+  longitude: number;
+  address:string;
   visited?: boolean;
   onClick?: () => void;
 };
