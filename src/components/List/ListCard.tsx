@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import { ReactComponent as AteCookieIcon } from 'atoms/icons/AteCookieIcon.svg'
+import { ReactComponent as IsDrinkedIcon } from 'atoms/icons/IsDrinkedIcon.svg'
+import { useNavigate } from 'react-router-dom'
+
 export interface ListCardProps {
   drink: {
     drinkImage: string
@@ -14,20 +16,23 @@ export interface ListCardProps {
 }
 
 function ListCard({ drink }: ListCardProps) {
+  const navigate = useNavigate()
   return (
     <CardContainer>
-      <CardImage>
+      <CardImage onClick={() => navigate(`/details/${drink.drinkName}`)}>
         <img src={drink.drinkImage} alt="술 이미지" />
       </CardImage>
       <CardContent>
         <CardLeft>
-          <CardTitle>{drink.drinkName}</CardTitle>
+          <CardTitle onClick={() => navigate(`/details/${drink.drinkName}`)}>
+            {drink.drinkName}
+          </CardTitle>
           <CardInfo>{`${drink.drinkSize}ml | ${drink.drinkLevel}도`}</CardInfo>
-          <CardInfo>{drink.drinkPrice}원</CardInfo>
+          <CardPrice>{drink.drinkPrice}원</CardPrice>
         </CardLeft>
         <CardRight>
           <CardButton>
-            <AteCookieIcon width={24} height={24} fill={drink.drinkIsAte ? '#FFA5A5' : '#fffff'} />
+            <IsDrinkedIcon width={32} height={32} fill={'#FD6E21'} />
           </CardButton>
           <CardCount>{drink.drinkAteCount}</CardCount>
         </CardRight>
@@ -37,16 +42,20 @@ function ListCard({ drink }: ListCardProps) {
 }
 
 const CardContainer = styled.div`
-  width: 360px;
-  height: 120px;
+  width: 340px;
+  height: 130px;
   display: flex;
-  background: #d9d9d9;
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 8px;
+  background: #fff8e1;
 `
 
 const CardImage = styled.div`
+  cursor: pointer;
   flex: 1;
-  width: 90px;
-  height: 90px;
+  width: 96px;
+  height: 96px;
   img {
     object-fit: cover;
   }
@@ -56,7 +65,6 @@ const CardContent = styled.div`
   flex: 2;
   display: flex;
   justify-content: space-around;
-  align-items: start;
   padding-top: 12px;
 `
 
@@ -65,6 +73,7 @@ const CardLeft = styled.div`
   flex-direction: column;
 `
 const CardTitle = styled.h1`
+  cursor: pointer;
   font-weight: 800;
   font-size: 20px;
   line-height: 120%;
@@ -76,12 +85,17 @@ const CardInfo = styled.div`
   line-height: 130%;
   font-size: 15px;
 `
+const CardPrice = styled.div`
+  font-weight: 700;
+  line-height: 24px;
+  font-size: 16px;
+  color: '#2B2D36';
+`
 
 const CardRight = styled.div`
   display: flex;
-  flex-direction: column;
-  justify-content: start;
-  align-items: center;
+  justify-content: center;
+  align-items: flex-end;
 `
 
 const CardButton = styled.div`
@@ -89,12 +103,13 @@ const CardButton = styled.div`
 `
 
 const CardCount = styled.div`
-  width: 13px;
-  height: 13px;
-  font-weight: 800;
-  font-size: 10px;
+  width: 21px;
+  height: 24px;
+  font-weight: 700;
+  font-size: 16px;
+  text-align: center;
   line-height: 130%;
-  margin-top: 5px;
+  margin-left: 4px;
 `
 
 export default ListCard
