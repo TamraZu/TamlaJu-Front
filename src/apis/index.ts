@@ -49,3 +49,13 @@ export const getListAlcohol = async (memberId: number, category: string) => {
   const response = await Axios.get(`/api/v1/alcohols?memberId=${memberId}&category=${category}`)
   return response.data.data
 }
+
+export const getMyPage = async (memberId: number) => {
+  const response = await Axios.get(`/api/v1/members/page/${memberId}`)
+  return response.data.data
+}
+
+export const postEatingCount = async (memberId: number, alcoholId: number) => {
+  const response = await Axios.post(`/api/v1/eats`, { memberId, alcoholId })
+  return response.data.message === '등록 성공'
+}
