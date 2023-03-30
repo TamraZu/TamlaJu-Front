@@ -32,7 +32,7 @@ function ListCard({ drink }: ListCardProps) {
         </CardLeft>
         <CardRight>
           <CardButton>
-            <IsDrinkedIcon width={32} height={32} fill={'#FD6E21'} />
+            <IsDrinkedIcon width={32} height={32} fill={drink.drinkIsAte ? '#FD6E21' : '#858899'} />
           </CardButton>
           <CardCount>{drink.drinkAteCount}</CardCount>
         </CardRight>
