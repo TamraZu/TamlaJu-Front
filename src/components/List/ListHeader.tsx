@@ -6,10 +6,12 @@ function ListHeader() {
 }
 
 const Header = styled.header`
-  position: fixed;
-  top: 14px;
+  margin-top: 44px;
   font-weight: 800;
-  font-size: 32px;
+  font-size: 28px;
+  line-height: 34px;
+  letter-spacing: -0.003em;
+  height: 34px;
 `
 
 export default ListHeader
