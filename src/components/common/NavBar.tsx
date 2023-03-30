@@ -11,8 +11,8 @@ function NavBar() {
     <Container>
       <NavBox>
         <nav>
-          <NavLink to={'/'}>
-            <MapIcon width="20" height="20" fill={pathname === '/' ? '#09121F' : '#A9ABB8'} />
+          <NavLink to={'/home'}>
+            <MapIcon width="20" height="20" fill={pathname === '/home' ? '#09121F' : '#A9ABB8'} />
           </NavLink>
         </nav>
         <nav>
