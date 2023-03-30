@@ -4,6 +4,69 @@ import React, { useState } from "react";
 import { useSetRecoilState } from 'recoil';
 import axios from "services";
 import { useNavigate } from 'react-router-dom';
+import styled from '@emotion/styled';
+import logo from 'atoms/png/logo_middle.png';
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  margin: 88px 16px 49px 16px;
+`
+
+const Title = styled.h1`
+font-size:28px;
+font-weight:700;
+font-family: 'Pretendard';
+letter-spacing: -0.003em;
+margin-bottom: 88px;
+`
+
+const Label = styled.label`
+  position:relative;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: 'Pretendard';
+  letter-spacing: -0.003em;
+  margin: 24px 0 4px;
+`
+
+const Input = styled.input`
+  padding: 14px 24px;
+  margin:12px 0 40px;
+  width:100%;
+  border-radius: 26px;
+  border: 1px solid #FFD6B2;
+  background-color: #FFF7F0;
+  transition: all 0.2s;
+  &:focus {
+    outline:none;
+    border: 1px solid #ffb97b;
+    box-shadow: 0 0 4px #f3cba6;
+  }
+`
+
+const Button = styled.button`
+  margin: 0 auto 140px auto;
+  padding: 12px 48px;
+  width:154px;
+  height:48px;
+  background: #FD6E21;
+  border-radius: 24px;
+  color:white;
+  font-weight: 700;
+  font-size: 16px;
+`
+
+const Img = styled.img`
+`
+const ButtonWrapper = styled.div`
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+  width:100%;
+
+`
 
 function SignIn() {
   const [id, setUsername] = useState<string>('');
@@ -24,26 +87,29 @@ function SignIn() {
     setMemberId(1) // need to fix;
     navigate('/home');
   }
-  return <div>
+  return <Container>
 
 
-    <h1>만나서 반가워요,<br />
-      탐라주에 오신걸 환영해요</h1>
+    <Title>만나서 반가워요,<br />
+      탐라주에 오신걸 환영해요</Title>
 
     <form >
-      <label>
-        아이디:
-        <input type="text" value={id} placeholder='아이디를 입력해주세요' onChange={e => setUsername(e.target.value)} />
-      </label>
+      <Label>
+        아이디
+        <Input type="text" value={id} placeholder='아이디를 입력해주세요' onChange={e => setUsername(e.target.value)} />
+      </Label>
       <br />
-      <label>
-        비밀번호:
-        <input type="password" value={password} placeholder='비밀번호를 입력해주세요' onChange={e => setPassword(e.target.value)} />
-      </label>
+      <Label>
+        비밀번호
+        <Input type="password" value={password} placeholder='비밀번호를 입력해주세요' onChange={e => setPassword(e.target.value)} />
+      </Label>
       <br />
-      <button type="submit" onClick={handleSubmit}>로그인</button>
+      <ButtonWrapper >
+        <Button type="submit" onClick={handleSubmit}>로그인</Button>
+        <Img src={logo} width={119} alt='logo' />
+      </ButtonWrapper>
     </form>
-  </div>;
+  </Container>;
 }
 
 export default SignIn;
