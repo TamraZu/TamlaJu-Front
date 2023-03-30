@@ -1,33 +1,47 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Category from 'components/List/Category'
 import Header from 'components/common/Header'
 import NavBar from 'components/common/NavBar'
 import ListCard from 'components/List/ListCard'
 import styled from '@emotion/styled'
 import ListCardContainer from 'components/List/ListCardContainer'
+import { getListAlcohol } from 'apis'
 
-const ListCardExample = {
-  drinkImage: 'https://company.lottechilsung.co.kr/common/images/product_view0204_bh2.jpg',
-  drinkName: '동백꽃, 제주',
-  drinkSize: 365,
-  drinkLevel: 16,
-  drinkPrice: 13000,
-  drinkAteCount: 33,
-  drinkIsAte: true,
+export interface ListAlcoholData {
+  alcoholId: number
+  name: string
+  imageUrl: string
+  volume: number
+  level: number
+  price: number
+  ateCount: number
+  hasAte: boolean
+}
+
+export interface CategoryData {
+  name: string
+  id: number
 }
 
 function List() {
+  const [category, setCategory] = useState<CategoryData>({ name: 'Makgeolli', id: 0 })
+  const [data, setData] = useState<ListAlcoholData[]>([])
+  useEffect(() => {
+    async function fetchListData() {
+      const response = await getListAlcohol(1, category.name)
+      setData(response)
+    }
+    fetchListData()
+  }, [category.name, category.id])
+
   return (
     <ListLayout>
       <Header>제주도감</Header>
-      <Category />
+      <Category category={category} setCategory={setCategory} />
       <ListCardContainer>
-        <ListCard drink={ListCardExample} />
-        <ListCard drink={ListCardExample} />
-        <ListCard drink={ListCardExample} />
-        <ListCard drink={ListCardExample} />
-        <ListCard drink={ListCardExample} />
-        <ListCard drink={ListCardExample} />
+        {data.map(elem => {
+          return <ListCard key={elem.alcoholId} drink={elem} />
+        })}
       </ListCardContainer>
       <NavBar />
     </ListLayout>
