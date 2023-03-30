@@ -48,7 +48,7 @@ const CardContainer = styled.div`
   border-radius: 16px;
   padding: 16px;
   margin-bottom: 8px;
-  background: #fff8e1;
+  background: #ffe9d4;
 `
 
 const CardImage = styled.div`
