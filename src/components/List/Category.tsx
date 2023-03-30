@@ -7,40 +7,32 @@ export default function Category() {
   const categoryList = [
     {
       id: 0,
-      tag: '전체',
-    },
-    {
-      id: 1,
       tag: '막걸리',
     },
     {
-      id: 2,
+      id: 1,
       tag: '약주',
     },
     {
+      id: 2,
+      tag: '소주/증류주',
+    },
+    {
       id: 3,
-      tag: '소주/증류주',
-    },
-    {
-      id: 4,
-      tag: '소주/증류주',
-    },
-    {
-      id: 5,
       tag: '맥주',
     },
     {
-      id: 6,
+      id: 4,
       tag: '와인',
     },
     {
-      id: 7,
+      id: 5,
       tag: '기타',
     },
   ]
 
   return (
-    <>
+    <CategoryLayout>
       <CategoryList>
         {categoryList.map((item, index) => {
           return (
@@ -57,7 +49,7 @@ export default function Category() {
           )
         })}
       </CategoryList>
-    </>
+    </CategoryLayout>
   )
 }
 
@@ -67,11 +59,13 @@ interface CategoryProps {
   active: number
 }
 
-export const CategoryLayout = styled.div``
+export const CategoryLayout = styled.div`
+  width: 340px;
+`
 export const CategoryList = styled.ul`
   display: flex;
+  padding: 8px 0;
   align-items: center;
-  padding: 10px 22px;
   overflow-x: scroll;
   overflow-y: hidden;
   -ms-overflow-style: none; /* IE and Edge */
@@ -80,13 +74,13 @@ export const CategoryList = styled.ul`
     height: 5px;
   }
   &::-webkit-scrollbar-thumb {
-    background: #635273;
+    background: #ffe9d4;
     border-radius: 10px;
   }
   &::-webkit-scrollbar-track {
     max-width: 10px;
-    background-color: black;
   }
+  margin-top: 24px;
 `
 export const CategoryItem = styled.li<CategoryProps>`
   flex-shrink: 0;
@@ -96,10 +90,11 @@ export const CategoryItem = styled.li<CategoryProps>`
   cursor: pointer;
   /* color: #fff; */
   text-shadow: #fff 1px 0 10px;
+  border-radius: 32px;
   ${props =>
     props.idx === props.active
-      ? 'background: linear-gradient(126.87deg, #b9a1cf 16.19%, #635273 83.65%); border-radius: 25px;'
-      : 'background: translate'};
+      ? 'background: #FEB32B; color:white '
+      : 'background: #E7E8EA; color: #858899'};
   &:not(:last-child) {
     margin-right: 7px;
   }
