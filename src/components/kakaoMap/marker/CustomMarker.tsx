@@ -3,7 +3,6 @@ import { MapMarker } from 'react-kakao-maps-sdk';
 import { MarkerDataType } from 'types/kakaoMapType';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'services';
-import BottomSheetContainer from 'components/common/BottomSheet';
 import { MapContext } from 'pages/Main';
 
 const visitedMarker = {
@@ -20,11 +19,10 @@ const visitedMarker = {
   },
 };
 
-export default function CustomMarker({ factoryId, latitude, longitude, visited, address }: MarkerDataType) {
-  const [isVisited, setIsVisited] = useState(visited);
+export default function CustomMarker({ factoryId, latitude, longitude, hasAte, address }: MarkerDataType) {
+  const [isVisited, setIsVisited] = useState(hasAte);
   const [isOpen, setIsOpen] = useState(false);
   const data = useContext(MapContext)
-  console.log(data);
   return (
     <MapMarker
       position={{ lat: latitude, lng: longitude }}

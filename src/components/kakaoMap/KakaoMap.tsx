@@ -2,14 +2,16 @@
 
 import { Map } from 'react-kakao-maps-sdk';
 import { css, jsx } from '@emotion/react';
-import { latLngType, MarkerDataType, mapOptionType } from 'types/kakaoMapType';
+import { latLngType, MarkerDataType, mapOptionType, apiConnectType } from 'types/kakaoMapType';
 import { useState, useEffect } from 'react';
 import {useQuery} from '@tanstack/react-query'
 import axios from 'services';
 import CustomMarker from "./marker/CustomMarker";
 const container = css({
     width: '100%',
-    height: '360px',
+    height: '343px',
+    margin:'12px 16px 0 16px',
+    borderRadius:'16px',
 })
 
 function KakaoMap({center, zoom}: mapOptionType) {
@@ -24,12 +26,13 @@ function KakaoMap({center, zoom}: mapOptionType) {
     useQuery(
         ['kakaomap', 'request', 'factories'],
         () => {
-            return axios.get<MarkerDataType[]>('api/v1/factories?memberId=1');
+            return axios.get<apiConnectType<MarkerDataType[]>>('api/v1/factories?memberId=1');
         },
         {
             onSuccess: (data) => {
-                setMarkers(data.data);
                 console.log(data)
+
+                setMarkers(data.data);
             },
         }
     );
@@ -41,23 +44,24 @@ function KakaoMap({center, zoom}: mapOptionType) {
                 lat: mouseEvent.latLng.getLat(),
                 lng: mouseEvent.latLng.getLng()
             })
+
             }>
 
-                {/* <CustomMarker latitude={center.lat} longitude={center.lng} onClick={() => {
+                <CustomMarker latitude={center.lat} longitude={center.lng} address='' onClick={() => {
                     // console.log()
                 }}>
                     
-                </CustomMarker> */}
-            {/* {markers.map((t) => {
+                </CustomMarker>
+            {markers.map((t:MarkerDataType) => {
                 return (
-                    <CustomMarker key={t.key} lat={t.lat} lng={t.lng} visited={t.visited}>
+                    <CustomMarker key={t.factoryId} address={t.address} latitude={t.latitude} longitude={t.longitude} hasAte={t.hasAte}>
                         <div>
                             inner component
                             <div>what</div>
                         </div>
                     </CustomMarker>
                 );
-            })} */}
+            })}
         </Map>
     );
 }

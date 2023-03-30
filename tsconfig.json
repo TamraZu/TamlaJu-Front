@@ -18,24 +18,24 @@
     "jsxImportSource": "@emotion/react",
     "baseUrl": "./src",
     "types": ["node"],
-    "paths": {
-      "~assets/*": ["./src/assets/*"],
-      "~components/*": ["./src/components/*"],
-      "~constants/*": ["./src/constants/*"],
-      "~contexts/*": ["./src/contexts/*"],
-      "~helpers/*": ["./src/helpers/*"],
-      "~hooks/*": ["./src/hooks/*"],
-      "~i18n/*": ["./src/i18n/*"],
-      "~layouts/*": ["./src/layouts/*"],
-      "~pages/*": ["./src/pages/*"],
-      "~styles/*": ["./src/styles/*"],
-      "~services/*": ["./src/services/*"],
-      "~types/*": ["./src/types/*"],
-      "~utils/*": ["./src/utils/*"],
-      "~public/*": ["./public/*"],
-      "~src/*": ["./src/*"],
-      "~/*": ["./*"]
-    }
+    // "paths": {
+    //   "~assets/*": ["./src/assets/*"],
+    //   "~components/*": ["./src/components/*"],
+    //   "~constants/*": ["./src/constants/*"],
+    //   "~contexts/*": ["./src/contexts/*"],
+    //   "~helpers/*": ["./src/helpers/*"],
+    //   "~hooks/*": ["./src/hooks/*"],
+    //   "~i18n/*": ["./src/i18n/*"],
+    //   "~layouts/*": ["./src/layouts/*"],
+    //   "~pages/*": ["./src/pages/*"],
+    //   "~styles/*": ["./src/styles/*"],
+    //   "~services/*": ["./src/services/*"],
+    //   "~types/*": ["./src/types/*"],
+    //   "~utils/*": ["./src/utils/*"],
+    //   "~public/*": ["./public/*"],
+    //   "~src/*": ["./src/*"],
+    //   "~/*": ["./*"]
+    // }
   },
   "include": ["src"]
 }

@@ -2,14 +2,16 @@
 
 import React, { useState, useEffect, useContext, useRef } from 'react';
 import { css } from '@emotion/react';
+import { ReactComponent as BrewerlyIcon } from 'atoms/icons/BrewerlyIcon.svg';
 import { useSpring, animated } from 'react-spring';
 import { BottomSheetControlType } from 'types/layoutControlType';
 import { MapContext } from 'pages/Main';
+import BrewerlyDetailCardView from './BrewerlyDetailCardView';
 
 const container = css({
     maxWidth: 375,
-    width:'100%',
-    height:328,
+    width: '100%',
+    height: 328,
     position: 'absolute',
     display: 'flex',
     bottom: 0,
@@ -18,7 +20,7 @@ const container = css({
     boxShadow: '0 -12px 20px rgba(0,0,0,0.16)',
     paddingTop: 24,
     backgroundColor: 'white',
-    zIndex:2
+    zIndex: 2
 })
 
 export default function BottomSheetContainer({ isOpen, onClose }: BottomSheetControlType) {
@@ -37,7 +39,8 @@ export default function BottomSheetContainer({ isOpen, onClose }: BottomSheetCon
             onClose();
         }
     };
-    const contextData = useContext(MapContext)
+    const contextData = useContext(MapContext);
+
     useEffect(() => {
         console.log(isOpen)
         // if (isOpen) {
@@ -52,10 +55,25 @@ export default function BottomSheetContainer({ isOpen, onClose }: BottomSheetCon
                 className="bottom-sheet"
                 css={container}
                 style={{
-                    transform: y.interpolate(y => `translateY(${y}%)`),
+                    transform: y.interpolate((y: number) => `translateY(${y}%)`),
                 }}
             >
-                
+
+                <div css={css`
+                    display: flex;
+                    font-size: 28px;
+                `}>
+                    {/* <BrewerlyIcon width="20" height="20" fill={'#09121F'}>
+
+                    </BrewerlyIcon> */}
+                </div>
+                <BrewerlyDetailCardView factoryId={1} name='dummy' address='dummy' alcohols={[{
+                    alcoholId: 1,
+                    name: 'test',
+                    imageUrl: 'string' 
+                }]}></BrewerlyDetailCardView>
+
+
             </animated.div>
         </>
     )

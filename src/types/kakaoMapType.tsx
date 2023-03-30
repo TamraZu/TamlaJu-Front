@@ -26,6 +26,12 @@ export type MarkerDataType = {
   latitude: number;
   longitude: number;
   address:string;
-  visited?: boolean;
+  hasAte?: boolean;
   onClick?: () => void;
 };
+
+export interface apiConnectType<T> {
+  success : boolean,
+  message : string,
+  data : T
+}
