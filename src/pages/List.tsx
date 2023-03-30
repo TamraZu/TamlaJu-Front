@@ -1,7 +1,12 @@
-import React from "react";
+import React from 'react'
+import Category from 'components/Category'
 
 function List() {
-  return <div>List</div>;
+  return (
+    <div>
+      <Category />
+    </div>
+  )
 }
 
-export default List;
+export default List
