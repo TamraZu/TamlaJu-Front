@@ -14,7 +14,7 @@ function DetailHeader() {
 
 const StyledDetailHeader = styled.div`
   width: 100%;
-  margin-top: 36px;
+  margin-top: 88px;
 `
 
 export default DetailHeader
