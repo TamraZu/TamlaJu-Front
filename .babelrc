@@ -1,0 +1,37 @@
+{
+  "presets": [
+    [
+      "@babel/env",
+      {
+        "targets": {
+          "node": "current"
+        }
+      }
+    ],
+    "@babel/typescript"
+  ],
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "extensions": [
+          ".ts",
+          ".tsx"
+        ],
+        "root": [
+          "."
+        ],
+        "alias": {
+          "@": "./src",
+          "@utils": "./src/utils",
+          "@pages": "./src/pages",
+          "@entities": "./src/entities"
+        }
+      }
+    ]
+  ],
+  "comments": false,
+  "ignore": [
+    "./src/__tests__"
+  ]
+}

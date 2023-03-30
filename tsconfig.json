@@ -2,7 +2,6 @@
   "compilerOptions": {
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
-    "baseUrl": "./src",
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -15,7 +14,28 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "jsxImportSource": "@emotion/react",
+    "baseUrl": ".",
+    "types": ["node"],
+    "paths": {
+      "~assets/*": ["./src/assets/*"],
+      "~components/*": ["./src/components/*"],
+      "~constants/*": ["./src/constants/*"],
+      "~contexts/*": ["./src/contexts/*"],
+      "~helpers/*": ["./src/helpers/*"],
+      "~hooks/*": ["./src/hooks/*"],
+      "~i18n/*": ["./src/i18n/*"],
+      "~layouts/*": ["./src/layouts/*"],
+      "~pages/*": ["./src/pages/*"],
+      "~styles/*": ["./src/styles/*"],
+      "~services/*": ["./src/services/*"],
+      "~types/*": ["./src/types/*"],
+      "~utils/*": ["./src/utils/*"],
+      "~public/*": ["./public/*"],
+      "~src/*": ["./src/*"],
+      "~/*": ["./*"]
+    }
   },
-  "include": ["src"]
+  "include": ["."]
 }
