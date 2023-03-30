@@ -17,11 +17,12 @@ function Detail() {
       setData(response)
     }
     fetchData()
-  }, [])
+  }, [id, data])
 
   if (!data) {
     return <div>로딩중...</div>
   }
+
   return (
     <>
       <DetailLayout>
@@ -47,7 +48,7 @@ function Detail() {
           </DetailTastingImage>
           <DetailTastingDescription>{data.description}</DetailTastingDescription>
         </DetailTastingInfo>
-        <DetailAteButton />
+        <DetailAteButton alcoholId={data.alcoholId} memberId={1} />
       </DetailLayout>
       <NavBar />
     </>

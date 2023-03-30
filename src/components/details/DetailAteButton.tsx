@@ -1,10 +1,20 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import { ReactComponent as IsDrinkedWhiteIcon } from 'atoms/icons/IsDrinkedWhiteIcon.svg'
+import { postEatingCount } from 'apis'
+import { useNavigate } from 'react-router-dom'
 
-function DetailAteButton() {
+interface DetailAteButtonProps {
+  alcoholId: number
+  memberId: number
+}
+
+function DetailAteButton({ alcoholId, memberId }: DetailAteButtonProps) {
+  const navigate = useNavigate()
   return (
-    <StyledButton>
+    <StyledButton
+      onClick={() => postEatingCount(memberId, alcoholId).then(res => navigate('/list'))}
+    >
       <IsDrinkedWhiteIcon width={24} height={24} />
       <StyledText>마셔봤어요</StyledText>
     </StyledButton>
