@@ -28,6 +28,7 @@ export type MarkerDataType = {
   address:string;
   hasAte?: boolean;
   onClick?: () => void;
+  setCenter:(a:latLngType) => void
 };
 
 export interface apiConnectType<T> {

@@ -7,6 +7,7 @@ import { useSpring, animated } from 'react-spring';
 import { BottomSheetControlType } from 'types/layoutControlType';
 import { MapContext } from 'pages/Main';
 import BrewerlyDetailCardView from './BrewerlyDetailCardView';
+import { brewerlyType } from 'types/drinkType';
 
 const container = css({
     maxWidth: 375,
@@ -26,7 +27,7 @@ const container = css({
 export default function BottomSheetContainer({ isOpen, onClose }: BottomSheetControlType) {
     const [open, setOpen] = useState<boolean>(isOpen);
     const [isAnimating, setIsAnimating] = useState(false);
-
+    const [data, setData] = useState<brewerlyType>()
     const { y } = useSpring({
         y: isOpen ? 0 : 120,
         config: { tension: 200, friction: 30 },
@@ -42,7 +43,9 @@ export default function BottomSheetContainer({ isOpen, onClose }: BottomSheetCon
     const contextData = useContext(MapContext);
 
     useEffect(() => {
-        console.log(isOpen)
+        if(isOpen){
+            // setData(contextData?.data!)
+        }
         // if (isOpen) {
         // isOpen()
         // }
@@ -61,7 +64,6 @@ export default function BottomSheetContainer({ isOpen, onClose }: BottomSheetCon
 
                 <div css={css`
                     display: flex;
-                    font-size: 28px;
                 `}>
                     {/* <BrewerlyIcon width="20" height="20" fill={'#09121F'}>
 

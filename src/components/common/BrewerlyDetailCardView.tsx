@@ -28,7 +28,7 @@ const BrewerlyDetailCardView = ({ factoryId, name, address, alcohols }: brewerly
             <h1>name</h1>
             <p>address</p>
             {alcohols.map((t: alcoholType) => {
-                return (<Card>
+                return (<Card key={t.alcoholId}>
                     <img src={t.imageUrl} />
                     <div><DrinkIcon />
                         <h3>{t.name}</h3>

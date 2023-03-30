@@ -8,6 +8,4 @@ const axios = Axios.create({
     baseURL: path
 });
 
-axios.defaults.withCredentials = true;
-
 export default axios;

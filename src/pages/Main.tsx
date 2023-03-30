@@ -1,5 +1,5 @@
 import { latLngType } from "types/kakaoMapType";
-import React, { useState, createContext } from 'react'
+import React, { useState, createContext, useEffect } from 'react'
 import { BottomSheetDataType, BottomSheetRecoilPropType } from "types/layoutControlType";
 import KakaoMap from "components/kakaoMap/KakaoMap";
 import BottomSheetContainer from "components/common/BottomSheet";
@@ -23,10 +23,14 @@ function Main() {
 
     return <>
         <MapContext.Provider value={{
-            data: btmSheetData, onDataChange: (newData) => {
+            data: btmSheetData,
+            // selectedMarker,
+            onDataChange: (newData) => {
                 setBtmSheetData(newData);
             },
-            toggleBottomSheet: (b: boolean) => setIsOpen(b)
+            toggleBottomSheet: (b: boolean) => {
+                setIsOpen(b)
+            }
 
         }}>
             <Header>제주 전통주로 특별한</Header>
@@ -36,7 +40,7 @@ function Main() {
             <BottomSheetContainer isOpen={isOpen} >
 
             </BottomSheetContainer>
-            <NavBar/>
+            <NavBar />
         </MapContext.Provider>
     </>;
 }

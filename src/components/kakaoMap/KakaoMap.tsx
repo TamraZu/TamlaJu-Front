@@ -3,22 +3,23 @@
 import { Map } from 'react-kakao-maps-sdk';
 import { css, jsx } from '@emotion/react';
 import { latLngType, MarkerDataType, mapOptionType, apiConnectType } from 'types/kakaoMapType';
-import { useState, useEffect } from 'react';
-import {useQuery} from '@tanstack/react-query'
+import { useState, useEffect, useContext } from 'react';
+import { useQuery } from '@tanstack/react-query'
 import axios from 'services';
 import CustomMarker from "./marker/CustomMarker";
+import { MapContext } from 'pages/Main';
 const container = css({
     width: '100%',
     height: '343px',
-    margin:'12px 16px 0 16px',
-    borderRadius:'16px',
+    margin: '12px 16px 0 16px',
+    borderRadius: '16px',
 })
 
-function KakaoMap({center, zoom}: mapOptionType) {
+function KakaoMap({ center, zoom }: mapOptionType) {
     const [zoomLevel, setZoom] = useState(zoom);
     const [position, setPosition] = useState<latLngType>(center)
     const [markers, setMarkers] = useState<MarkerDataType[]>([]);
-
+    const data = useContext(MapContext);
     useEffect(() => {
         console.log(position)
     }, [position])
@@ -29,32 +30,29 @@ function KakaoMap({center, zoom}: mapOptionType) {
             return axios.get<apiConnectType<MarkerDataType[]>>('api/v1/factories?memberId=1');
         },
         {
-            onSuccess: (data) => {
-                console.log(data)
-
-                setMarkers(data.data);
+            onSuccess: (response) => {
+                setMarkers(response.data.data);
             },
         }
     );
 
     return (
-        <Map css={container} center={center}
+        <Map css={container} center={position}
             level={zoomLevel}
-            onRightClick={(_t, mouseEvent) => setPosition({
-                lat: mouseEvent.latLng.getLat(),
-                lng: mouseEvent.latLng.getLng()
-            })
-
+            isPanto
+            onClick={(_t, mouseEvent) => {
+                setPosition({
+                    lat: mouseEvent.latLng.getLat(),
+                    lng: mouseEvent.latLng.getLng()
+                })
+                data?.toggleBottomSheet(false);
+            }
             }>
 
-                <CustomMarker latitude={center.lat} longitude={center.lng} address='' onClick={() => {
-                    // console.log()
-                }}>
-                    
-                </CustomMarker>
-            {markers.map((t:MarkerDataType) => {
+            {markers.map((t: MarkerDataType) => {
                 return (
-                    <CustomMarker key={t.factoryId} address={t.address} latitude={t.latitude} longitude={t.longitude} hasAte={t.hasAte}>
+                    <CustomMarker
+                        key={t.factoryId} factoryId={t.factoryId} address={t.address} latitude={t.latitude} longitude={t.longitude} hasAte={t.hasAte} setCenter={setPosition}>
                         <div>
                             inner component
                             <div>what</div>
