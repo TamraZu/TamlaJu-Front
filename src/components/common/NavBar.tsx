@@ -1,12 +1,11 @@
 import styled from '@emotion/styled'
-import { NavLink, useLocation, useNavigate } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 import { ReactComponent as DrinkIcon } from 'atoms/icons/DrinkIcon.svg'
 import { ReactComponent as MapIcon } from 'atoms/icons/MapIcon.svg'
 import { ReactComponent as ProfileIcon } from 'atoms/icons/ProfileIcon.svg'
 
 function NavBar() {
   const { pathname } = useLocation()
-  const navigate = useNavigate()
 
   return (
     <Container>
@@ -45,7 +44,8 @@ const Container = styled.div`
   margin: auto;
   max-width: 430px;
   width: 100%;
-  border-top: 1px solid black;
+  height: 50px;
+  /* border-top: 1px solid black; */
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   box-shadow: 0px -2px 2px rgba(0, 0, 0, 0.04);
@@ -56,10 +56,9 @@ const NavBox = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 0 95px;
+  padding-top: 10px;
   flex: 1;
-  height: 80px;
-  /* background: linear-gradient(180deg, #0b0711 0%, rgba(11, 7, 17, 0.9) 100%); */
-  border-radius: 30px 30px 0px 0px;
+  height: 30px;
   margin: auto;
   nav {
     cursor: pointer;
