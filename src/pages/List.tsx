@@ -1,6 +1,6 @@
 import React from 'react'
 import Category from 'components/List/Category'
-import ListHeader from 'components/List/ListHeader'
+import Header from 'components/common/Header'
 import NavBar from 'components/common/NavBar'
 import ListCard from 'components/List/ListCard'
 import styled from '@emotion/styled'
@@ -19,7 +19,7 @@ const ListCardExample = {
 function List() {
   return (
     <ListLayout>
-      <ListHeader />
+      <Header>제주도감</Header>
       <Category />
       <ListCardContainer>
         <ListCard drink={ListCardExample} />
