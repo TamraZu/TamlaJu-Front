@@ -18,7 +18,7 @@ export interface BottomSheetDataType {
 }
 
 export interface BottomSheetRecoilPropType {
-    data:SetStateAction<brewerlyType>;
+    data:SetStateAction<brewerlyType|undefined>;
     onDataChange:(data:brewerlyType) => void;
     toggleBottomSheet:(data:boolean) => void;
     children?:ReactNode;

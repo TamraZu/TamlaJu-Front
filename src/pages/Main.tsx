@@ -18,7 +18,7 @@ const Header = styled.h1`
 
 function Main() {
     const data: BottomSheetRecoilPropType | null = null;
-    const [btmSheetData, setBtmSheetData] = useState<brewerlyType|undefined>();
+    const [btmSheetData, setBtmSheetData] = useState<brewerlyType>();
     const [isOpen, setIsOpen] = useState(false);
 
 
