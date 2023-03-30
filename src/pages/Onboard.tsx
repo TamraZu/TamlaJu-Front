@@ -16,7 +16,8 @@ const fadeOut = keyframes`
 `
 
 const SplashArt = styled.img`
-    width: 100%;
+    max-width: 375px;
+    margin:auto auto auto 0;
     position: absolute;
     bottom: 0;
     /* transition: all 0.5s; */
@@ -31,6 +32,7 @@ export default function Onboard() {
 
     const navigateToHome = () => {
         navigate('/home');
+        return
     }
     
     const timeout = () => setTimeout(() => {
