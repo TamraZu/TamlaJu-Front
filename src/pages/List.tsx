@@ -6,6 +6,8 @@ import ListCard from 'components/List/ListCard'
 import styled from '@emotion/styled'
 import ListCardContainer from 'components/List/ListCardContainer'
 import { getListAlcohol } from 'apis'
+import { useRecoilState } from 'recoil'
+import { memberId } from 'components/atoms/atoms'
 
 export interface ListAlcoholData {
   alcoholId: number
@@ -26,13 +28,15 @@ export interface CategoryData {
 function List() {
   const [category, setCategory] = useState<CategoryData>({ name: 'Makgeolli', id: 0 })
   const [data, setData] = useState<ListAlcoholData[]>([])
+  const [mId] = useRecoilState(memberId)
+
   useEffect(() => {
     async function fetchListData() {
-      const response = await getListAlcohol(1, category.name)
+      const response = await getListAlcohol(mId, category.name)
       setData(response)
     }
     fetchListData()
-  }, [category.name, category.id])
+  }, [category.name, category.id, mId])
 
   return (
     <ListLayout>
