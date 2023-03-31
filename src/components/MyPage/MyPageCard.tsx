@@ -23,7 +23,8 @@ const MyPageCardLayout = styled.div`
   width: 108px;
   height: 180px;
   background: #fff8e1;
-  background-image: 'url(../../../atoms/png/stamp.png)';
+  background-image: url('/stamp.png');
+  background-size: contain;
   border: 1px solid #fbeec3;
   border-radius: 16px;
   padding: 10px 10px 0px 10px;
