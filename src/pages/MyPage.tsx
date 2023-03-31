@@ -9,6 +9,7 @@ import { getMyPage } from 'apis'
 import MyPageNoData from 'components/MyPage/MyPageNoData'
 import { useRecoilState } from 'recoil'
 import { memberId } from 'components/atoms/atoms'
+import MyPageCountHeader from 'components/MyPage/MyPageCountHeader'
 
 type AlcoholData = { alcoholId: number; name: string; imageUrl: string }
 
@@ -50,6 +51,7 @@ function MyPage() {
     <>
       <StyledMyPageLayout>
         <Header>나의 기록</Header>
+        <MyPageCountHeader count={myPageData.count} />
         <MyPageContainer>
           {myPageData.alcohols?.map((elem, id) => {
             return <MyPageCard key={id} imageUrl={elem?.imageUrl ?? ''} name={elem?.name ?? ''} />
