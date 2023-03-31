@@ -34,6 +34,7 @@ export interface DetailData {
   region: string
   tasteImage: string | null
   volume: number
+  factory: string
 }
 export const getMyPageAlcohol = async (memberId: number) => {
   const response = await Axios.get(`/api/v1/members/page/${memberId}`)
