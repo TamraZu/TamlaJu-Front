@@ -96,15 +96,15 @@ export const CategoryList = styled.ul`
 export const CategoryItem = styled.li<CategoryItemProps>`
   flex-shrink: 0;
   padding: 5px 10px;
-  font-size: 13px;
-  font-weight: 400;
+  font-size: 18px;
+  font-weight: 700;
   cursor: pointer;
   /* color: #fff; */
   text-shadow: #fff 1px 0 10px;
   border-radius: 32px;
   ${props =>
     props.idx === props.active
-      ? 'background: #FEB32B; color:white '
+      ? 'background: #FD6E21;; color:white '
       : 'background: #E7E8EA; color: #858899'};
   &:not(:last-child) {
     margin-right: 7px;
