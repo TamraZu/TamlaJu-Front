@@ -7,6 +7,9 @@ import MyPageContainer from 'components/MyPage/MyPageContainer'
 import NavBar from 'components/common/NavBar'
 import { getMyPage } from 'apis'
 import MyPageNoData from 'components/MyPage/MyPageNoData'
+import { useRecoilState } from 'recoil'
+import { memberId } from 'components/atoms/atoms'
+import MyPageCountHeader from 'components/MyPage/MyPageCountHeader'
 
 type AlcoholData = { alcoholId: number; name: string; imageUrl: string }
 
@@ -18,6 +21,7 @@ type MyPageData = {
 }
 
 function MyPage() {
+  const [mId] = useRecoilState(memberId)
   const [myPageData, setMyPageData] = useState<MyPageData>({
     memberId: 1,
     nickname: '탐라주',
@@ -33,11 +37,11 @@ function MyPage() {
   })
   useEffect(() => {
     async function fetchData() {
-      const data = await getMyPage(1)
+      const data = await getMyPage(mId)
       setMyPageData(data)
     }
     fetchData()
-  }, [myPageData])
+  }, [myPageData, mId])
 
   if (myPageData?.count === 0) {
     return <MyPageNoData />
@@ -47,6 +51,7 @@ function MyPage() {
     <>
       <StyledMyPageLayout>
         <Header>나의 기록</Header>
+        <MyPageCountHeader count={myPageData.count} />
         <MyPageContainer>
           {myPageData.alcohols?.map((elem, id) => {
             return <MyPageCard key={id} imageUrl={elem?.imageUrl ?? ''} name={elem?.name ?? ''} />

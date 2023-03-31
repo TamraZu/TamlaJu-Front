@@ -4,15 +4,18 @@ import { ReactComponent as IsDrinkedIcon } from 'atoms/icons/IsDrinkedIcon.svg'
 import { useNavigate } from 'react-router-dom'
 import { ListAlcoholData } from 'pages/List'
 import { postEatingCount } from 'apis'
+import { useRecoilState } from 'recoil'
+import { memberId } from 'components/atoms/atoms'
 
 export interface ListCardProps {
   drink: ListAlcoholData
 }
 
 function ListCard({ drink }: ListCardProps) {
+  const [mId] = useRecoilState(memberId)
   const navigate = useNavigate()
   const onClickHandler = async () => {
-    await postEatingCount(1, drink.alcoholId)
+    await postEatingCount(mId, drink.alcoholId)
   }
   return (
     <CardContainer>

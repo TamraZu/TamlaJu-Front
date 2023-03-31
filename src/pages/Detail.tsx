@@ -6,18 +6,21 @@ import DetailInfoContainer from 'components/details/DetailInfoContainer'
 import { useEffect, useState } from 'react'
 import { DetailData, getDetailAlcohol } from 'apis'
 import { useParams } from 'react-router-dom'
+import { useRecoilState } from 'recoil'
+import { memberId } from 'components/atoms/atoms'
 
 function Detail() {
   const { id } = useParams()
+  const [mId] = useRecoilState(memberId)
   const [data, setData] = useState<DetailData | null>(null)
 
   useEffect(() => {
     async function fetchData() {
-      const response = await getDetailAlcohol(Number(id), 1)
+      const response = await getDetailAlcohol(Number(id), mId)
       setData(response)
     }
     fetchData()
-  }, [id, data])
+  }, [id, data, mId])
 
   if (!data) {
     return <div>로딩중...</div>
@@ -48,7 +51,7 @@ function Detail() {
           </DetailTastingImage>
           <DetailTastingDescription>{data.description}</DetailTastingDescription>
         </DetailTastingInfo>
-        <DetailAteButton alcoholId={data.alcoholId} memberId={1} />
+        <DetailAteButton alcoholId={data.alcoholId} memberId={mId} />
       </DetailLayout>
       <NavBar />
     </>
