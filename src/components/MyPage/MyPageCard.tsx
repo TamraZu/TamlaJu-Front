@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from '@emotion/styled'
+import Stamp from 'atoms/png/stamp.png'
 
 interface MyPageCardProps {
   imageUrl: string
@@ -22,6 +23,7 @@ const MyPageCardLayout = styled.div`
   width: 108px;
   height: 180px;
   background: #fff8e1;
+  background-image: 'url(../../../atoms/png/stamp.png)';
   border: 1px solid #fbeec3;
   border-radius: 16px;
   padding: 10px 10px 0px 10px;
@@ -33,6 +35,7 @@ const MyPageImageBox = styled.div`
   border-radius: 12px;
   width: 90px;
   height: 110px;
+  border-radius: 24px;
   img {
     width: 100%;
     height: 100%;
