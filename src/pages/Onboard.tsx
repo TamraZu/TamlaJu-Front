@@ -31,7 +31,7 @@ export default function Onboard() {
 
 
     const navigateToHome = () => {
-        navigate('/home');
+        navigate('/signin');
         return
     }
     
