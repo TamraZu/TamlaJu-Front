@@ -39,6 +39,7 @@ function Main() {
             }
 
         }}>
+            <div style={{overflowY:"scroll", overflowX:"hidden"}}>
             <Header>제주 전통주로 특별한<br/>
             일상을 보내보세요</Header>
 
@@ -47,6 +48,7 @@ function Main() {
                 전통주 순위
             </Header>
             <RankingContainer/>
+            </div>
             <BottomSheetContainer isOpen={isOpen} >
 
             </BottomSheetContainer>
