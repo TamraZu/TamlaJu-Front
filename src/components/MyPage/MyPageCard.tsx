@@ -12,6 +12,7 @@ function MyPageCard({ imageUrl, name }: MyPageCardProps) {
     <MyPageCardLayout>
       <MyPageImageBox>
         <img src={imageUrl} alt="기본 이미지" />
+        <StyledImage src="/stamp.png" width={10} height={10} alt="이밎" />
       </MyPageImageBox>
       <MyPageAlcoholName>{name}</MyPageAlcoholName>
     </MyPageCardLayout>
@@ -23,14 +24,18 @@ const MyPageCardLayout = styled.div`
   width: 108px;
   height: 180px;
   background: #fff8e1;
-  background-image: url('/stamp.png');
-  background-size: contain;
   border: 1px solid #fbeec3;
   border-radius: 16px;
   padding: 10px 10px 0px 10px;
 `
+const StyledImage = styled.img`
+  z-index: 5;
+  position: absolute;
+  top: 0;
+`
 
 const MyPageImageBox = styled.div`
+  position: relative;
   margin: 0 auto;
   background: #ffffff;
   border-radius: 12px;
