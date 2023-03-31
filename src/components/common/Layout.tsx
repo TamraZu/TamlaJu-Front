@@ -13,5 +13,6 @@ export default Layout
 
 const StyledLayout = styled.div`
   max-width: 375px;
+  height: 100vh;
   margin: 0 auto;
 `

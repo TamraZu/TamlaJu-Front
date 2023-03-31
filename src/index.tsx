@@ -7,16 +7,20 @@ import './index.css'
 import App from './App'
 import Layout from 'components/common/Layout'
 import reportWebVitals from './reportWebVitals'
+import { RecoilRoot } from 'recoil';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 let queryClient = new QueryClient()
 root.render(
   <React.StrictMode>
+
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
-        <Layout>
-          <App />
-        </Layout>
+        <RecoilRoot>
+          <Layout>
+            <App />
+          </Layout>
+        </RecoilRoot>
       </BrowserRouter>
       <ReactQueryDevtools />
     </QueryClientProvider>
