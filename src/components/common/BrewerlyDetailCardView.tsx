@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { Link } from 'react-router-dom';
 import { alcoholType, brewerlyType } from 'types/drinkType';
 import drinkIcon from 'atoms/icons/DrinkIcon.svg';
 const CardWrapper = styled.div`
@@ -49,19 +50,21 @@ const BrewerlyDetailCardView = ({ alcohols }: BrewerlydetailCardViewProps) => {
     return (<CardWrapper>
         <>
             {alcohols.map((t: alcoholType) => {
-                return (<Card key={t.alcoholId}>
-                    
-                    <div style={{ position: 'relative' }}>
-                        <DrinkImg src={t.imageUrl} />
-                    </div>
-                    <div style={{ display: 'flex' }}>
-                        <DrinkIcon src={drinkIcon}/>
-                        <h5>{t.name}</h5>
-                    </div>
-                    <div>
+                return (<Link to={`/details/${t.alcoholId}`}>
+                    <Card key={t.alcoholId}>
 
-                    </div>
-                </Card>)
+                        <div style={{ position: 'relative' }}>
+                            <DrinkImg src={t.imageUrl} />
+                        </div>
+                        <div style={{ display: 'flex' }}>
+                            <DrinkIcon src={drinkIcon} />
+                            <h5>{t.name}</h5>
+                        </div>
+                        <div>
+
+                        </div>
+                    </Card>
+                </Link>)
             })}
         </>
 
