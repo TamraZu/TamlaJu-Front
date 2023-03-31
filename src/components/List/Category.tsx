@@ -1,33 +1,50 @@
-import { useState } from 'react'
+import { SetStateAction, Dispatch } from 'react'
 import styled from '@emotion/styled'
+import { CategoryData } from 'pages/List'
 
-export default function Category() {
-  const [btnActive, setBtnActive] = useState(0)
+interface CategoryProps {
+  category: CategoryData
+  setCategory: Dispatch<SetStateAction<CategoryData>>
+}
 
+interface CategoryItemProps {
+  key: number
+  idx: number
+  active: number
+  onClick: () => void
+}
+
+export default function Category({ category, setCategory }: CategoryProps) {
   const categoryList = [
     {
       id: 0,
       tag: '막걸리',
+      name: 'Makgeolli',
     },
     {
       id: 1,
       tag: '약주',
+      name: 'Yakju',
     },
     {
       id: 2,
       tag: '소주/증류주',
+      name: 'Soju',
     },
     {
       id: 3,
       tag: '맥주',
+      name: 'Beer',
     },
     {
       id: 4,
       tag: '와인',
+      name: 'Wine',
     },
     {
       id: 5,
       tag: '기타',
+      name: 'ETC',
     },
   ]
 
@@ -39,9 +56,9 @@ export default function Category() {
             <CategoryItem
               key={item.id}
               idx={index}
-              active={btnActive}
+              active={category.id}
               onClick={() => {
-                setBtnActive(index)
+                setCategory((prev: CategoryData) => ({ ...prev, id: item.id, name: item.name }))
               }}
             >
               {item.tag}
@@ -51,12 +68,6 @@ export default function Category() {
       </CategoryList>
     </CategoryLayout>
   )
-}
-
-interface CategoryProps {
-  key: number
-  idx: number
-  active: number
 }
 
 export const CategoryLayout = styled.div`
@@ -82,7 +93,7 @@ export const CategoryList = styled.ul`
   }
   margin-top: 24px;
 `
-export const CategoryItem = styled.li<CategoryProps>`
+export const CategoryItem = styled.li<CategoryItemProps>`
   flex-shrink: 0;
   padding: 5px 10px;
   font-size: 13px;

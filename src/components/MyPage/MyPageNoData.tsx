@@ -1,25 +1,31 @@
 import React from 'react'
-import styled from '@emotion/styled'
+import { ReactComponent as IsDrinkedSadIcon } from 'atoms/icons/IsDrinkedSadIcon.svg'
 import { ReactComponent as IsDrinkedWhiteIcon } from 'atoms/icons/IsDrinkedWhiteIcon.svg'
-import { postEatingCount } from 'apis'
 import { useNavigate } from 'react-router-dom'
+import styled from '@emotion/styled'
 
-interface DetailAteButtonProps {
-  alcoholId: number
-  memberId: number
-}
-
-function DetailAteButton({ alcoholId, memberId }: DetailAteButtonProps) {
+function DetailAteButton() {
   const navigate = useNavigate()
   return (
-    <StyledButton
-      onClick={() => postEatingCount(memberId, alcoholId).then(res => navigate('/list'))}
-    >
+    <StyledButton onClick={() => navigate('/')}>
       <IsDrinkedWhiteIcon width={24} height={24} />
-      <StyledText>마셔봤어요</StyledText>
+      <StyledText>제주 술 보러가기</StyledText>
     </StyledButton>
   )
 }
+
+function MyPageNoData() {
+  return (
+    <>
+      <IsDrinkedSadIcon width={80} height={80} />
+      <div>술기록이 존재하지 않아요</div>
+      <div>전통주를 보러 가볼까요?</div>
+      <DetailAteButton />
+    </>
+  )
+}
+
+export default MyPageNoData
 
 const StyledButton = styled.div`
   cursor: pointer;
@@ -38,5 +44,3 @@ const StyledButton = styled.div`
 const StyledText = styled.div`
   color: white;
 `
-
-export default DetailAteButton

@@ -2,39 +2,36 @@ import React from 'react'
 import styled from '@emotion/styled'
 import { ReactComponent as IsDrinkedIcon } from 'atoms/icons/IsDrinkedIcon.svg'
 import { useNavigate } from 'react-router-dom'
+import { ListAlcoholData } from 'pages/List'
+import { postEatingCount } from 'apis'
 
 export interface ListCardProps {
-  drink: {
-    drinkImage: string
-    drinkName: string
-    drinkSize: number
-    drinkLevel: number
-    drinkPrice: number
-    drinkAteCount: number
-    drinkIsAte: boolean
-  }
+  drink: ListAlcoholData
 }
 
 function ListCard({ drink }: ListCardProps) {
   const navigate = useNavigate()
+  const onClickHandler = async () => {
+    await postEatingCount(1, drink.alcoholId)
+  }
   return (
     <CardContainer>
-      <CardImage onClick={() => navigate(`/details/${drink.drinkName}`)}>
-        <img src={drink.drinkImage} alt="술 이미지" />
+      <CardImage onClick={() => navigate(`/details/${drink.alcoholId}`)}>
+        <img src={drink.imageUrl} alt="술 이미지" />
       </CardImage>
       <CardContent>
         <CardLeft>
-          <CardTitle onClick={() => navigate(`/details/${drink.drinkName}`)}>
-            {drink.drinkName}
+          <CardTitle onClick={() => navigate(`/details/${drink.alcoholId}`)}>
+            {drink.name}
           </CardTitle>
-          <CardInfo>{`${drink.drinkSize}ml | ${drink.drinkLevel}도`}</CardInfo>
-          <CardPrice>{drink.drinkPrice}원</CardPrice>
+          <CardInfo>{`${drink.volume}ml | ${drink.level}도`}</CardInfo>
+          <CardPrice>{drink.price}원</CardPrice>
         </CardLeft>
         <CardRight>
           <CardButton>
-            <IsDrinkedIcon width={32} height={32} fill={drink.drinkIsAte ? '#FD6E21' : '#858899'} />
+            <IsDrinkedIcon width={32} height={32} fill={drink.hasAte ? '#FD6E21' : '#858899'} />
           </CardButton>
-          <CardCount>{drink.drinkAteCount}</CardCount>
+          <CardCount onClick={onClickHandler}>{drink.ateCount}</CardCount>
         </CardRight>
       </CardContent>
     </CardContainer>
@@ -42,7 +39,8 @@ function ListCard({ drink }: ListCardProps) {
 }
 
 const CardContainer = styled.div`
-  width: 340px;
+  position: relative;
+  width: 343px;
   height: 130px;
   display: flex;
   border-radius: 16px;
@@ -53,39 +51,49 @@ const CardContainer = styled.div`
 
 const CardImage = styled.div`
   cursor: pointer;
-  flex: 1;
   width: 96px;
   height: 96px;
   img {
     object-fit: cover;
+    width: 96px;
+    height: 96px;
   }
 `
 
 const CardContent = styled.div`
-  flex: 2;
   display: flex;
-  justify-content: space-around;
   padding-top: 12px;
+  margin-left: 16px;
 `
 
 const CardLeft = styled.div`
-  display: flex;
-  flex-direction: column;
+  position: absolute;
+  left: 125px;
 `
-const CardTitle = styled.h1`
+const CardTitle = styled.div`
   cursor: pointer;
-  font-weight: 800;
-  font-size: 20px;
+  font-weight: 700;
+  font-size: 18px;
   line-height: 120%;
+  width: 200px;
+  height: 28px;
   margin-bottom: 15px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: -0.01em;
 `
 
 const CardInfo = styled.div`
   font-weight: 300;
-  line-height: 130%;
-  font-size: 15px;
+  line-height: 22px;
+  font-size: 14px;
+  height: 22px;
+  margin-top: -10px;
 `
 const CardPrice = styled.div`
+  height: 24px;
+  margin-top: 8px;
   font-weight: 700;
   line-height: 24px;
   font-size: 16px;
@@ -93,6 +101,9 @@ const CardPrice = styled.div`
 `
 
 const CardRight = styled.div`
+  position: absolute;
+  right: 19px;
+  bottom: 16px;
   display: flex;
   justify-content: center;
   align-items: flex-end;

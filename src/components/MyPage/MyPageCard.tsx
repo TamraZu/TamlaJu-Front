@@ -1,13 +1,18 @@
 import React from 'react'
 import styled from '@emotion/styled'
 
-function MyPageCard() {
+interface MyPageCardProps {
+  imageUrl: string
+  name: string
+}
+
+function MyPageCard({ imageUrl, name }: MyPageCardProps) {
   return (
     <MyPageCardLayout>
       <MyPageImageBox>
-        <img src="" alt="기본 이미지" />
+        <img src={imageUrl} alt="기본 이미지" />
       </MyPageImageBox>
-      <MyPageAlcoholName>제주샘 니모메</MyPageAlcoholName>
+      <MyPageAlcoholName>{name}</MyPageAlcoholName>
     </MyPageCardLayout>
   )
 }
