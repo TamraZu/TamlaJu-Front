@@ -82,7 +82,6 @@ export default function CustomMarker({ factoryId, latitude, longitude, hasAte, a
   useEffect(() => {
     if (response) {
       data?.onDataChange(response.data)
-      console.log(response, 'set')
     }
   }, [response])
 

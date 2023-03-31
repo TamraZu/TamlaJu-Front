@@ -1,11 +1,19 @@
 import { latLngType } from "./kakaoMapType";
 
+export type rankingType = {
+    alcoholId: number;
+    name: string;
+    imageUrl: string;
+    address: string;
+    ateCount: number
+}
+
 /** 상세 조회때 사용 */
 export type drinkType = {
     alcoholId: number;
-    name?: string | null;
-    imageUrl?: string | null;
-    address?: string | null;
+    name: string;
+    imageUrl: string;
+    address: string;
     ateCount: number
 
 }

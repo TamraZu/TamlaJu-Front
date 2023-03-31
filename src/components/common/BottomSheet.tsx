@@ -111,7 +111,6 @@ export default function BottomSheetContainer({ isOpen, onClose }: BottomSheetCon
         if (contextData?.data) {
             setData(contextData?.data)
         }
-        console.log(contextData);
     }, [contextData])
     return (
         <>
