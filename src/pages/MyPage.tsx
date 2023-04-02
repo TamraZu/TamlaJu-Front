@@ -54,7 +54,7 @@ function MyPage() {
         <MyPageCountHeader count={myPageData.count} />
         <MyPageContainer>
           {myPageData.alcohols?.map((elem, id) => {
-            return <MyPageCard key={id} imageUrl={elem?.imageUrl ?? ''} name={elem?.name ?? ''} />
+            return <MyPageCard key={elem.alcoholId} imageUrl={elem?.imageUrl ?? ''} name={elem?.name ?? ''} alcoholId={elem.alcoholId} />
           })}
         </MyPageContainer>
       </StyledMyPageLayout>
