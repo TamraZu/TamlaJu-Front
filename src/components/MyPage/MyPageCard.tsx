@@ -1,21 +1,25 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import Stamp from 'atoms/png/stamp.png'
+import { Link } from 'react-router-dom'
 
 interface MyPageCardProps {
   imageUrl: string
   name: string
+  alcoholId: number
 }
 
-function MyPageCard({ imageUrl, name }: MyPageCardProps) {
+function MyPageCard({ imageUrl, name, alcoholId }: MyPageCardProps) {
   return (
-    <MyPageCardLayout>
-      <MyPageImageBox>
-        <img src={imageUrl} alt="기본 이미지" />
-        <StyledImage src="/stamp.png" width={10} height={10} alt="이밎" />
-      </MyPageImageBox>
-      <MyPageAlcoholName>{name}</MyPageAlcoholName>
-    </MyPageCardLayout>
+    <Link to={`/details/${alcoholId}`}>
+      <MyPageCardLayout>
+        <MyPageImageBox>
+          <img src={imageUrl} alt="기본 이미지" />
+          <StyledImage src="/stamp.png" width={10} height={10} alt="이밎" />
+        </MyPageImageBox>
+        <MyPageAlcoholName>{name}</MyPageAlcoholName>
+      </MyPageCardLayout>
+    </Link>
   )
 }
 
