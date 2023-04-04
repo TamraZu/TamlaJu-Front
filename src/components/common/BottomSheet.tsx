@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 
-import { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useRef, MutableRefObject } from 'react';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled'
 import { ReactComponent as BreweryIcon } from 'atoms/icons/BreweryIcon.svg';
@@ -11,6 +11,7 @@ import { brewerlyType } from 'types/drinkType';
 import close from 'atoms/icons/CloseIcon.svg'
 import { useRecoilState } from 'recoil';
 import { bottomSheetOpened } from 'components/atoms/atoms';
+import { useHorizontalScroll } from 'components/hooks/useHorizontalScroll';
 
 const container = css({
     maxWidth: 375,
@@ -110,6 +111,7 @@ export default function BottomSheetContainer() {
     const [isAnimating, setIsAnimating] = useState(false);
     const [data, setData] = useState<brewerlyType | undefined>()
     const [isOpen, setIsOpen] = useRecoilState<boolean>(bottomSheetOpened);
+    const scrollRef = useHorizontalScroll();
     const { y } = useSpring({
         y: isOpen ? 0 : 120,
         config: { tension: 200, friction: 30 },
@@ -124,6 +126,7 @@ export default function BottomSheetContainer() {
     };
 
     const contextData = useContext(MapContext);
+    
     useEffect(() => {
         if (contextData?.data) {
             setData(contextData?.data)
@@ -159,7 +162,7 @@ export default function BottomSheetContainer() {
                         <AddressFont>{data?.address}</AddressFont>
                     </div>
                     <CardViewGradient />
-                    <CardViewContainer>
+                    <CardViewContainer ref={scrollRef}>
                         {data?.alcohols.length ?
                             <BrewerlyDetailCardView alcohols={data.alcohols} /> :
                             <CenterBold>상품 정보가 없습니다.</CenterBold>
