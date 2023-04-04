@@ -59,7 +59,7 @@ export default function CustomMarker({ factoryId, latitude, longitude, hasAte, a
   const [enabled, setEnabled] = useState(false);
   // const [isVisited, setIsVisited] = useState(hasAte);
   // const [isSelected, setIsSelected] = useState(data?.data?.factoryId === factoryId);
-  // const [image, setImage] = useState(hasAte ? ateMarker : defaultMarker);
+  const [image, setImage] = useState(hasAte ? ateMarker : defaultMarker);
   // useEffect(() => {
   // setImage(isSelected ? selectedMarker : isVisited ? ateMarker : defaultMarker)
   // })
@@ -89,7 +89,7 @@ export default function CustomMarker({ factoryId, latitude, longitude, hasAte, a
     <MapMarker
       position={{ lat: latitude, lng: longitude }}
       clickable={true}
-      image={defaultMarker}
+      image={image}
       onClick={(e) => {
         axios.get<apiConnectType<brewerlyType>>(`api/v1/factories/${factoryId}`)
           .then(t => {
