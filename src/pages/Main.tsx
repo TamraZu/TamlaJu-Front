@@ -19,6 +19,8 @@ const Header = styled.h1`
     font-family: 'Pretendard';
     font-weight:700;
     margin:12px 0 0 16px;
+    word-break: keep-all;
+    word-wrap: break-word;
 `
 
 function Main() {
