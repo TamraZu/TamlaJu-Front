@@ -21,26 +21,27 @@ export type locationDataType = {
 };
 
 export type MarkerDataType = {
-  factoryId?: number;
-  children?: ReactNode;
+  factoryId: number;
+  children: ReactNode;
   latitude: number;
   longitude: number;
-  address:string;
-  hasAte?: boolean;
+  address: string;
+  hasAte: boolean;
   onClick?: () => void;
-  setCenter:(a:latLngType) => void
+  setCenter: (pos: latLngType) => void;
+  setZoom: (zoom: number) => void;
 };
 
 export type tempType = {
   factoryId: number;
   name: string;
   address: string;
-  latLng?:latLngType;
+  latLng?: latLngType;
   // alcohols: alcoholType[];
 }
 
 export interface apiConnectType<T> {
-  success : boolean,
-  message : string,
-  data : T
+  success: boolean,
+  message: string,
+  data: T
 }
