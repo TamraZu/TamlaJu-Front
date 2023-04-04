@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 
-import React, { useState, useEffect, useContext, useRef, MutableRefObject } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled'
 import { ReactComponent as BreweryIcon } from 'atoms/icons/BreweryIcon.svg';
@@ -118,12 +118,6 @@ export default function BottomSheetContainer() {
         onStart: () => setIsAnimating(true),
         onRest: () => setIsAnimating(false),
     });
-
-    const handleClose = () => {
-        if (!isAnimating) {
-            setIsOpen(false);
-        }
-    };
 
     const contextData = useContext(MapContext);
     

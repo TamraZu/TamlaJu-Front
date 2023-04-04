@@ -1,7 +1,6 @@
-import React from 'react';
 import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
-import { alcoholType, brewerlyType } from 'types/drinkType';
+import { alcoholType } from 'types/drinkType';
 import { ReactComponent as DrinkIcon } from 'atoms/icons/DrinkIcon.svg'
 
 const CardWrapper = styled.div`
@@ -26,11 +25,6 @@ margin:10px;
 width: 118px;
 height: 126px;
 border-radius: 12px;
-`
-const StampImg = styled.img`
-position: absolute;
-left:0;
-right:0;
 `
 
 const TitleFont = styled.h1`

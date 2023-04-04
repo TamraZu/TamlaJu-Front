@@ -61,6 +61,10 @@ export function CustomMarker({ factoryId, latitude, longitude, hasAte, address, 
   const [image, setImage] = useState(factoryId === marker ? SELECTED_MARKER_IMG : hasAte ? ATE_MARKER_IMG : DEFAULT_MARKER_IMG);
 
   useEffect(() => {
+    setIsOpen(false);
+  },[])
+
+  useEffect(() => {
     // 데이터 변경
     if (response) {
       data?.onDataChange(response.data)

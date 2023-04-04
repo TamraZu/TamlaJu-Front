@@ -84,7 +84,6 @@ function SignIn() {
     e.preventDefault();
     try {
       const response = await loginMutation.mutateAsync();
-      console.log(response)
       if (response.success) {
         setMemberId(1);
         navigate('/home');

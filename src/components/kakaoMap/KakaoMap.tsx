@@ -1,9 +1,9 @@
 /** @jsxImportSource @emotion/react */
 
 import { Map } from 'react-kakao-maps-sdk';
-import { css, jsx } from '@emotion/react';
+import { css } from '@emotion/react';
 import { latLngType, MarkerDataType, mapOptionType, apiConnectType } from 'types/kakaoMapType';
-import { useState, useEffect, useContext } from 'react';
+import { useState, useContext } from 'react';
 import { useQuery } from '@tanstack/react-query'
 import axios from 'services';
 import {MemoizedMarker} from "./marker/CustomMarker";
@@ -22,8 +22,6 @@ function KakaoMap({ center, zoom }: mapOptionType) {
     const [position, setPosition] = useState<latLngType>(center)
     const [markers, setMarkers] = useState<MarkerDataType[]>([]);
     const [isOpen, setIsOpen] = useRecoilState<boolean>(bottomSheetOpened);
-    const data = useContext(MapContext);
-
 
     useQuery(
         ['kakaomap', 'request', 'factories'],
