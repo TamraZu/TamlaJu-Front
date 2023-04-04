@@ -23,10 +23,14 @@ const container = css({
     margin: '0 auto',
     borderRadius: '16px 16px 0 0',
     boxShadow: '0 -12px 20px rgba(0,0,0,0.16)',
-    padding: '24px 16px 0 16px',
+    padding: '24px 0 0 0',
     backgroundColor: 'white',
     zIndex: 2
 })
+
+const wrapper = css`
+    width:100%;
+`
 
 const mapIcon = css`
 margin: 4px;    
@@ -51,12 +55,14 @@ const flexHeadWrapper = css`
     position: relative;
     justify-content: space-between;
     align-content: center;
+    margin-left:16px;
 `
 const address = css`
-    margin: 0 28px 0 28px;
+    margin: 0 28px 0 44px;
     word-break: break-all;
     font-size:14px;
     height: 48px;
+    
 `
 
 const CenterBold = styled.h1`
@@ -81,11 +87,24 @@ const AddressFont = styled.h1`
 `;
 
 const CardViewContainer = styled.div`
-    width: calc(100vw - 32px);
+    
+    width: calc(100% - 16px);
     overflow-y: hidden;
     overflow-x: scroll;
+    ::-webkit-scrollbar{
+        display:none;
+    }
 `
 
+const CardViewGradient = styled.div`
+    pointer-events:none;
+    position:absolute;
+    width:100%;
+    height:100%;
+    z-index:2;
+    background-image: linear-gradient(90deg, rgb(255, 255, 255) 0%, transparent 7.5%), linear-gradient(270deg, rgb(255, 255, 255) 0%, transparent 7.5%);
+
+`
 export default function BottomSheetContainer() {
 
     const [isAnimating, setIsAnimating] = useState(false);
@@ -114,7 +133,6 @@ export default function BottomSheetContainer() {
 
     return (
         <>
-            {isOpen && <div className="bottom-sheet-backdrop" onClick={handleClose} />}
             <animated.div
                 className="bottom-sheet"
                 css={container}
@@ -122,7 +140,7 @@ export default function BottomSheetContainer() {
                     transform: y.to((y: number) => `translateY(${y}%)`),
                 }}
             >
-                <div>
+                <div css={wrapper}>
                     <div css={closeBtn} onClick={() => {
                         setIsOpen(false);
                     }}>
@@ -140,11 +158,12 @@ export default function BottomSheetContainer() {
                     <div css={address}>
                         <AddressFont>{data?.address}</AddressFont>
                     </div>
+                    <CardViewGradient />
                     <CardViewContainer>
-                    {data?.alcohols.length ?
-                        <BrewerlyDetailCardView alcohols={data.alcohols} /> :
-                        <CenterBold>상품 정보가 없습니다.</CenterBold>
-                    }
+                        {data?.alcohols.length ?
+                            <BrewerlyDetailCardView alcohols={data.alcohols} /> :
+                            <CenterBold>상품 정보가 없습니다.</CenterBold>
+                        }
                     </CardViewContainer>
                 </div>
             </animated.div>
