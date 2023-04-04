@@ -96,7 +96,7 @@ export default function BottomSheetContainer() {
         if (contextData?.data) {
             setData(contextData?.data)
         }
-    }, [contextData])
+    }, [contextData]);
     return (
         <>
             {isOpen && <div className="bottom-sheet-backdrop" onClick={handleClose} />}
@@ -104,7 +104,7 @@ export default function BottomSheetContainer() {
                 className="bottom-sheet"
                 css={container}
                 style={{
-                    transform: y.interpolate((y: number) => `translateY(${y}%)`),
+                    transform: y.to((y: number) => `translateY(${y}%)`),
                 }}
             >
                 <div style={{ margin: '0 0 0 16px' }}>
