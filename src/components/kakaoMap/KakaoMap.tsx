@@ -6,8 +6,10 @@ import { latLngType, MarkerDataType, mapOptionType, apiConnectType } from 'types
 import { useState, useEffect, useContext } from 'react';
 import { useQuery } from '@tanstack/react-query'
 import axios from 'services';
-import CustomMarker from "./marker/CustomMarker";
+import {MemoizedMarker, CustomMarker} from "./marker/CustomMarker";
 import { MapContext } from 'pages/Main';
+import { bottomSheetOpened } from 'components/atoms/atoms';
+import { useRecoilState } from 'recoil';
 const container = css({
     width: '343px',
     height: '343px',
@@ -19,6 +21,7 @@ function KakaoMap({ center, zoom }: mapOptionType) {
     const [zoomLevel, setZoom] = useState(zoom);
     const [position, setPosition] = useState<latLngType>(center)
     const [markers, setMarkers] = useState<MarkerDataType[]>([]);
+    const [isOpen, setIsOpen] = useRecoilState<boolean>(bottomSheetOpened);
     const data = useContext(MapContext);
 
 
@@ -31,6 +34,9 @@ function KakaoMap({ center, zoom }: mapOptionType) {
             onSuccess: (response) => {
                 setMarkers(response.data.data);
             },
+            onError: () => {
+                console.error('Failed to getting marker info')
+            }
         }
     );
 
@@ -39,19 +45,14 @@ function KakaoMap({ center, zoom }: mapOptionType) {
             level={zoomLevel}
             isPanto
             onClick={(_t, mouseEvent) => {
-                data?.toggleBottomSheet(false);
+                setIsOpen(false);
             }
             }>
 
             {markers.map((t: MarkerDataType) => {
                 return (
-                    <CustomMarker
-                        key={t.factoryId} factoryId={t.factoryId} address={t.address} latitude={t.latitude} longitude={t.longitude} hasAte={t.hasAte} setCenter={setPosition}>
-                        <div>
-                            inner component
-                            <div>what</div>
-                        </div>
-                    </CustomMarker>
+                    <MemoizedMarker
+                        key={t.factoryId} factoryId={t.factoryId} address={t.address} latitude={t.latitude} longitude={t.longitude} hasAte={t.hasAte} setCenter={setPosition} setZoom={setZoom} children={undefined}/>
                 );
             })}
         </Map>

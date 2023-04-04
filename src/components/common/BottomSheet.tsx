@@ -10,6 +10,8 @@ import { MapContext } from 'pages/Main';
 import BrewerlyDetailCardView from './BrewerlyDetailCardView';
 import { alcoholType, brewerlyType } from 'types/drinkType';
 import close from 'atoms/icons/CloseIcon.svg'
+import { useRecoilState } from 'recoil';
+import { bottomSheetOpened } from 'components/atoms/atoms';
 
 const container = css({
     maxWidth: 375,
@@ -71,10 +73,11 @@ const AddressFont = styled.h1`
     font-size: 16px;
 `;
 
-export default function BottomSheetContainer({ isOpen, onClose }: BottomSheetControlType) {
-    const [open, setOpen] = useState<boolean>(isOpen);
+export default function BottomSheetContainer() {
+
     const [isAnimating, setIsAnimating] = useState(false);
     const [data, setData] = useState<brewerlyType | undefined>()
+    const [isOpen, setIsOpen] = useRecoilState<boolean>(bottomSheetOpened);
     const { y } = useSpring({
         y: isOpen ? 0 : 120,
         config: { tension: 200, friction: 30 },
@@ -84,36 +87,9 @@ export default function BottomSheetContainer({ isOpen, onClose }: BottomSheetCon
 
     const handleClose = () => {
         if (!isAnimating) {
-            setOpen(false);
+            setIsOpen(false);
         }
     };
-
-
-    const BottomSheetGenerate = () => {
-        return (
-            <div style={{ margin: '0 0 0 16px' }}>
-                <div css={closeBtn} onClick={() => { contextData?.toggleBottomSheet(false) }}>
-                    <img src={close} alt="close" width={20} height={20} />
-                </div>
-                <div css={flexHeadWrapper}>
-                    <div css={flexHeadline}>
-                        <BreweryIcon css={mapIcon} title='map' fill='#000' width={20} height={20}> </BreweryIcon>
-                        <TitleFont >{data?.name}</TitleFont>
-
-                    </div>
-
-                </div>
-
-                <div css={address}>
-                    <AddressFont>{data?.address}</AddressFont>
-                </div>
-                {data?.alcohols.length ?
-                    <BrewerlyDetailCardView alcohols={data.alcohols} /> :
-                    <CenterBold>상품 정보가 없습니다.</CenterBold>
-                }
-            </div>
-        )
-    }
 
     const contextData = useContext(MapContext);
     useEffect(() => {
@@ -131,7 +107,29 @@ export default function BottomSheetContainer({ isOpen, onClose }: BottomSheetCon
                     transform: y.interpolate((y: number) => `translateY(${y}%)`),
                 }}
             >
-                {BottomSheetGenerate()}
+                <div style={{ margin: '0 0 0 16px' }}>
+                    <div css={closeBtn} onClick={() => {
+                        setIsOpen(false);
+                    }}>
+                        <img src={close} alt="close" width={20} height={20} />
+                    </div>
+                    <div css={flexHeadWrapper}>
+                        <div css={flexHeadline}>
+                            <BreweryIcon css={mapIcon} title='map' fill='#000' width={20} height={20}> </BreweryIcon>
+                            <TitleFont >{data?.name}</TitleFont>
+
+                        </div>
+
+                    </div>
+
+                    <div css={address}>
+                        <AddressFont>{data?.address}</AddressFont>
+                    </div>
+                    {data?.alcohols.length ?
+                        <BrewerlyDetailCardView alcohols={data.alcohols} /> :
+                        <CenterBold>상품 정보가 없습니다.</CenterBold>
+                    }
+                </div>
             </animated.div>
         </>
     )

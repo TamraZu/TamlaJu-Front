@@ -50,7 +50,7 @@ const TitleFont = styled.h1`
     white-space: nowrap; 
 `;
 
-const CardTitleWrapper = styled.h1`
+const CardTitleWrapper = styled.div`
     display:flex;
     margin:0 10px;
     line-height: 24px;
@@ -68,8 +68,8 @@ const BrewerlyDetailCardView = ({ alcohols }: BrewerlydetailCardViewProps) => {
     return (<CardWrapper>
         <>
             {alcohols.map((t: alcoholType) => {
-                return (<Link to={`/details/${t.alcoholId}`}>
-                    <Card key={t.alcoholId}>
+                return (<Link to={`/details/${t.alcoholId}`} key={t.alcoholId}>
+                    <Card>
 
                         <div style={{ position: 'relative' }}>
                             <DrinkImg src={t.imageUrl} />

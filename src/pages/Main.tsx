@@ -24,7 +24,6 @@ const Header = styled.h1`
 function Main() {
     const data: BottomSheetRecoilPropType | null = null;
     const [btmSheetData, setBtmSheetData] = useState<brewerlyType>();
-    const [isOpen, setIsOpen] = useState(false);
 
 
     return <Container>
@@ -34,9 +33,6 @@ function Main() {
             onDataChange: (newData) => {
                 setBtmSheetData(newData);
             },
-            toggleBottomSheet: (b: boolean) => {
-                setIsOpen(b)
-            }
 
         }}>
             <Header>제주 전통주로 특별한<br/>
@@ -47,9 +43,7 @@ function Main() {
                 전통주 순위
             </Header>
             <RankingContainer/>
-            <BottomSheetContainer isOpen={isOpen} >
-
-            </BottomSheetContainer>
+            <BottomSheetContainer/>
             <NavBar />
         </MapContext.Provider>
     </Container>;

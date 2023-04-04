@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { MapMarker } from 'react-kakao-maps-sdk';
 import { apiConnectType, latLngType, MarkerDataType } from 'types/kakaoMapType';
 import { useQuery } from '@tanstack/react-query';
@@ -9,6 +9,8 @@ import markerAteImage from 'atoms/png/BreweryCheckedIcon.png'
 import markerDefaultImage from 'atoms/png/BreweryIcon.png'
 import { brewerlyType } from 'types/drinkType';
 import { AxiosResponse } from 'axios';
+import { useRecoilState } from 'recoil';
+import { bottomSheetOpened } from 'components/atoms/atoms';
 
 const ateMarker = {
   src: markerAteImage,
@@ -52,10 +54,10 @@ const defaultMarker = {
     },
   },
 }
-export default function CustomMarker({ factoryId, latitude, longitude, hasAte, address, setCenter }: MarkerDataType) {
+export function CustomMarker({ factoryId, latitude, longitude, hasAte, address, setCenter, setZoom }: MarkerDataType) {
   const data = useContext(MapContext)
   const [response, setResponse] = useState<apiConnectType<brewerlyType>>();
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useRecoilState(bottomSheetOpened);
   const [enabled, setEnabled] = useState(false);
   // const [isVisited, setIsVisited] = useState(hasAte);
   // const [isSelected, setIsSelected] = useState(data?.data?.factoryId === factoryId);
@@ -78,7 +80,7 @@ export default function CustomMarker({ factoryId, latitude, longitude, hasAte, a
   //   }
   // );
 
-  
+
   useEffect(() => {
     if (response) {
       data?.onDataChange(response.data)
@@ -95,17 +97,13 @@ export default function CustomMarker({ factoryId, latitude, longitude, hasAte, a
           .then(t => {
             setResponse(t.data);
           }).catch(e => {
-          alert('네트워크 통신 실패')
-        })
+            alert('네트워크 통신 실패')
+          })
 
-        const pos = {
-          lat: e.getPosition().getLat(),
-          lng: e.getPosition().getLng()
-        }
+        setCenter({ lat: e.getPosition().getLat(), lng: e.getPosition().getLng() })
+        setIsOpen(true);
+        // 여기에 여는 기능 추가
 
-        setCenter({ lat: pos.lat, lng: pos.lng })
-        data?.toggleBottomSheet(isOpen);
-        setIsOpen(!isOpen);
 
       }
         // 커스텀 마커에서 클릭했을때 지도의 중심으로 이동
@@ -118,3 +116,5 @@ export default function CustomMarker({ factoryId, latitude, longitude, hasAte, a
     </MapMarker >
   );
 }
+
+export const MemoizedMarker = React.memo(CustomMarker)
