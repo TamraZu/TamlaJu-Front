@@ -1,6 +1,7 @@
 import styled from '@emotion/styled'
 import { Link } from 'react-router-dom'
 import { alcoholType, drinkType } from 'types/drinkType'
+import  DrinkIcon from 'atoms/icons/IsDrinkedIcon.svg'
 
 const CardContainer = styled.div`
   width: 100%;
@@ -69,6 +70,19 @@ const CardCount = styled.div`
   letter-spacing: -0.003em;
   text-align: center;
 `
+const CardDetail = styled.div`
+  display:flex;
+  justify-content:center;
+  align-items:center;
+`
+
+const IsDrinkIcon = styled.img`
+  fill:#525463;
+  background-color:#525463;
+  border-radius:50%;
+  margin-right:5px;
+`
+
 interface RankingItemInterface {
   prop: drinkType,
   index: number
@@ -84,7 +98,10 @@ export default function RankingItem({ prop, index }: RankingItemInterface) {
         <CardContent>
           <CardTitle>{prop.name}</CardTitle>
           <CardInfo>{prop.address}</CardInfo>
-          <CardCount>{prop.ateCount + '명이 즐겼어요😍'}</CardCount>
+          <CardDetail>
+            <IsDrinkIcon src={DrinkIcon} width={13} />
+            <CardCount>{prop.ateCount ? prop.ateCount + '명이 즐겼어요' : prop.ateCount}</CardCount>
+          </CardDetail>
 
         </CardContent>
       </CardContainer>
