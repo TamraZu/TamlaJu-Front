@@ -7,9 +7,7 @@ import { ReactComponent as DrinkIcon } from 'atoms/icons/DrinkIcon.svg'
 const CardWrapper = styled.div`
     border-radius: 16px;
     width:100%;
-    margin:14px 16px 58px 16px;
-    overflow-x: scroll;
-    overflow-y: hidden;
+    margin:14px 0 58px 0;
     display: flex;
     gap:8px;
     ::-webkit-scrollbar{

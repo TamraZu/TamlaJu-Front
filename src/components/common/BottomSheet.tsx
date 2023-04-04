@@ -23,7 +23,7 @@ const container = css({
     margin: '0 auto',
     borderRadius: '16px 16px 0 0',
     boxShadow: '0 -12px 20px rgba(0,0,0,0.16)',
-    paddingTop: 24,
+    padding: '24px 16px 0 16px',
     backgroundColor: 'white',
     zIndex: 2
 })
@@ -42,18 +42,21 @@ z-index: 1;
 
 const flexHeadline = css`
     display:flex;
+    width:100%;
 `
 
 const flexHeadWrapper = css`
+    width:100%;
     display:flex;
     position: relative;
     justify-content: space-between;
     align-content: center;
 `
 const address = css`
-    margin: 0 28px 14px 28px;
+    margin: 0 28px 0 28px;
     word-break: break-all;
     font-size:14px;
+    height: 48px;
 `
 
 const CenterBold = styled.h1`
@@ -66,11 +69,22 @@ height: 100%;
 const TitleFont = styled.h1`
     font-size: 20px;
     font-weight: 700;
+    word-break: keep-all;
+    word-wrap: break-word;
+    width:calc(100% - 36px);
 `;
 
 const AddressFont = styled.h1`
     font-size: 16px;
+    word-break: keep-all;
+    word-wrap: break-word;
 `;
+
+const CardViewContainer = styled.div`
+    width: calc(100vw - 32px);
+    overflow-y: hidden;
+    overflow-x: scroll;
+`
 
 export default function BottomSheetContainer() {
 
@@ -96,6 +110,8 @@ export default function BottomSheetContainer() {
             setData(contextData?.data)
         }
     }, [contextData]);
+
+
     return (
         <>
             {isOpen && <div className="bottom-sheet-backdrop" onClick={handleClose} />}
@@ -106,7 +122,7 @@ export default function BottomSheetContainer() {
                     transform: y.to((y: number) => `translateY(${y}%)`),
                 }}
             >
-                <div style={{ margin: '0 0 0 16px' }}>
+                <div>
                     <div css={closeBtn} onClick={() => {
                         setIsOpen(false);
                     }}>
@@ -124,12 +140,14 @@ export default function BottomSheetContainer() {
                     <div css={address}>
                         <AddressFont>{data?.address}</AddressFont>
                     </div>
+                    <CardViewContainer>
                     {data?.alcohols.length ?
                         <BrewerlyDetailCardView alcohols={data.alcohols} /> :
                         <CenterBold>상품 정보가 없습니다.</CenterBold>
                     }
+                    </CardViewContainer>
                 </div>
             </animated.div>
         </>
     )
-} 
+}

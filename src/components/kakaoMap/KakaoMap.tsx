@@ -6,13 +6,12 @@ import { latLngType, MarkerDataType, mapOptionType, apiConnectType } from 'types
 import { useState, useEffect, useContext } from 'react';
 import { useQuery } from '@tanstack/react-query'
 import axios from 'services';
-import {MemoizedMarker, CustomMarker} from "./marker/CustomMarker";
+import {MemoizedMarker} from "./marker/CustomMarker";
 import { MapContext } from 'pages/Main';
 import { bottomSheetOpened } from 'components/atoms/atoms';
 import { useRecoilState } from 'recoil';
 const container = css({
     width: 'calc(100% - 32px)',
-    // height: 'calc(100vw - 32px)',
     aspectRatio: '1/1',
     margin: '16px 0 16px 16px',
     borderRadius: '16px',

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { alcoholType, drinkType } from 'types/drinkType'
 
 const CardContainer = styled.div`
-  width: 343px;
+  width: 100%;
   height: 88px;
   display: flex;
   border-radius: 16px;
@@ -16,14 +16,15 @@ const CardContainer = styled.div`
 
 const CardNumber = styled.div`
     margin-right: 8px;
+    flex-shrink:0;
     font-weight:700;
     font-size:28px;
     letter-spacing: -0.003em;
-
 `
 
 const CardImage = styled.img`
   cursor: pointer;
+  flex-shrink:0;
   width: 64px;
   height: 64px;
   margin-right: 14px;
@@ -31,6 +32,8 @@ const CardImage = styled.img`
 
 const CardContent = styled.div`
   display: flex;
+  width:100%;
+  flex-shrink:1;
   flex-direction: column;
   justify-content: center;
   align-items: start;
@@ -38,11 +41,13 @@ const CardContent = styled.div`
 
 const CardTitle = styled.h1`
   cursor: pointer;
-  width: 200px;
+  flex-shrink: 1;
+  min-width:0;
+  width:100%;
   display: inline-block; 
-    text-overflow: ellipsis;
-    overflow: hidden; 
-    white-space: nowrap; 
+  text-overflow: ellipsis;
+  overflow: hidden; 
+  white-space: nowrap; 
   font-weight: 800;
   font-size: 20px;
   line-height: 120%;
@@ -52,6 +57,7 @@ const CardInfo = styled.div`
   font-weight: 300;
   line-height: 130%;
   font-size: 13px;
+  flex-shrink: 1;
   margin-bottom: 2px;
   color:#858899;
 `
@@ -59,6 +65,7 @@ const CardInfo = styled.div`
 const CardCount = styled.div`
   font-weight: 500;
   font-size: 13px;
+  flex-shrink: 1;
   letter-spacing: -0.003em;
   text-align: center;
 `
@@ -77,8 +84,8 @@ export default function RankingItem({ prop, index }: RankingItemInterface) {
         <CardContent>
           <CardTitle>{prop.name}</CardTitle>
           <CardInfo>{prop.address}</CardInfo>
-            <CardCount>{prop.ateCount + '명이 즐겼어요😍'}</CardCount>
-            
+          <CardCount>{prop.ateCount + '명이 즐겼어요😍'}</CardCount>
+
         </CardContent>
       </CardContainer>
     </Link>
