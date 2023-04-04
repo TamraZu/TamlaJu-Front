@@ -13,42 +13,42 @@ import { AxiosResponse } from 'axios';
 const ateMarker = {
   src: markerAteImage,
   size: {
-    width: 24,
-    height: 24,
+    width: 36,
+    height: 36,
   },
   options: {
     offset: {
-      x: 12,
-      y: 24,
+      x: 18,
+      y: 36,
     },
   },
 }
 
-const selectedMarker = {
-  src: markerSelectedImage,
-  size: {
-    width: 24,
-    height: 24,
-  },
-  options: {
-    offset: {
-      x: 12,
-      y: 24,
-    },
-  },
-}
+// const selectedMarker = {
+//   src: markerSelectedImage,
+//   size: {
+//     width: 24,
+//     height: 24,
+//   },
+//   options: {
+//     offset: {
+//       x: 12,
+//       y: 24,
+//     },
+//   },
+// }
 
 
 const defaultMarker = {
   src: markerDefaultImage,
   size: {
-    width: 24,
-    height: 24,
+    width: 36,
+    height: 36,
   },
   options: {
     offset: {
-      x: 12,
-      y: 24,
+      x: 18,
+      y: 36,
     },
   },
 }
@@ -59,7 +59,7 @@ export default function CustomMarker({ factoryId, latitude, longitude, hasAte, a
   const [enabled, setEnabled] = useState(false);
   // const [isVisited, setIsVisited] = useState(hasAte);
   // const [isSelected, setIsSelected] = useState(data?.data?.factoryId === factoryId);
-  // const [image, setImage] = useState(defaultMarker);
+  // const [image, setImage] = useState(hasAte ? ateMarker : defaultMarker);
   // useEffect(() => {
   // setImage(isSelected ? selectedMarker : isVisited ? ateMarker : defaultMarker)
   // })
@@ -78,11 +78,10 @@ export default function CustomMarker({ factoryId, latitude, longitude, hasAte, a
   //   }
   // );
 
-
+  
   useEffect(() => {
     if (response) {
       data?.onDataChange(response.data)
-      console.log(response, 'set')
     }
   }, [response])
 

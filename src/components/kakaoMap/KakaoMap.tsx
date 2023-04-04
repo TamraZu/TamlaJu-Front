@@ -9,9 +9,9 @@ import axios from 'services';
 import CustomMarker from "./marker/CustomMarker";
 import { MapContext } from 'pages/Main';
 const container = css({
-    width: '100%',
+    width: '343px',
     height: '343px',
-    margin: '12px 16px 0 16px',
+    margin: '16px 0 16px 16px',
     borderRadius: '16px',
 })
 
@@ -20,9 +20,7 @@ function KakaoMap({ center, zoom }: mapOptionType) {
     const [position, setPosition] = useState<latLngType>(center)
     const [markers, setMarkers] = useState<MarkerDataType[]>([]);
     const data = useContext(MapContext);
-    useEffect(() => {
-        console.log(position)
-    }, [position])
+
 
     useQuery(
         ['kakaomap', 'request', 'factories'],

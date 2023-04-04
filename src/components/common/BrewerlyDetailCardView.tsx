@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { Link } from 'react-router-dom';
 import { alcoholType, brewerlyType } from 'types/drinkType';
-import drinkIcon from 'atoms/icons/DrinkIcon.svg';
+import { ReactComponent as DrinkIcon } from 'atoms/icons/DrinkIcon.svg'
+
 const CardWrapper = styled.div`
     border-radius: 16px;
     width:100%;
@@ -37,10 +39,27 @@ left:0;
 right:0;
 `
 
-const DrinkIcon = styled.img`
-width:20px;
-height: 20px;
+const TitleFont = styled.h1`
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: -0.003em;
+    width: 100px;
+    display: inline-block; 
+    text-overflow: ellipsis;
+    overflow: hidden; 
+    white-space: nowrap; 
+`;
+
+const CardTitleWrapper = styled.h1`
+    display:flex;
+    margin:0 10px;
+    line-height: 24px;
+    gap:2px;
+    justify-content: center;
+    align-items: center;
+
 `
+
 interface BrewerlydetailCardViewProps {
     alcohols: alcoholType[]
 }
@@ -49,19 +68,20 @@ const BrewerlyDetailCardView = ({ alcohols }: BrewerlydetailCardViewProps) => {
     return (<CardWrapper>
         <>
             {alcohols.map((t: alcoholType) => {
-                return (<Card key={t.alcoholId}>
-                    
-                    <div style={{ position: 'relative' }}>
-                        <DrinkImg src={t.imageUrl} />
-                    </div>
-                    <div style={{ display: 'flex' }}>
-                        <DrinkIcon src={drinkIcon}/>
-                        <h5>{t.name}</h5>
-                    </div>
-                    <div>
+                return (<Link to={`/details/${t.alcoholId}`}>
+                    <Card key={t.alcoholId}>
 
-                    </div>
-                </Card>)
+                        <div style={{ position: 'relative' }}>
+                            <DrinkImg src={t.imageUrl} />
+                        </div>
+                        <div style={{display:'flex', justifyContent:'center'}}>
+                            <CardTitleWrapper>
+                                <DrinkIcon width="20" fill={'#09121F'} />
+                                <TitleFont>{t.name}</TitleFont>
+                            </CardTitleWrapper>
+                        </div>
+                    </Card>
+                </Link>)
             })}
         </>
 

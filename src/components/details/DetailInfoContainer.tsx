@@ -13,10 +13,10 @@ function DetailInfoContainer({ detailData }: DetailInfoContainerProps) {
         <DetailInfoKey>가격 </DetailInfoKey>
         <DetailInfoValue>{detailData.price}원</DetailInfoValue>
       </DetailInfo>
-      <DetailInfoAddress>
-        <DetailInfoAddressKey>생산자</DetailInfoAddressKey>
-        <DetailInfoAddressValue>{detailData.address}</DetailInfoAddressValue>
-      </DetailInfoAddress>
+      <DetailInfo>
+        <DetailInfoKey>생산자</DetailInfoKey>
+        <DetailInfoValue>{detailData.factory}</DetailInfoValue>
+      </DetailInfo>
       <DetailInfo>
         <DetailInfoKey>지역 </DetailInfoKey>
         <DetailInfoValue>{detailData.region}</DetailInfoValue>
@@ -65,28 +65,6 @@ const DetailInfoKey = styled.div`
   letter-spacing: -0.003em;
 `
 
-const DetailInfoAddress = styled(DetailInfo)`
-  margin-bottom: 20px;
-`
-
-const DetailInfoAddressKey = styled.div`
-  color: #858899;
-  white-space: nowrap;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 24px;
-  width: 48px;
-  height: 24px;
-  letter-spacing: -0.003em;
-`
-const DetailInfoAddressValue = styled.div`
-  height: 50px;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 24px;
-  word-wrap: break-word;
-  letter-spacing: -0.003em;
-`
 const DetailInfoValue = styled.div`
   height: 50px;
   font-weight: 500;

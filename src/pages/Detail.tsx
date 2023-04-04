@@ -51,7 +51,7 @@ function Detail() {
           </DetailTastingImage>
           <DetailTastingDescription>{data.description}</DetailTastingDescription>
         </DetailTastingInfo>
-        <DetailAteButton alcoholId={data.alcoholId} memberId={mId} />
+        <DetailAteButton alcoholId={data.alcoholId} ateCount={data.ateCount} memberId={mId} />
       </DetailLayout>
       <NavBar />
     </>

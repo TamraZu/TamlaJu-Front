@@ -33,8 +33,10 @@ margin: 4px;
 
 const closeBtn = css`
 position: absolute;
+cursor:pointer;
 margin:4px;
 right:16px;
+z-index: 1;
 `
 
 const flexHeadline = css`
@@ -60,6 +62,14 @@ margin-top: 75px;
 height: 100%;
 `
 
+const TitleFont = styled.h1`
+    font-size: 20px;
+    font-weight: 700;
+`;
+
+const AddressFont = styled.h1`
+    font-size: 16px;
+`;
 
 export default function BottomSheetContainer({ isOpen, onClose }: BottomSheetControlType) {
     const [open, setOpen] = useState<boolean>(isOpen);
@@ -82,26 +92,25 @@ export default function BottomSheetContainer({ isOpen, onClose }: BottomSheetCon
     const BottomSheetGenerate = () => {
         return (
             <div style={{ margin: '0 0 0 16px' }}>
-                <img src={close} css={closeBtn} onClick={() => { contextData?.toggleBottomSheet(false) }} alt="close" width={20} height={20}/>
-
+                <div css={closeBtn} onClick={() => { contextData?.toggleBottomSheet(false) }}>
+                    <img src={close} alt="close" width={20} height={20} />
+                </div>
                 <div css={flexHeadWrapper}>
                     <div css={flexHeadline}>
                         <BreweryIcon css={mapIcon} title='map' fill='#000' width={20} height={20}> </BreweryIcon>
-                        <h3>{data?.name}</h3>
+                        <TitleFont >{data?.name}</TitleFont>
 
                     </div>
 
                 </div>
 
                 <div css={address}>
-                    <p>{data?.address}</p>
+                    <AddressFont>{data?.address}</AddressFont>
                 </div>
                 {data?.alcohols.length ?
                     <BrewerlyDetailCardView alcohols={data.alcohols} /> :
                     <CenterBold>상품 정보가 없습니다.</CenterBold>
                 }
-
-
             </div>
         )
     }
@@ -111,7 +120,6 @@ export default function BottomSheetContainer({ isOpen, onClose }: BottomSheetCon
         if (contextData?.data) {
             setData(contextData?.data)
         }
-        console.log(contextData);
     }, [contextData])
     return (
         <>
