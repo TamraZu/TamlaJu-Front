@@ -1,5 +1,5 @@
 import { latLngType } from "types/kakaoMapType";
-import React, { useState, createContext, useEffect } from 'react'
+import { useState, createContext } from 'react'
 import {BottomSheetRecoilPropType } from "types/layoutControlType";
 import KakaoMap from "components/kakaoMap/KakaoMap";
 import BottomSheetContainer from "components/common/BottomSheet";
@@ -22,7 +22,7 @@ const Header = styled.h1`
 `
 
 function Main() {
-    const data: BottomSheetRecoilPropType | null = null;
+    // const data: BottomSheetRecoilPropType | null = null;
     const [btmSheetData, setBtmSheetData] = useState<brewerlyType>();
 
 

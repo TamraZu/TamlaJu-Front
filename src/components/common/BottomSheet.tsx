@@ -1,14 +1,13 @@
 /** @jsxImportSource @emotion/react */
 
-import React, { useState, useEffect, useContext, useRef } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled'
 import { ReactComponent as BreweryIcon } from 'atoms/icons/BreweryIcon.svg';
 import { useSpring, animated } from 'react-spring';
-import { BottomSheetControlType } from 'types/layoutControlType';
 import { MapContext } from 'pages/Main';
 import BrewerlyDetailCardView from './BrewerlyDetailCardView';
-import { alcoholType, brewerlyType } from 'types/drinkType';
+import { brewerlyType } from 'types/drinkType';
 import close from 'atoms/icons/CloseIcon.svg'
 import { useRecoilState } from 'recoil';
 import { bottomSheetOpened } from 'components/atoms/atoms';

@@ -11,8 +11,9 @@ import { MapContext } from 'pages/Main';
 import { bottomSheetOpened } from 'components/atoms/atoms';
 import { useRecoilState } from 'recoil';
 const container = css({
-    width: '343px',
-    height: '343px',
+    width: 'calc(100% - 32px)',
+    // height: 'calc(100vw - 32px)',
+    aspectRatio: '1/1',
     margin: '16px 0 16px 16px',
     borderRadius: '16px',
 })
