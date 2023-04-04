@@ -55,14 +55,25 @@ const DEFAULT_MARKER_IMG = {
 
 export function CustomMarker({ factoryId, latitude, longitude, hasAte, address, setCenter, setZoom }: MarkerDataType) {
   const data = useContext(MapContext)
+
+  const getImage = () => {
+    if (factoryId === marker) {
+      return SELECTED_MARKER_IMG
+    } else if (hasAte) {
+      return ATE_MARKER_IMG
+    } else {
+      return DEFAULT_MARKER_IMG
+    }
+  }
+
   const [response, setResponse] = useState<apiConnectType<brewerlyType>>();
   const [marker, setSelectedMarker] = useRecoilState(selectedMarker);
   const setIsOpen = useSetRecoilState(bottomSheetOpened);
-  const [image, setImage] = useState(factoryId === marker ? SELECTED_MARKER_IMG : hasAte ? ATE_MARKER_IMG : DEFAULT_MARKER_IMG);
+  const [image, setImage] = useState(getImage());
 
   useEffect(() => {
     setIsOpen(false);
-  },[])
+  }, [setIsOpen])
 
   useEffect(() => {
     // 데이터 변경
@@ -70,8 +81,8 @@ export function CustomMarker({ factoryId, latitude, longitude, hasAte, address, 
       data?.onDataChange(response.data)
     }
     // 마커 이미지 변경
-    setImage(factoryId === marker ? SELECTED_MARKER_IMG : hasAte ? ATE_MARKER_IMG : DEFAULT_MARKER_IMG);
-  }, [response, marker])
+    setImage(getImage());
+  }, [response, marker, getImage])
 
   return (
     <MapMarker

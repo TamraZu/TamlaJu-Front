@@ -3,13 +3,12 @@
 import { Map } from 'react-kakao-maps-sdk';
 import { css } from '@emotion/react';
 import { latLngType, MarkerDataType, mapOptionType, apiConnectType } from 'types/kakaoMapType';
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query'
 import axios from 'services';
 import {MemoizedMarker} from "./marker/CustomMarker";
-import { MapContext } from 'pages/Main';
 import { bottomSheetOpened } from 'components/atoms/atoms';
-import { useRecoilState } from 'recoil';
+import { useSetRecoilState } from 'recoil';
 const container = css({
     width: 'calc(100% - 32px)',
     aspectRatio: '1/1',
@@ -21,7 +20,7 @@ function KakaoMap({ center, zoom }: mapOptionType) {
     const [zoomLevel, setZoom] = useState(zoom);
     const [position, setPosition] = useState<latLngType>(center)
     const [markers, setMarkers] = useState<MarkerDataType[]>([]);
-    const [isOpen, setIsOpen] = useRecoilState<boolean>(bottomSheetOpened);
+    const setIsOpen = useSetRecoilState<boolean>(bottomSheetOpened);
 
     useQuery(
         ['kakaomap', 'request', 'factories'],

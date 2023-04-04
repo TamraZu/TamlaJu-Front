@@ -108,15 +108,12 @@ const CardViewGradient = styled.div`
 `
 export default function BottomSheetContainer() {
 
-    const [isAnimating, setIsAnimating] = useState(false);
     const [data, setData] = useState<brewerlyType | undefined>()
     const [isOpen, setIsOpen] = useRecoilState<boolean>(bottomSheetOpened);
     const scrollRef = useHorizontalScroll();
     const { y } = useSpring({
         y: isOpen ? 0 : 120,
         config: { tension: 200, friction: 30 },
-        onStart: () => setIsAnimating(true),
-        onRest: () => setIsAnimating(false),
     });
 
     const contextData = useContext(MapContext);
