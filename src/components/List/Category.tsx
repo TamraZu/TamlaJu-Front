@@ -99,8 +99,6 @@ export const CategoryItem = styled.li<CategoryItemProps>`
   font-size: 18px;
   font-weight: 700;
   cursor: pointer;
-  /* color: #fff; */
-  text-shadow: #fff 1px 0 10px;
   border-radius: 32px;
   ${props =>
     props.idx === props.active
