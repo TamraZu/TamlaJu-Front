@@ -1,6 +1,5 @@
-import React from 'react'
 import { ReactComponent as IsDrinkedSadIcon } from 'atoms/icons/IsDrinkedSadIcon.svg'
-import { ReactComponent as IsDrinkedWhiteIcon } from 'atoms/icons/IsDrinkedWhiteIcon.svg'
+import { ReactComponent as IsDrinkedDetailIcon } from 'atoms/icons/IsDrinkedDetailIcon.svg'
 import { useNavigate } from 'react-router-dom'
 import styled from '@emotion/styled'
 
@@ -8,7 +7,7 @@ function DetailAteButton() {
   const navigate = useNavigate()
   return (
     <StyledButton onClick={() => navigate('/')}>
-      <IsDrinkedWhiteIcon width={24} height={24} />
+      <IsDrinkedDetailIcon width={24} height={24} fill="#fd6e21" />
       <StyledText>제주 술 보러가기</StyledText>
     </StyledButton>
   )

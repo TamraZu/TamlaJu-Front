@@ -13,7 +13,7 @@ const StyledListCard = styled.div`
   margin-top: 16px;
   overflow-y: scroll;
   overflow-x: hidden;
-  height: 70vh;
+  height: 60vh;
   ::-webkit-scrollbar {
     width: 5px;
   }
