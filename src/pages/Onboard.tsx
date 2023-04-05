@@ -16,38 +16,50 @@ const fadeOut = keyframes`
 
 const Wrapper = styled.div`
     width:100vw;
-`
-const SplashArt = styled.img`
     height:100vh;
-    /* aspect-ratio:375 / 812; */
+    left:0;
+    right:0;
+    position: fixed;
+`
+
+const SubWrapper = styled.div`
+    height:100vh;
+    aspect-ratio:375 / 812;
+    position:absolute;
     object-fit:contain;
-    object-position:center bottom;
-    opacity: 1;
-    animation: ${fadeOut} 2.5s ease-out;
-    animation-fill-mode: forwards;
-    cursor: pointer;
+    left:50%; 
+    transform:translateX(-50%);
+`
+
+const SplashArt = styled.img`
+
 `
 const StyledButton = styled.button`
-    background-color : #FD6E21;
-    width: 154px;
+    background-color : #fee500;
+    width: calc(100% - 64px);
     height: 48px;
-    border-radius:24px;
-    position:fixed;
-    
-    bottom:10%;
+    border-radius:12px;
+    position:absolute;
+    bottom:75px;
     left:50%;
-    transform:translate(-50%, 50%);
+    transform:translateX(-50%);
 `
 
 const Header = styled.h1`
     color:white;
-    font-size:20px;
+    font-size:16px;
     text-align:center;
+    color:#000;
+
 `
+const kakaoLogin = () => {
+
+
+}
+
 
 export default function Onboard() {
     const navigate = useNavigate();
-
 
     const navigateToHome = () => {
         navigate('/signin');
@@ -55,13 +67,15 @@ export default function Onboard() {
     }
 
     return (
-        <Wrapper onClick={navigateToHome}>
+        <Wrapper>
+            <SubWrapper>
             <SplashArt src={splash} />
-            <StyledButton>
+            <StyledButton onClick={kakaoLogin}>
                 <Header>
-                    시작하기
+                    카카오로 로그인하기
                 </Header>
             </StyledButton>
+            </SubWrapper>
         </Wrapper>
     )
 }
