@@ -85,7 +85,7 @@ function SignIn() {
     try {
       const response = await loginMutation.mutateAsync();
       if (response.success) {
-        setMemberId(1);
+        // setMemberId(1);
         navigate('/home');
       }
     } catch (error: any) {

@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom'
 
 interface DetailAteButtonProps {
   alcoholId: number
-  memberId: number
+  memberId: string
   ateCount: number
 }
 

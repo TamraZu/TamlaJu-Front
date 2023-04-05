@@ -41,22 +41,22 @@ export const getMyPageAlcohol = async (memberId: number) => {
   return response.data.data
 }
 
-export const getDetailAlcohol = async (alcoholId: number, memberId: number) => {
+export const getDetailAlcohol = async (alcoholId: number, memberId: string) => {
   const response = await Axios.get(`/api/v1/alcohols/${alcoholId}?memberId=${memberId}`)
   return response.data.data
 }
 
-export const getListAlcohol = async (memberId: number, category: string) => {
+export const getListAlcohol = async (memberId: string, category: string) => {
   const response = await Axios.get(`/api/v1/alcohols?memberId=${memberId}&category=${category}`)
   return response.data.data
 }
 
-export const getMyPage = async (memberId: number) => {
+export const getMyPage = async (memberId: string) => {
   const response = await Axios.get(`/api/v1/members/page/${memberId}`)
   return response.data.data
 }
 
-export const postEatingCount = async (memberId: number, alcoholId: number) => {
+export const postEatingCount = async (memberId: string, alcoholId: number) => {
   const response = await Axios.post(`/api/v1/eats`, { memberId, alcoholId })
   return response.data.message === '등록 성공'
 }

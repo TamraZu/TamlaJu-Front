@@ -1,9 +1,9 @@
 import { atom } from 'recoil';
 import { BottomSheetDataType } from 'types/layoutControlType';
 
-export const memberId = atom<number>({
+export const memberId = atom<string>({
     key: 'memberId',
-    default: -1
+    default: '',
 })
 
 export const bottomSheetOpened = atom<boolean>({
