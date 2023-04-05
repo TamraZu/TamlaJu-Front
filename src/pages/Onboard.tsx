@@ -1,8 +1,8 @@
 import splash from 'atoms/png/OnboardingSplashArt.png'
 import styled from '@emotion/styled';
 import { keyframes } from '@emotion/css';
-import { useNavigate } from 'react-router-dom';
 
+const { Kakao } = window;
 
 const fadeOut = keyframes`
     from, 50%{
@@ -52,29 +52,26 @@ const Header = styled.h1`
     color:#000;
 
 `
-const kakaoLogin = () => {
-
-
-}
-
 
 export default function Onboard() {
-    const navigate = useNavigate();
 
-    const navigateToHome = () => {
-        navigate('/signin');
-        return
+    const LoginviaKakao = () => {
+        // APP KEY 입력
+        Kakao.Auth.authorize({
+            redirectUri: `${process.env.REACT_APP_FRONTEND_BASE_URL}/login/kakao`,
+            scope: "profile_nickname,account_email,profile_image"
+        })
     }
 
     return (
         <Wrapper>
             <SubWrapper>
-            <SplashArt src={splash} />
-            <StyledButton onClick={kakaoLogin}>
-                <Header>
-                    카카오로 로그인하기
-                </Header>
-            </StyledButton>
+                <SplashArt src={splash} />
+                <StyledButton onClick={LoginviaKakao}>
+                    <Header>
+                        카카오로 로그인하기
+                    </Header>
+                </StyledButton>
             </SubWrapper>
         </Wrapper>
     )
