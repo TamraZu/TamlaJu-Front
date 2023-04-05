@@ -6,14 +6,14 @@ interface ListCardContainerProps {
 }
 
 function ListCardContainer({ children }: ListCardContainerProps) {
-  return <StyledListCard>{children}</StyledListCard>
+  return <StyledListCardContainer>{children}</StyledListCardContainer>
 }
 
-const StyledListCard = styled.div`
+const StyledListCardContainer = styled.div`
   margin-top: 16px;
   overflow-y: scroll;
   overflow-x: hidden;
-  height: 60vh;
+  height: 65vh;
   ::-webkit-scrollbar {
     width: 5px;
   }
