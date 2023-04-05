@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import Stamp from 'atoms/png/stamp.png'
 import { Link } from 'react-router-dom'
 
 interface MyPageCardProps {
