@@ -1,13 +1,18 @@
 import { AxiosResponse, InternalAxiosRequestConfig } from "axios";
 import { memberId } from "components/atoms/atoms";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import axios from "services";
-import { apiConnectType } from "types/kakaoMapType";
-import { UserType } from "types/AuthType";
+import styled from '@emotion/styled';
 
 const { Kakao } = window;
+
+const StyledText = styled.div`
+    width:100%;
+    text-align: center;
+    margin-top:300px;
+`
 
 const loginViaKakao = async (setMemberId: (a: string) => void, Navto: (a: string) => void) => {
     let params = new URL(document.location.toString()).searchParams;
@@ -40,9 +45,12 @@ const loginViaKakao = async (setMemberId: (a: string) => void, Navto: (a: string
         imageUrl: kakaoUserInfo.kakao_account.profile.profile_image_url,
     }).catch((err: any) => { console.error('getUser', err) })
 
+    console.log('token', getUser.data.data.acccessToken);
+
     axios.interceptors.request.use(
         (config: InternalAxiosRequestConfig<any>) => {
             config.headers.Authorization = getUser.data.data.accessToken;
+            config.headers["Content-Type"] = "application/json"
             return config;
         },
         (error) => {
@@ -61,11 +69,12 @@ const loginViaKakao = async (setMemberId: (a: string) => void, Navto: (a: string
 const KakaoLogin = () => {
     const [mId, setMid] = useRecoilState<string>(memberId)
     const navigate = useNavigate();
+
     useEffect(() => {
-        loginViaKakao(setMid, navigate)
+            loginViaKakao(setMid, navigate)
     }, [])
 
-    return <div>kakao login 완료</div>
+    return <StyledText>kakao login 진행중</StyledText>
 }
 
 export default KakaoLogin;
