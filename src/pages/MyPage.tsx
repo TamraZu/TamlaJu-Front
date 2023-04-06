@@ -41,7 +41,7 @@ function MyPage() {
       setMyPageData(data)
     }
     fetchData()
-  }, [myPageData, mId])
+  }, [mId])
 
   if (myPageData?.count === 0) {
     return (<>
