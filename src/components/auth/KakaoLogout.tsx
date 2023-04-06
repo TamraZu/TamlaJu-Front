@@ -1,4 +1,5 @@
 import { InternalAxiosRequestConfig } from "axios";
+import React from "react";
 import axios from "services";
 
 const logout = () => {
@@ -10,8 +11,8 @@ const logout = () => {
         })
 }
 
-const KakaoLogout = () => {
-    return <div onClick={logout}>로그아웃</div>
+const KakaoLogout :React.FC = () => {
+    return (<div onClick={logout}>로그아웃</div>);
 }
 
 export default KakaoLogout;

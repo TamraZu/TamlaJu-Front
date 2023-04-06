@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { ReactComponent as IsDrinkedDetailIcon } from 'atoms/icons/IsDrinkedDetailIcon.svg'
+import { ReactComponent as IsDrinkedDetailIcon } from 'atoms/icons/IsDrinkedWhiteIcon.svg'
 import { postEatingCount } from 'apis'
 import { useNavigate } from 'react-router-dom'
 
