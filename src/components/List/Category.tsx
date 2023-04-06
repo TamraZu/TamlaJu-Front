@@ -72,6 +72,7 @@ export default function Category({ category, setCategory }: CategoryProps) {
 
 export const CategoryLayout = styled.div`
   width: 340px;
+  margin-top: 24px;
 `
 export const CategoryList = styled.ul`
   display: flex;
@@ -91,7 +92,6 @@ export const CategoryList = styled.ul`
   &::-webkit-scrollbar-track {
     max-width: 10px;
   }
-  margin-top: 24px;
 `
 export const CategoryItem = styled.li<CategoryItemProps>`
   flex-shrink: 0;
@@ -99,8 +99,6 @@ export const CategoryItem = styled.li<CategoryItemProps>`
   font-size: 18px;
   font-weight: 700;
   cursor: pointer;
-  /* color: #fff; */
-  text-shadow: #fff 1px 0 10px;
   border-radius: 32px;
   ${props =>
     props.idx === props.active

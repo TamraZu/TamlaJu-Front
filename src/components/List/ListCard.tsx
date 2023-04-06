@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import { ReactComponent as IsDrinkedIcon } from 'atoms/icons/IsDrinkedIcon.svg'
-import { ReactComponent as BadFace } from 'atoms/icons/BadFace.svg'
 import { useNavigate } from 'react-router-dom'
 import { ListAlcoholData } from 'pages/List'
 import { postEatingCount } from 'apis'
@@ -33,11 +32,7 @@ function ListCard({ drink }: ListCardProps) {
         </CardLeft>
         <CardRight>
           <CardButton>
-            {drink.ateCount ? (
-              <IsDrinkedIcon width={32} height={32} fill={drink.hasAte ? '#FD6E21' : '#858899'} />
-            ) : (
-              <BadFace width={32} height={32} fill={drink.hasAte ? '#FD6E21' : '#858899'} />
-            )}
+            <IsDrinkedIcon width={32} height={32} fill={drink.hasAte ? '#FD6E21' : '#858899'} />
           </CardButton>
           <CardCount onClick={onClickHandler}>{drink.ateCount}</CardCount>
         </CardRight>
