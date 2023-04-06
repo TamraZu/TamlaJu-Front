@@ -1,5 +1,5 @@
 import { ReactNode, SetStateAction } from 'react';
-import { alcoholType, brewerlyType } from './drinkType';
+import { brewerlyType } from './drinkType';
 import { latLngType } from './kakaoMapType';
 
 export interface BottomSheetControlType {
@@ -14,7 +14,6 @@ export interface BottomSheetDataType {
     name?:string;
     address?:string;
     LatLng?:latLngType
-    alcohols: alcoholType[];
 }
 
 export interface BottomSheetRecoilPropType {
