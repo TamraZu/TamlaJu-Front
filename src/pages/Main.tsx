@@ -1,5 +1,5 @@
 import { latLngType } from "types/kakaoMapType";
-import { useState, createContext, useEffect } from 'react'
+import { useState, createContext } from 'react'
 import { BottomSheetRecoilPropType } from "types/layoutControlType";
 import KakaoMap from "components/kakaoMap/KakaoMap";
 import BottomSheetContainer from "components/common/BottomSheet";
