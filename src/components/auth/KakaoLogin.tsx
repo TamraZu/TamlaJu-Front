@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import axios from "services";
 import styled from '@emotion/styled';
+import { getCookie, setCookie } from "./Cookie";
 
 const { Kakao } = window;
 
@@ -45,6 +46,8 @@ const loginViaKakao = async (setMemberId: (a: string) => void, Navto: (a: string
         imageUrl: kakaoUserInfo.kakao_account.profile.profile_image_url,
     }).catch((err: any) => { console.error('getUser', err) })
 
+    // 추후 HTTP Only 쿠키로 수정 필요
+    setCookie('authorization', getUser.data.data.accessToken, 1);
     axios.interceptors.request.use(
         (config: InternalAxiosRequestConfig<any>) => {
             config.headers.Authorization = getUser.data.data.accessToken;
