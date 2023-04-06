@@ -13,7 +13,9 @@ const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 const queryClient = new QueryClient({
   defaultOptions:{
     queries:{
-      staleTime:1000 * 200, // 200초
+      refetchOnWindowFocus:false,
+      refetchOnMount:false,
+      staleTime:1000 * 300, // 5분 (300초)
     },
   },
 })

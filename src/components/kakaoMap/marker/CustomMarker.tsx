@@ -85,6 +85,7 @@ export function CustomMarker({ factoryId, latitude, longitude, hasAte, address, 
       return getFactoryDetail(factoryId);
     },
     {
+      staleTime:0,
       enabled: false,
       onSuccess: (res) => {
         setData(res);
@@ -103,7 +104,7 @@ export function CustomMarker({ factoryId, latitude, longitude, hasAte, address, 
       image={image}
       onClick={(event) => {
         // 클릭 시 양조장 상세정보 API 호출
-        if(isStale) refetch();
+        refetch();
 
         setCenter({ lat: event.getPosition().getLat(), lng: event.getPosition().getLng() })
         setIsOpen(true);

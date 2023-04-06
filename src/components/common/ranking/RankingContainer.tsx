@@ -14,15 +14,21 @@ const RankingWrapper = styled.div`
     justify-content: center;
 `
 
+// 캐싱 필요
 const RankingContainer = () => {
-    const [data, setData] = useState<drinkType[]>([]);
+    const [drinkData, setData] = useState<drinkType[]>([]);
     // 초기 데이터 Load
-    useQuery(
+    const {data, refetch, ...rest} = useQuery(
         ['get', 'ranking', 'list'],
         () => {
             return getRanking();
         },
         {
+            cacheTime:1000*1000,
+            onSettled: (data, err) => {
+                if(data) setData(data);
+                if(err) console.error(err);
+            },
             onSuccess: (res) => {
                 setData(res);
             },
@@ -34,7 +40,7 @@ const RankingContainer = () => {
 
 
     return <RankingWrapper>
-        {data?.map((t, i) => {
+        {drinkData?.map((t, i) => {
             return <RankingItem prop={t} index={i + 1} key={t.alcoholId} />
         })}
     </RankingWrapper>
