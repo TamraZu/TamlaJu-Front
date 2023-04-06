@@ -1,15 +1,14 @@
 /** @jsxImportSource @emotion/react */
 
 import { Map } from 'react-kakao-maps-sdk';
-import { css, jsx } from '@emotion/react';
+import { css } from '@emotion/react';
 import { latLngType, MarkerDataType, mapOptionType, apiConnectType } from 'types/kakaoMapType';
-import { useState, useEffect, useContext } from 'react';
+import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query'
 import axios from 'services';
-import {MemoizedMarker} from "./marker/CustomMarker";
-import { MapContext } from 'pages/Main';
-import { bottomSheetOpened } from 'components/atoms/atoms';
-import { useRecoilState } from 'recoil';
+import { MemoizedMarker } from "./marker/CustomMarker";
+import { bottomSheetOpened, memberId } from 'components/atoms/atoms';
+import { useSetRecoilState, useRecoilValue } from 'recoil';
 const container = css({
     width: 'calc(100% - 32px)',
     aspectRatio: '1/1',
@@ -21,21 +20,20 @@ function KakaoMap({ center, zoom }: mapOptionType) {
     const [zoomLevel, setZoom] = useState(zoom);
     const [position, setPosition] = useState<latLngType>(center)
     const [markers, setMarkers] = useState<MarkerDataType[]>([]);
-    const [isOpen, setIsOpen] = useRecoilState<boolean>(bottomSheetOpened);
-    const data = useContext(MapContext);
-
+    const mId = useRecoilValue(memberId)
+    const setIsOpen = useSetRecoilState<boolean>(bottomSheetOpened);
 
     useQuery(
         ['kakaomap', 'request', 'factories'],
         () => {
-            return axios.get<apiConnectType<MarkerDataType[]>>('api/v1/factories?memberId=1');
+            return axios.get<apiConnectType<MarkerDataType[]>>(`api/v1/factories?memberId=${mId}`);
         },
         {
             onSuccess: (response) => {
                 setMarkers(response.data.data);
             },
-            onError: () => {
-                console.error('Failed to getting marker info')
+            onError: (err) => {
+                console.error('Failed to getting marker info', err)
             }
         }
     );
@@ -52,7 +50,7 @@ function KakaoMap({ center, zoom }: mapOptionType) {
             {markers.map((t: MarkerDataType) => {
                 return (
                     <MemoizedMarker
-                        key={t.factoryId} factoryId={t.factoryId} address={t.address} latitude={t.latitude} longitude={t.longitude} hasAte={t.hasAte} setCenter={setPosition} setZoom={setZoom} children={undefined}/>
+                        key={t.factoryId} factoryId={t.factoryId} address={t.address} latitude={t.latitude} longitude={t.longitude} hasAte={t.hasAte} setCenter={setPosition} setZoom={setZoom} children={undefined} />
                 );
             })}
         </Map>
