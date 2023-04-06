@@ -1,14 +1,13 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MapMarker } from 'react-kakao-maps-sdk';
 import { apiConnectType, MarkerDataType } from 'types/kakaoMapType';
 import axios from 'services';
-import { MapContext } from 'pages/Main';
 import markerSelectedImage from 'atoms/png/BrewerySelectedIcon.png'
 import markerAteImage from 'atoms/png/BreweryCheckedIcon.png'
 import markerDefaultImage from 'atoms/png/BreweryIcon.png'
-import { brewerlyType } from 'types/drinkType';
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import { bottomSheetOpened, selectedMarker } from 'components/atoms/atoms';
+import { bottomSheetData, bottomSheetOpened, selectedMarker } from 'components/atoms/atoms';
+import { BottomSheetDataType } from 'types/layoutControlType';
 
 const ATE_MARKER_IMG = {
   src: markerAteImage,
@@ -54,7 +53,6 @@ const DEFAULT_MARKER_IMG = {
 }
 
 export function CustomMarker({ factoryId, latitude, longitude, hasAte, address, setCenter, setZoom }: MarkerDataType) {
-  const data = useContext(MapContext)
 
   const getImage = () => {
     if (factoryId === marker) {
@@ -66,23 +64,19 @@ export function CustomMarker({ factoryId, latitude, longitude, hasAte, address, 
     }
   }
 
-  const [response, setResponse] = useState<apiConnectType<brewerlyType>>();
   const [marker, setSelectedMarker] = useRecoilState(selectedMarker);
   const setIsOpen = useSetRecoilState(bottomSheetOpened);
   const [image, setImage] = useState(getImage());
+  const [data, setData] = useRecoilState<BottomSheetDataType>(bottomSheetData)
 
   useEffect(() => {
     setIsOpen(false);
   }, [setIsOpen])
 
   useEffect(() => {
-    // 데이터 변경
-    if (response) {
-      data?.onDataChange(response.data)
-    }
     // 마커 이미지 변경
     setImage(getImage());
-  }, [response, marker, getImage])
+  }, [marker, getImage])
 
   return (
     <MapMarker
@@ -91,12 +85,13 @@ export function CustomMarker({ factoryId, latitude, longitude, hasAte, address, 
       image={image}
       onClick={(event) => {
         // 클릭 시 양조장 상세정보 API 호출
-        axios.get<apiConnectType<brewerlyType>>(`api/v1/factories/${factoryId}`)
+        axios.get<apiConnectType<BottomSheetDataType>>(`api/v1/factories/${factoryId}`)
           .then(t => {
-            setResponse(t.data);
-            setSelectedMarker(t.data.data.factoryId);
+            // setResponse(t.data);
+            setData(t.data.data)
+            setSelectedMarker(factoryId);
           }).catch(e => {
-            alert('네트워크 통신 실패')
+            console.error('marker click',e);
           })
         setCenter({ lat: event.getPosition().getLat(), lng: event.getPosition().getLng() })
         setIsOpen(true);

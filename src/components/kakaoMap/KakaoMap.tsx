@@ -30,7 +30,6 @@ function KakaoMap({ center, zoom }: mapOptionType) {
         },
         {
             onSuccess: (response) => {
-                console.log(response);
                 setMarkers(response.data.data);
             },
             onError: (err) => {

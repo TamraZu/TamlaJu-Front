@@ -10,8 +10,9 @@ import BrewerlyDetailCardView from './BrewerlyDetailCardView';
 import { brewerlyType } from 'types/drinkType';
 import close from 'atoms/icons/CloseIcon.svg'
 import { useRecoilState } from 'recoil';
-import { bottomSheetOpened } from 'components/atoms/atoms';
+import { bottomSheetData, bottomSheetOpened } from 'components/atoms/atoms';
 import { useHorizontalScroll } from 'components/hooks/useHorizontalScroll';
+import { BottomSheetDataType } from 'types/layoutControlType';
 
 const container = css({
     maxWidth: 375,
@@ -108,7 +109,7 @@ const CardViewGradient = styled.div`
 `
 export default function BottomSheetContainer() {
 
-    const [data, setData] = useState<brewerlyType | undefined>()
+    const [data, setData] = useRecoilState<BottomSheetDataType>(bottomSheetData)
     const [isOpen, setIsOpen] = useRecoilState<boolean>(bottomSheetOpened);
     const scrollRef = useHorizontalScroll();
     const { y } = useSpring({
@@ -119,10 +120,10 @@ export default function BottomSheetContainer() {
     const contextData = useContext(MapContext);
     
     useEffect(() => {
-        if (contextData?.data) {
-            setData(contextData?.data)
+        if (data) {
+            setData(data)
         }
-    }, [contextData]);
+    }, [data]);
 
 
     return (
