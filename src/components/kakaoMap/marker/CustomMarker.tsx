@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { MapMarker } from 'react-kakao-maps-sdk';
-import { apiConnectType, MarkerDataType } from 'types/kakaoMapType';
-import axios from 'services';
+import { MarkerDataType } from 'types/kakaoMapType';
 import markerSelectedImage from 'atoms/png/BrewerySelectedIcon.png'
 import markerAteImage from 'atoms/png/BreweryCheckedIcon.png'
 import markerDefaultImage from 'atoms/png/BreweryIcon.png'
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { bottomSheetData, bottomSheetOpened, selectedMarker } from 'components/atoms/atoms';
 import { BottomSheetDataType } from 'types/layoutControlType';
+import { getFactoryDetail } from 'apis';
+import { useQuery } from '@tanstack/react-query';
 
 const ATE_MARKER_IMG = {
   src: markerAteImage,
@@ -78,6 +79,23 @@ export function CustomMarker({ factoryId, latitude, longitude, hasAte, address, 
     setImage(getImage());
   }, [marker, getImage])
 
+  const { refetch, isStale } = useQuery(
+    ['get', 'factory', 'detail', factoryId],
+    () => {
+      return getFactoryDetail(factoryId);
+    },
+    {
+      enabled: false,
+      onSuccess: (res) => {
+        setData(res);
+        setSelectedMarker(factoryId);
+      },
+      onError: (err) => {
+        console.error('GetFactoryDetail', err);
+      }
+    }
+  )
+
   return (
     <MapMarker
       position={{ lat: latitude, lng: longitude }}
@@ -85,14 +103,8 @@ export function CustomMarker({ factoryId, latitude, longitude, hasAte, address, 
       image={image}
       onClick={(event) => {
         // 클릭 시 양조장 상세정보 API 호출
-        axios.get<apiConnectType<BottomSheetDataType>>(`api/v1/factories/${factoryId}`)
-          .then(t => {
-            // setResponse(t.data);
-            setData(t.data.data)
-            setSelectedMarker(factoryId);
-          }).catch(e => {
-            console.error('marker click',e);
-          })
+        if(isStale) refetch();
+
         setCenter({ lat: event.getPosition().getLat(), lng: event.getPosition().getLng() })
         setIsOpen(true);
       }

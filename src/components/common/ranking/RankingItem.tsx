@@ -93,8 +93,7 @@ export default function RankingItem({ prop, index }: RankingItemInterface) {
     <Link to={`/details/${prop.alcoholId}`}>
       <CardContainer>
         <CardNumber>{index}</CardNumber>
-        <CardImage src={prop.imageUrl}>
-        </CardImage>
+        <CardImage src={prop.imageUrl} width={64} height={64}/>
         <CardContent>
           <CardTitle>{prop.name}</CardTitle>
           <CardInfo>{prop.address}</CardInfo>
