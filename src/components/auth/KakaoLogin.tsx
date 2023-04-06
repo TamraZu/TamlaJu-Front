@@ -4,7 +4,8 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import axios from "services";
-import { UserType } from "types/UserType";
+import { apiConnectType } from "types/kakaoMapType";
+import { UserType } from "types/AuthType";
 
 const { Kakao } = window;
 
@@ -15,50 +16,40 @@ const loginViaKakao = async (setMemberId: (a: string) => void, Navto: (a: string
     let client_id = process.env.REACT_APP_KAKAOMAP_APPKEY;
 
     // 카카오 서버에 인증 요청
-    axios.post(
+    const kakaoToken:any = await axios.post(
         `https://kauth.kakao.com/oauth/token?grant_type=${grant_type}&client_id=${client_id}&redirect_uri=${process.env.REACT_APP_FRONTEND_BASE_URL}/login/kakao&code=${code}`
         , {
             headers: {
                 "Content-type": "application/x-www-form-urlencoded;chartset=utf-8",
             }
         })
-        .then(res => {
-            // 액세스 토큰 저장
+        .catch(err => { console.error('kakaoToken', err) })
 
-            console.log(res)
-            Kakao.Auth.setAccessToken(res.data.access_token);
-            Kakao.API.request({
-                url: "/v2/user/me",
-                data: {
-                    property_keys: ['kakao_account.email', 'kakao_account.profile']
-                },
-                success: (response: any) => {
-                    console.log(response)
-                    axios.post('/api/v1/auth', {
-                        email: response.kakao_account.email,
-                        nickname: response.kakao_account.profile.nickname,
-                        imageUrl: response.kakao_account.profile.profile_image_url,
-                    }).then((res: any) => {
-                        axios.get('/auth/test', {
-                            headers: { Authorization: `${res.data.data.accessToken}` }
-                        }).then(t => {
-                            setMemberId(t.data);
-                            Navto('/home');
-                        })
+    Kakao.Auth.setAccessToken(kakaoToken.data.access_token);
 
-                    }).catch(err => {
-                        console.error(err);
-                    })
+    const kakaoUserInfo = await Kakao.API.request({
+        url: "/v2/user/me",
+        data: {
+            property_keys: ['kakao_account.email', 'kakao_account.profile']
+        }
+    }).catch((err:any) => { console.error('kakaoUserInfo', err) })
 
-                },
-                fail: (error: any) => {
-                    console.log(error);
-                }
-            })
 
-        }).catch(err => {
-            console.log(err)
-        })
+    const getUser: any = await axios.post('/api/v1/auth', {
+        email: kakaoUserInfo.kakao_account.email,
+        nickname: kakaoUserInfo.kakao_account.profile.nickname,
+        imageUrl: kakaoUserInfo.kakao_account.profile.profile_image_url,
+    }).catch((err:any) => { console.error('getUser', err) })
+    
+    const MId:any = await axios.get('/auth/test', {
+        headers: { Authorization: `${getUser.data.data.accessToken}` }
+    }).catch((err:any) => { console.error('memberId', err) })
+
+    console.log(getUser, MId)
+
+
+    setMemberId(MId.data)
+    Navto('/home')
 }
 
 const KakaoLogin = () => {
