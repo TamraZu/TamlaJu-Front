@@ -8,5 +8,10 @@ module.exports = {
     'dot-notation': 'error', // 가능하다면 dot notation 사용
     'no-unused-vars': 'warn', // 사용하지 않는 변수 금지
     'no-useless-escape': 'warn',
+    'react-hooks/exhaustive-deps':[
+      'warn',{
+        'additionalHooks':'useRecoilCallback'
+      }
+    ]
   },
 }
