@@ -4,6 +4,7 @@ import { drinkType } from 'types/drinkType';
 import { apiConnectType } from 'types/kakaoMapType';
 import styled from '@emotion/styled';
 import RankingItem from './RankingItem';
+import { AxiosResponse } from 'axios';
 
 const RankingWrapper = styled.div`
     display: flex;

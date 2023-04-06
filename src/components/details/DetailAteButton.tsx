@@ -5,8 +5,8 @@ import { useNavigate } from 'react-router-dom'
 
 interface DetailAteButtonProps {
   alcoholId: number
-  memberId: string
-  ateCount: number
+  memberId: number
+  hasAte: boolean
 }
 
 function DetailAteButton({ alcoholId, memberId, hasAte }: DetailAteButtonProps) {
