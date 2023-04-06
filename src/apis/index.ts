@@ -1,13 +1,14 @@
-import axios from 'axios'
+import axios from "services"
 
-const BASE_URL = 'https://tamrazu.store'
 
-export const Axios = axios.create({
-  baseURL: BASE_URL,
-  headers: {
-    'Content-type': 'application/json',
-  },
-})
+// const BASE_URL = 'https://tamrazu.store'
+
+// export const Axios = axios.create({
+//   baseURL: BASE_URL,
+//   headers: {
+//     'Content-type': 'application/json',
+//   },
+// })
 
 export interface MyPageData {
   memberId: number
@@ -37,26 +38,26 @@ export interface DetailData {
   factory: string
 }
 export const getMyPageAlcohol = async (memberId: number) => {
-  const response = await Axios.get(`/api/v1/members/page/${memberId}`)
+  const response = await axios.get(`/api/v1/members/page/${memberId}`)
   return response.data.data
 }
 
-export const getDetailAlcohol = async (alcoholId: number, memberId: number) => {
-  const response = await Axios.get(`/api/v1/alcohols/${alcoholId}?memberId=${memberId}`)
+export const getDetailAlcohol = async (alcoholId: number, memberId: string) => {
+  const response = await axios.get(`/api/v1/alcohols/${alcoholId}?memberId=${memberId}`)
   return response.data.data
 }
 
-export const getListAlcohol = async (memberId: number, category: string) => {
-  const response = await Axios.get(`/api/v1/alcohols?memberId=${memberId}&category=${category}`)
+export const getListAlcohol = async (memberId: string, category: string) => {
+  const response = await axios.get(`/api/v1/alcohols?memberId=${memberId}&category=${category}`)
   return response.data.data
 }
 
-export const getMyPage = async (memberId: number) => {
-  const response = await Axios.get(`/api/v1/members/page/${memberId}`)
+export const getMyPage = async (memberId: string) => {
+  const response = await axios.get(`/api/v1/members/page/${memberId}`)
   return response.data.data
 }
 
-export const postEatingCount = async (memberId: number, alcoholId: number) => {
-  const response = await Axios.post(`/api/v1/eats`, { memberId, alcoholId })
+export const postEatingCount = async (memberId: string, alcoholId: number) => {
+  const response = await axios.post(`/api/v1/eats`, { memberId, alcoholId })
   return response.data.message === '등록 성공'
 }
