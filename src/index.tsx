@@ -10,7 +10,13 @@ import reportWebVitals from './reportWebVitals'
 import { RecoilRoot } from 'recoil';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
-let queryClient = new QueryClient()
+const queryClient = new QueryClient({
+  defaultOptions:{
+    queries:{
+      staleTime:1000 * 200, // 200초
+    },
+  },
+})
 root.render(
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
