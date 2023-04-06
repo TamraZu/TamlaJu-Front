@@ -6,7 +6,7 @@ import styled from '@emotion/styled'
 function DetailAteButton() {
   const navigate = useNavigate()
   return (
-    <StyledButton onClick={() => navigate('/')}>
+    <StyledButton onClick={() => navigate('/home')}>
       <IsDrinkedDetailIcon width={24} height={24} fill="#fd6e21" />
       <StyledText>제주 술 보러가기</StyledText>
     </StyledButton>
