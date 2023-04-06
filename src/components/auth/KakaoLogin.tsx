@@ -45,8 +45,6 @@ const loginViaKakao = async (setMemberId: (a: string) => void, Navto: (a: string
         imageUrl: kakaoUserInfo.kakao_account.profile.profile_image_url,
     }).catch((err: any) => { console.error('getUser', err) })
 
-    console.log('token', getUser.data.data.acccessToken);
-
     axios.interceptors.request.use(
         (config: InternalAxiosRequestConfig<any>) => {
             config.headers.Authorization = getUser.data.data.accessToken;
