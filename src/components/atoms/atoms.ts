@@ -17,6 +17,15 @@ export const selectedMarker = atom<number>({
 })
 
 export const bottomSheetData = atom<BottomSheetDataType>({
-    key:"bottomSheetData",
-    default:undefined,
+    key: "bottomSheetData",
+    default: {
+        selectedId: -1,
+        name: '',
+        address: '',
+        LatLng: {
+            lat: 0,
+            lng: 0,
+        },
+        alcohols:[]
+    }
 })
