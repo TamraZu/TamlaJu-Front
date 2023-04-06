@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'services';
+import { useState } from 'react';
 import { drinkType } from 'types/drinkType';
-import { apiConnectType } from 'types/kakaoMapType';
 import styled from '@emotion/styled';
 import RankingItem from './RankingItem';
+import { getRanking } from 'apis';
+import { useQuery } from '@tanstack/react-query';
 
 const RankingWrapper = styled.div`
     display: flex;
@@ -16,23 +16,26 @@ const RankingWrapper = styled.div`
 
 const RankingContainer = () => {
     const [data, setData] = useState<drinkType[]>([]);
-
     // 초기 데이터 Load
-    useEffect(() => {
-        axios.get<apiConnectType<drinkType[]>>('/api/v1/alcohols/rank')
-            .then(t => {
-                setData(t.data.data);
-            }).catch(err => {
-                alert(err);
-            })
-        return () => {
+    useQuery(
+        ['get', 'ranking', 'list'],
+        () => {
+            return getRanking();
+        },
+        {
+            onSuccess: (res) => {
+                setData(res);
+            },
+            onError: (err) => {
+                console.error("getRankingError", err)
+            }
         }
-    }, [])
+    )
 
 
     return <RankingWrapper>
-        {data?.map((t,i) => {
-            return <RankingItem prop={t} index={i+1} key={t.alcoholId}/>
+        {data?.map((t, i) => {
+            return <RankingItem prop={t} index={i + 1} key={t.alcoholId} />
         })}
     </RankingWrapper>
 }
