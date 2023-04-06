@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import { Link } from 'react-router-dom'
-import { alcoholType, drinkType } from 'types/drinkType'
+import { drinkType } from 'types/drinkType'
 import  DrinkIcon from 'atoms/icons/IsDrinkedIcon.svg'
 
 const CardContainer = styled.div`
