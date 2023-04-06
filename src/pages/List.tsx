@@ -39,16 +39,18 @@ function List() {
   }, [category.name, category.id, mId])
 
   return (
-    <ListLayout>
-      <Header>제주도감</Header>
-      <Category category={category} setCategory={setCategory} />
-      <ListCardContainer>
-        {data.map(elem => {
-          return <ListCard key={elem.alcoholId} drink={elem} />
-        })}
-      </ListCardContainer>
+    <>
+      <ListLayout>
+        <Header>제주도감</Header>
+        <Category category={category} setCategory={setCategory} />
+        <ListCardContainer>
+          {data.map(elem => {
+            return <ListCard key={elem.alcoholId} drink={elem} />
+          })}
+        </ListCardContainer>
+      </ListLayout>
       <NavBar />
-    </ListLayout>
+    </>
   )
 }
 

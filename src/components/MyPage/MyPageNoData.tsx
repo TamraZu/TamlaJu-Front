@@ -1,6 +1,5 @@
-import React from 'react'
 import { ReactComponent as IsDrinkedSadIcon } from 'atoms/icons/IsDrinkedSadIcon.svg'
-import { ReactComponent as IsDrinkedWhiteIcon } from 'atoms/icons/IsDrinkedWhiteIcon.svg'
+import { ReactComponent as IsDrinkedDetailIcon } from 'atoms/icons/IsDrinkedDetailIcon.svg'
 import { useNavigate } from 'react-router-dom'
 import styled from '@emotion/styled'
 
