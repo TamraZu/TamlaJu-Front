@@ -1,78 +1,54 @@
+import React, { useEffect } from 'react';
 import splash from 'atoms/png/OnboardingSplashArt.png'
 import styled from '@emotion/styled';
 import { keyframes } from '@emotion/css';
+import { useNavigate } from 'react-router-dom';
 
-const { Kakao } = window;
 
 const fadeOut = keyframes`
     from, 50%{
-        opacity: 0;
+        opacity: 1;
     }
 
     to, 90% {
-        opacity: 1;
+        opacity: 0;
     }
-`
-
-const Wrapper = styled.div`
-    width:100vw;
-    height:100vh;
-    left:0;
-    right:0;
-    position: fixed;
-`
-
-const SubWrapper = styled.div`
-    height:100vh;
-    aspect-ratio:375 / 812;
-    position:absolute;
-    object-fit:contain;
-    left:50%; 
-    transform:translateX(-50%);
 `
 
 const SplashArt = styled.img`
-
+    max-width: 375px;
+    margin:auto auto auto 0;
+    position: absolute;
+    bottom: 0;
+    /* transition: all 0.5s; */
+    opacity: 1;
+    animation: ${fadeOut} 2.5s ease-out;
+    animation-fill-mode: forwards;
+    cursor: pointer;
 `
-const StyledButton = styled.button`
-    background-color : #fee500;
-    width: calc(100% - 64px);
-    height: 48px;
-    border-radius:12px;
-    position:absolute;
-    bottom:75px;
-    left:50%;
-    transform:translateX(-50%);
-`
-
-const Header = styled.h1`
-    color:white;
-    font-size:16px;
-    text-align:center;
-    color:#000;
-
-`
-
 export default function Onboard() {
+    const navigate = useNavigate();
 
-    const LoginviaKakao = () => {
-        // APP KEY 입력
-        Kakao.Auth.authorize({
-            redirectUri: `${process.env.REACT_APP_FRONTEND_BASE_URL}/login/kakao`,
-            scope: "profile_nickname,account_email,profile_image"
-        })
+
+    const navigateToHome = () => {
+        navigate('/signin');
+        return
     }
+    
+    const timeout = () => setTimeout(() => {
+            navigateToHome()
+        }, 2500)
+
+    useEffect(() => {
+        timeout();
+        return () => {
+            clearTimeout(timeout());
+        }
+    }, [])
 
     return (
-        <Wrapper>
-            <SubWrapper>
-                <SplashArt src={splash} />
-                <StyledButton onClick={LoginviaKakao}>
-                    <Header>
-                        카카오로 로그인하기
-                    </Header>
-                </StyledButton>
-            </SubWrapper>
-        </Wrapper>
+        <div onClick={navigateToHome}>
+            <SplashArt src={splash} />
+        </div>
     )
 }

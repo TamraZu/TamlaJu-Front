@@ -1,9 +1,9 @@
 import { atom } from 'recoil';
 import { BottomSheetDataType } from 'types/layoutControlType';
 
-export const memberId = atom<string>({
+export const memberId = atom<number>({
     key: 'memberId',
-    default: '',
+    default: -1
 })
 
 export const bottomSheetOpened = atom<boolean>({
@@ -17,15 +17,6 @@ export const selectedMarker = atom<number>({
 })
 
 export const bottomSheetData = atom<BottomSheetDataType>({
-    key: "bottomSheetData",
-    default: {
-        selectedId: -1,
-        name: '',
-        address: '',
-        LatLng: {
-            lat: 0,
-            lng: 0,
-        },
-        alcohols:[]
-    }
+    key:"bottomSheetData",
+    default:undefined,
 })

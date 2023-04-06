@@ -6,8 +6,7 @@ import Axios from 'axios'
 
 export const path = 'https://tamrazu.store/';
 const axios = Axios.create({
-    baseURL: path,
-    // withCredentials:true,
+    baseURL: path
 });
 
 
