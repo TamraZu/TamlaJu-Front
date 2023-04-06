@@ -1,5 +1,4 @@
 import { InternalAxiosRequestConfig } from "axios";
-import { useEffect } from "react";
 import axios from "services";
 
 const logout = () => {
