@@ -1,4 +1,4 @@
-import { AxiosResponse } from "axios";
+import { AxiosResponse, InternalAxiosRequestConfig } from "axios";
 import { memberId } from "components/atoms/atoms";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -16,7 +16,7 @@ const loginViaKakao = async (setMemberId: (a: string) => void, Navto: (a: string
     let client_id = process.env.REACT_APP_KAKAOMAP_APPKEY;
 
     // 카카오 서버에 인증 요청
-    const kakaoToken:any = await axios.post(
+    const kakaoToken: any = await axios.post(
         `https://kauth.kakao.com/oauth/token?grant_type=${grant_type}&client_id=${client_id}&redirect_uri=${process.env.REACT_APP_FRONTEND_BASE_URL}/login/kakao&code=${code}`
         , {
             headers: {
@@ -32,21 +32,27 @@ const loginViaKakao = async (setMemberId: (a: string) => void, Navto: (a: string
         data: {
             property_keys: ['kakao_account.email', 'kakao_account.profile']
         }
-    }).catch((err:any) => { console.error('kakaoUserInfo', err) })
-
+    }).catch((err: any) => { console.error('kakaoUserInfo', err) })
 
     const getUser: any = await axios.post('/api/v1/auth', {
         email: kakaoUserInfo.kakao_account.email,
         nickname: kakaoUserInfo.kakao_account.profile.nickname,
         imageUrl: kakaoUserInfo.kakao_account.profile.profile_image_url,
-    }).catch((err:any) => { console.error('getUser', err) })
-    
-    const MId:any = await axios.get('/auth/test', {
+    }).catch((err: any) => { console.error('getUser', err) })
+
+    axios.interceptors.request.use(
+        (config: InternalAxiosRequestConfig<any>) => {
+            config.headers.Authorization = getUser.data.data.accessToken;
+            return config;
+        },
+        (error) => {
+            console.error(error);
+            return Promise.reject(error);
+        })
+
+    const MId: any = await axios.get('/auth/test', {
         headers: { Authorization: `${getUser.data.data.accessToken}` }
-    }).catch((err:any) => { console.error('memberId', err) })
-
-    console.log(getUser, MId)
-
+    }).catch((err: any) => { console.error('memberId', err) })
 
     setMemberId(MId.data)
     Navto('/home')
