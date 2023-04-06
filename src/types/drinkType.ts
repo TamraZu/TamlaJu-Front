@@ -23,6 +23,7 @@ export type alcoholType = {
     alcoholId:number;
     imageUrl:string;
     name:string;
+    hasAte?:boolean|undefined;
 }
 
 export type drinkRankingType = {

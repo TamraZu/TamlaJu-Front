@@ -44,7 +44,10 @@ function MyPage() {
   }, [myPageData, mId])
 
   if (myPageData?.count === 0) {
-    return <MyPageNoData />
+    return (<>
+      <MyPageNoData />
+      <NavBar />
+    </>);
   }
 
   return (
