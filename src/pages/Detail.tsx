@@ -1,60 +1,51 @@
-import DetailHeader from 'components/details/DetailHeader'
 import styled from '@emotion/styled'
+import { useParams } from 'react-router-dom'
+import { useRecoilState } from 'recoil'
+import DetailHeader from 'components/details/DetailHeader'
 import NavBar from 'components/common/NavBar'
 import DetailAteButton from 'components/details/DetailAteButton'
 import DetailInfoContainer from 'components/details/DetailInfoContainer'
-import { useEffect, useState } from 'react'
-import { DetailData, getDetailAlcohol } from 'apis'
-import { useParams } from 'react-router-dom'
-import { useRecoilState } from 'recoil'
 import { memberId } from 'components/atoms/atoms'
 import HasAuth from 'components/auth/Auth'
+import { useAlcoholDetail } from 'components/hooks/useAlcoholDetail'
 
 function Detail() {
-  HasAuth();
+  HasAuth()
 
   const { id } = useParams()
   const [mId] = useRecoilState(memberId)
-  const [data, setData] = useState<DetailData | null>(null)
-
-  useEffect(() => {
-    async function fetchData() {
-      const response = await getDetailAlcohol(Number(id), mId)
-      setData(response)
-    }
-    fetchData()
-  }, [id, data, mId])
-
-  if (!data) {
-    return <div>로딩중...</div>
-  }
+  const alcoholDetail = useAlcoholDetail(Number(id))
 
   return (
     <>
       <DetailLayout>
         <DetailHeader />
         <DetailImageBox>
-          <img src={data?.imageUrl} alt="상세 술 이미지" />
+          <img src={alcoholDetail?.imageUrl} alt="상세 술 이미지" />
         </DetailImageBox>
         <DetailTitle>
-          <DetailCategory>{data?.category}</DetailCategory>
-          <DetailName>{data?.name}</DetailName>
+          <DetailCategory>{alcoholDetail?.category}</DetailCategory>
+          <DetailName>{alcoholDetail?.name}</DetailName>
         </DetailTitle>
-        <DetailInfoContainer detailData={data} />
+        <DetailInfoContainer detailData={alcoholDetail} />
         <DetailTestingNote>테이스팅 노트</DetailTestingNote>
         <DetailTastingInfo>
           <DetailTastingImage>
             <img
               src={
-                data?.tasteImage ||
+                alcoholDetail?.tasteImage ||
                 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZzkaK3E-cG2KkquhpAL_ukNA9RSRmVmiNxg&usqp=CAU'
               }
               alt="테이스팅 노트 이미지"
             />
           </DetailTastingImage>
-          <DetailTastingDescription>{data.description}</DetailTastingDescription>
+          <DetailTastingDescription>{alcoholDetail.description}</DetailTastingDescription>
         </DetailTastingInfo>
-        <DetailAteButton alcoholId={data.alcoholId} memberId={mId} hasAte={data.hasAte} />
+        <DetailAteButton
+          alcoholId={alcoholDetail.alcoholId}
+          memberId={mId}
+          hasAte={alcoholDetail.hasAte}
+        />
       </DetailLayout>
       <NavBar />
     </>
