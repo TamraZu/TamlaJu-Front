@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getCookie } from "./Cookie";
 
@@ -11,7 +11,8 @@ const HasAuth = () => {
             alert('로그인 정보를 불러올 수 없습니다.\n로그인 화면으로 이동합니다.')
             navigate('/');
         }
-    }, [navigate, token]);
+    }, [])
+
 }
 
 export default HasAuth;
