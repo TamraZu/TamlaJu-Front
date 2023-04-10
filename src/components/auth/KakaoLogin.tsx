@@ -72,7 +72,7 @@ const KakaoLogin = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-            loginViaKakao(setMid, navigate)
+        loginViaKakao(setMid, navigate)
     }, [])
 
     return <StyledText>kakao login 진행중</StyledText>

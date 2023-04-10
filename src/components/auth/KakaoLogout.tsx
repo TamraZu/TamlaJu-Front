@@ -15,7 +15,9 @@ const logout = () => {
 }
 
 const KakaoLogout :React.FC = () => {
-    return (<div onClick={logout}>로그아웃(임시)</div>);
+    // 미관상 임시로 내부 내용 없앱니다.
+    // return (<div onClick={logout}>로그아웃(임시)</div>);
+    return (<div onClick={logout}></div>);
 }
 
 export default KakaoLogout;
