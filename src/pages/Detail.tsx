@@ -134,13 +134,13 @@ const DetailTastingImage = styled.div`
 `
 
 const DetailTastingDescription = styled.div`
+  padding:10px 16px 13px 16px;
   font-weight: 500;
   font-size: 14px;
   line-height: 22px;
-  width: 320px;
-  margin-top: 10px;
-  margin-bottom: 13px;
+  width: 100%;
   white-space: pre-line;
+  word-break:keep-all;
 `
 
 export default Detail
