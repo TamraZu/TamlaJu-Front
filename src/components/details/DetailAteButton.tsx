@@ -1,9 +1,11 @@
 import styled from '@emotion/styled'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ReactComponent as IsDrinkedDetailIcon } from 'atoms/icons/IsDrinkedWhiteIcon.svg'
 import { ReactComponent as IsDrinkedSadIcon } from 'atoms/icons/IsDrinkedSadIcon.svg'
+import { ReactComponent as ProfileIcon } from 'atoms/icons/ProfileIcon.svg';
 import { putEatingCount } from 'apis'
 import { useNavigate } from 'react-router-dom'
+import {toast} from 'react-toastify'
 
 interface DetailAteButtonProps {
   alcoholId: number
@@ -14,10 +16,21 @@ interface DetailAteButtonProps {
 function DetailAteButton({ alcoholId, memberId, hasAte }: DetailAteButtonProps) {
   const navigate = useNavigate()
   const [ate, setAte] = useState(hasAte);
+
+  useEffect(() => {
+    if(ate){
+      toast(<StyledDiv>
+      <ProfileIcon width={16} height={16} fill={'#ffffff'}/>
+      나의 기록에 추가됐어요
+      </StyledDiv>)
+    }
+  }, [ate])
   return (
     <StyledButton
       hasAte={ate}
-      onClick={() => putEatingCount(alcoholId).then(() => { setAte(!ate) })}
+      onClick={() => putEatingCount(alcoholId).then(() => { 
+        setAte(!ate) 
+      })}
     >
 
       {ate
@@ -53,6 +66,15 @@ const StyledButton = styled.div<DetailAteBackgroundProps>`
 
 const StyledText = styled.div<DetailAteBtnTextProps>`
   color: white;
+`
+
+const StyledDiv = styled.div`
+  width:100%;
+  display:flex;
+  gap:8px;
+  align-items:center;
+  justify-content:center;
+
 `
 
 export default DetailAteButton

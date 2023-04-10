@@ -25,6 +25,7 @@ root.render(
         <RecoilRoot>
           <Layout>
             <App />
+            
           </Layout>
         </RecoilRoot>
       </BrowserRouter>
