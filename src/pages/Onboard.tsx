@@ -1,21 +1,18 @@
 import splash from 'atoms/png/OnboardingSplashArt.png'
 import styled from '@emotion/styled';
-import { keyframes } from '@emotion/css';
 import IconKakaoLogo from 'atoms/icons/IconKakaoLogo_sm.png'
-import { Link } from 'react-router-dom';
-import { setCookie } from 'components/auth/Cookie';
 
 const { Kakao } = window;
 
-const fadeOut = keyframes`
-    from, 50%{
-        opacity: 0;
-    }
+// const fadeOut = keyframes`
+//     from, 50%{
+//         opacity: 0;
+//     }
 
-    to, 90% {
-        opacity: 1;
-    }
-`
+//     to, 90% {
+//         opacity: 1;
+//     }
+// `
 
 const Wrapper = styled.div`
     width:100vw;
@@ -56,14 +53,14 @@ const StyledButton = styled.button`
 
 `
 
-const GuestButton = styled.button`
+/* const GuestButton = styled.button`
     background-color : #e2e2e2;
     width:100%;
     height: 48px;
     color: black;
     border-radius:12px;
 
-`
+` */
 
 const Header = styled.h1`
     color:white;
@@ -88,9 +85,9 @@ export default function Onboard() {
         })
     }
 
-    const LoginviaGuest = () => {
+    /* const LoginviaGuest = () => {
         setCookie('authorization', 'guest', 1);
-    }
+    } */
 
     return (
         <Wrapper>
