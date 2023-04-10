@@ -1,8 +1,7 @@
-import axios from "services"
-import { drinkType } from "types/drinkType"
-import { apiConnectType, MarkerDataType } from "types/kakaoMapType"
-import { BottomSheetDataType } from "types/layoutControlType"
-
+import axios from 'services'
+import { drinkType } from 'types/drinkType'
+import { apiConnectType, MarkerDataType } from 'types/kakaoMapType'
+import { BottomSheetDataType } from 'types/layoutControlType'
 
 // const BASE_URL = 'https://tamrazu.store'
 
@@ -46,14 +45,13 @@ export interface DetailData {
 // service에 있는 axios는 로그인 시 interceptor를 통해
 // header를 반영하니, 가급적 service 내 axios 사용 바랍니다.
 
-
 export const getMyPageAlcohol = async (memberId: number) => {
   const response = await axios.get(`/api/v1/members/page/${memberId}`)
   return response.data.data
 }
 
-export const getDetailAlcohol = async (alcoholId: number, memberId: string) => {
-  const response = await axios.get(`/api/v1/alcohols/${alcoholId}?memberId=${memberId}`)
+export const getDetailAlcohol = async (alcoholId: number) => {
+  const response = await axios.get(`/api/v1/alcohols/${alcoholId}`)
   return response.data.data
 }
 
@@ -75,15 +73,15 @@ export const postEatingCount = async (memberId: string, alcoholId: number) => {
 // 04.06. 추가
 
 /**
- * 주류 순위의 TOP 3를 반환한다. 
- * 
- * @author Ramon K Shin 
+ * 주류 순위의 TOP 3를 반환한다.
+ *
+ * @author Ramon K Shin
  * @version 1.0
  * @returns 음료 순위 TOP 3 반환
  */
-export const getRanking = async() => {
+export const getRanking = async () => {
   const response = await axios.get<apiConnectType<drinkType[]>>('/api/v1/alcohols/rank')
-  return response.data.data;
+  return response.data.data
 }
 
 /**
@@ -91,9 +89,11 @@ export const getRanking = async() => {
  * @param mId 멤버 아이디
  * @returns 공장 상세정보 배열
  */
-export const getFactoryList = async(mId:string) => {
-  const response = await axios.get<apiConnectType<MarkerDataType[]>>(`api/v1/factories?memberId=${mId}`);
-  return response.data.data;
+export const getFactoryList = async (mId: string) => {
+  const response = await axios.get<apiConnectType<MarkerDataType[]>>(
+    `api/v1/factories?memberId=${mId}`,
+  )
+  return response.data.data
 }
 
 /**
@@ -101,7 +101,9 @@ export const getFactoryList = async(mId:string) => {
  * @param factoryId 양조장 아이디
  * @returns 바텀 시트에 쓰일 정보들 (이름, 주소, 술 목록)
  */
-export const getFactoryDetail = async(factoryId:number) => {
-  const response = await axios.get<apiConnectType<BottomSheetDataType>>(`api/v1/factories/${factoryId}`);
-  return response.data.data;
+export const getFactoryDetail = async (factoryId: number) => {
+  const response = await axios.get<apiConnectType<BottomSheetDataType>>(
+    `api/v1/factories/${factoryId}`,
+  )
+  return response.data.data
 }
