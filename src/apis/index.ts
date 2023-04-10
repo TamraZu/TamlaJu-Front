@@ -3,24 +3,17 @@ import { drinkType } from 'types/drinkType'
 import { apiConnectType, MarkerDataType } from 'types/kakaoMapType'
 import { BottomSheetDataType } from 'types/layoutControlType'
 
-// const BASE_URL = 'https://tamrazu.store'
-
-// export const Axios = axios.create({
-//   baseURL: BASE_URL,
-//   headers: {
-//     'Content-type': 'application/json',
-//   },
-// })
-
 export interface MyPageData {
   memberId: number
   nickname: string
   count: number
-  alcohols: {
-    alcoholId: number
-    name: string
-    imageUrl: string
-  }
+  alcohols: alcoholData[]
+}
+
+interface alcoholData {
+  alcoholId: number
+  name: string
+  imageUrl: string
 }
 
 export interface DetailData {
@@ -45,8 +38,9 @@ export interface DetailData {
 // service에 있는 axios는 로그인 시 interceptor를 통해
 // header를 반영하니, 가급적 service 내 axios 사용 바랍니다.
 
-export const getMyPageAlcohol = async (memberId: number) => {
-  const response = await axios.get(`/api/v1/members/page/${memberId}`)
+
+export const getMyPageAlcohol = async () => {
+  const response = await axios.get(`/api/v1/members/page`)
   return response.data.data
 }
 
@@ -57,11 +51,6 @@ export const getDetailAlcohol = async (alcoholId: number) => {
 
 export const getListAlcohol = async (memberId: string, category: string) => {
   const response = await axios.get(`/api/v1/alcohols?memberId=${memberId}&category=${category}`)
-  return response.data.data
-}
-
-export const getMyPage = async (memberId: string) => {
-  const response = await axios.get(`/api/v1/members/page/${memberId}`)
   return response.data.data
 }
 
