@@ -24,7 +24,7 @@ const RankingContainer = () => {
             return getRanking();
         },
         {
-            cacheTime:1000*1000,
+            // cacheTime:1000*1000,
             onSettled: (data, err) => {
                 if(data) setData(data);
                 if(err) console.error(err);
