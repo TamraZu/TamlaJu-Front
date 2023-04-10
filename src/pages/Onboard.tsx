@@ -43,16 +43,16 @@ const ButtonWrapper = styled.div`
     display:flex;
     flex-direction:column;
     gap:8px;
-    bottom:5%;
+    bottom:96px;
     left:50%;
-    width: calc(80% - 64px);
+    width: calc(100% - 48px);
     transform:translateX(-50%);
 `
 const StyledButton = styled.button`
     background-color : #fee500;
     width:100%;
     height: 48px;
-    border-radius:12px;
+    border-radius:24px;
 
 `
 
@@ -75,7 +75,7 @@ const Header = styled.h1`
 
 const KakaoLogo = styled.img`
     display:inline;
-    margin: 0 6px;
+    margin: 0 10px;
 `
 
 export default function Onboard() {
@@ -107,7 +107,7 @@ export default function Onboard() {
                     <StyledButton onClick={LoginviaKakao}>
                         <Header>
                             <KakaoLogo src={IconKakaoLogo} alt="Kakao Logo" />
-                            카카오 로그인
+                            카카오로 시작하기
                         </Header>
                     </StyledButton>
                 </ButtonWrapper>
