@@ -30,13 +30,14 @@ function Detail() {
     transition={bounce}
     position='top-center'
     limit={1}
-    autoClose={5}
+    autoClose={2}
     hideProgressBar
     closeOnClick
     pauseOnHover
     closeButton={false}
     rtl={false}
     draggable
+    theme={'dark'}
     />
       <DetailLayout>
         <DetailHeader />
@@ -76,7 +77,7 @@ const DetailLayout = styled.div`
   padding: 0 16px;
   overflow-y: scroll;
   overflow-x: hidden;
-  height: 90vh;
+  height: calc(100vh - 50px);
   ::-webkit-scrollbar {
     width: 5px;
   }
