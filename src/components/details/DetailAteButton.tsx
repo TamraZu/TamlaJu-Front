@@ -6,6 +6,7 @@ import { ReactComponent as ProfileIcon } from 'atoms/icons/ProfileIcon.svg';
 import { putEatingCount } from 'apis'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import useDidMountEffect from 'components/hooks/useDidMountEffect';
 
 interface DetailAteButtonProps {
   alcoholId: number
@@ -16,15 +17,15 @@ interface DetailAteButtonProps {
 function DetailAteButton({ alcoholId, memberId, hasAte }: DetailAteButtonProps) {
   const [ate, setAte] = useState(hasAte);
 
-  useEffect(() => {
+  useDidMountEffect(() => {
     if (ate) {
       toast(<StyledDiv>
         <ProfileIcon width={16} height={16} fill={'#ffffff'} />
         나의 기록에 추가됐어요
       </StyledDiv>)
     }
-    console.log(ate, 'rendered');
   }, [ate])
+
   return (
     <StyledButton
       hasAte={ate}
