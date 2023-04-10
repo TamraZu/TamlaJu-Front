@@ -1,14 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import Category from 'components/List/Category'
 import Header from 'components/common/Header'
 import NavBar from 'components/common/NavBar'
 import ListCard from 'components/List/ListCard'
 import styled from '@emotion/styled'
 import ListCardContainer from 'components/List/ListCardContainer'
-import { getListAlcohol } from 'apis'
-import { useRecoilState } from 'recoil'
-import { memberId } from 'components/atoms/atoms'
 import HasAuth from 'components/auth/Auth'
+import { useAlcoholList } from 'components/hooks/useAlcoholList'
 
 export interface ListAlcoholData {
   alcoholId: number
@@ -27,19 +25,10 @@ export interface CategoryData {
 }
 
 function List() {
-  HasAuth();
+  HasAuth()
 
   const [category, setCategory] = useState<CategoryData>({ name: 'Makgeolli', id: 0 })
-  const [data, setData] = useState<ListAlcoholData[]>([])
-  const [mId] = useRecoilState(memberId)
-
-  useEffect(() => {
-    async function fetchListData() {
-      const response = await getListAlcohol(mId, category.name)
-      setData(response)
-    }
-    fetchListData()
-  }, [category.name, category.id, mId])
+  const alcoholListData = useAlcoholList(category.name)
 
   return (
     <>
@@ -47,8 +36,8 @@ function List() {
         <Header>제주도감</Header>
         <Category category={category} setCategory={setCategory} />
         <ListCardContainer>
-          {data.map(elem => {
-            return <ListCard key={elem.alcoholId} drink={elem} />
+          {alcoholListData.map(drink => {
+            return <ListCard key={drink.alcoholId} drink={drink} />
           })}
         </ListCardContainer>
       </ListLayout>
