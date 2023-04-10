@@ -53,8 +53,8 @@ export const getListAlcohol = async (category: string) => {
   return response.data.data
 }
 
-export const postEatingCount = async (memberId: string, alcoholId: number) => {
-  const response = await axios.post(`/api/v1/eats`, { memberId, alcoholId })
+export const putEatingCount = async (alcoholId: number) => {
+  const response = await axios.put(`/api/v1/histories/${alcoholId}`)
   return response.data.message === '등록 성공'
 }
 
