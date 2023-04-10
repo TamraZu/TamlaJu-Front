@@ -7,6 +7,7 @@ import MyPageNoData from 'components/MyPage/MyPageNoData'
 import MyPageCountHeader from 'components/MyPage/MyPageCountHeader'
 import HasAuth from 'components/auth/Auth'
 import { useAlcoholMyPage } from 'components/hooks/useAlcoholMyPage'
+import KakaoLogout from 'components/auth/KakaoLogout'
 
 function MyPage() {
   HasAuth()
@@ -15,24 +16,26 @@ function MyPage() {
   return (
     <>
       <StyledMyPageLayout>
+        <TopBar>
         <Header>나의 기록</Header>
-        <MyPageCountHeader count={myPageData.count} />
-        <MyPageContainer>
-          {myPageData.count === 0 ? (
-            <MyPageNoData />
-          ) : (
-            myPageData.alcohols?.map(elem => {
-              return (
-                <MyPageCard
-                  key={elem.alcoholId}
-                  imageUrl={elem?.imageUrl ?? ''}
-                  name={elem?.name ?? ''}
-                  alcoholId={elem.alcoholId}
-                />
-              )
-            })
-          )}
-        </MyPageContainer>
+        <KakaoLogout/>
+        </TopBar>
+        {myPageData.count === 0 ?
+          <MyPageNoData />
+          : (<>
+          <MyPageCountHeader count={myPageData.count} />
+          <MyPageContainer>
+              {myPageData.alcohols?.map(elem => {
+                return (
+                  <MyPageCard
+                    key={elem.alcoholId}
+                    imageUrl={elem?.imageUrl ?? ''}
+                    name={elem?.name ?? ''}
+                    alcoholId={elem.alcoholId} />
+                )
+              })}
+            </MyPageContainer>
+            </>)}
       </StyledMyPageLayout>
       <NavBar />
     </>
@@ -41,6 +44,13 @@ function MyPage() {
 
 const StyledMyPageLayout = styled.div`
   padding: 0 16px;
+`
+
+const TopBar = styled.div`
+  margin-top: 44px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 `
 
 export default MyPage
