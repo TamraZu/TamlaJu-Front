@@ -1,46 +1,63 @@
-# Getting Started with Create React App
+# 🍊 TamraJu
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<img width="892" alt="image" src="https://user-images.githubusercontent.com/55437339/229000195-927525a2-d3cd-4273-beaa-93adfe43a9e1.png">
 
-## Available Scripts
+내 손안에 탐나는 제주 전통주 도감, 탐라주
 
-In the project directory, you can run:
+[탐라주 서비스 바로가기](https://tamrazu.vercel.app/SignIn)
+- 아이디: guest1
+- 비밀번호: 1111
 
-### `npm start`
+<br/>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## ☁️ Goormton - Group 5
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+| 프론트 개발 | 프론트 개발 | 백엔드 개발 |
+| :---: | :---: | :---: |
+|<img src="https://user-images.githubusercontent.com/55437339/228994330-96b561fc-e2f7-4a3d-a5bd-787480cbd9a2.png" width="300" height="300"/>| <img src="https://user-images.githubusercontent.com/55437339/228994501-977c002e-acaa-4aea-af6c-fa6425d7f662.png" width="300" height="300"/> | <img src="https://user-images.githubusercontent.com/55437339/228993752-6f4e2fce-2523-42cb-81a6-0d4e0c14b16d.png" width="300" height="300"/> |
+| [신희상](https://github.com/ramer-dev) | [박재현](https://github.com/jaehyeon74) | [김소현](https://github.com/thguss) |
 
-### `npm test`
+<br/>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🛠 Used Stacks
 
-### `npm run build`
+### Front-end
+- TypeScript, React
+- Kakao Map Sdk
+- React-query, Axios
+- Emotion
+- Recoil
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Back-end
+- JDK 17, Spring Boot 2.7.10, Gradle 7.5.1
+- Data-Jpa, Spring-Web, Lombok, MySQL 8.0
+- Github Action, AWS(EC2, RDS, S3, Code Deploy, ACM, ALB, Route 53 .etc)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+<br/>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 🥕 API 명세서
+| API명 | URL |
+| :---: | :---: |
+| 로그인(아이디: guest1, 비밀번호: 1111) | [[POST] /api/v1/members/sign](https://github.com/TamraZu/.github/wiki/%EB%A1%9C%EA%B7%B8%EC%9D%B8) |
+| 양조장 전체 조회 | [[GET] /api/v1/factories?memberId=](https://github.com/TamraZu/.github/wiki/%EC%96%91%EC%A1%B0%EC%9E%A5-%EC%A0%84%EC%B2%B4-%EC%A1%B0%ED%9A%8C) |
+| 전통주 상위 3개 조회 | [[GET] /api/v1/alcohols/rank](https://github.com/TamraZu/.github/wiki/%EC%A0%84%ED%86%B5%EC%A3%BC-%EC%83%81%EC%9C%84-3%EA%B0%9C-%EC%A1%B0%ED%9A%8C) |
+| 양조장 상세 조회 | [[GET] ~/api/v1/factories/{factoryId}](https://github.com/TamraZu/.github/wiki/%EC%96%91%EC%A1%B0%EC%9E%A5-%EC%83%81%EC%84%B8-%EC%A1%B0%ED%9A%8C) |
+| 전통주 전체 조회 | [[GET] ~/api/v1/alcohols?memberId=&category=](https://github.com/TamraZu/.github/wiki/%EC%A0%84%ED%86%B5%EC%A3%BC-%EC%A0%84%EC%B2%B4-%EC%A1%B0%ED%9A%8C) |
+| 카테고리 전체 조회 | [[GET] ~/api/v1/categories](https://github.com/TamraZu/.github/wiki/%EC%B9%B4%ED%85%8C%EA%B3%A0%EB%A6%AC-%EC%A0%84%EC%B2%B4-%EC%A1%B0%ED%9A%8C) |
+| 전통주 상세 조회 | [[GET] ~/api/v1/alcohols/{alcoholId}?memberId=](https://github.com/TamraZu/.github/wiki/%EC%A0%84%ED%86%B5%EC%A3%BC-%EC%83%81%EC%84%B8-%EC%A1%B0%ED%9A%8C) |
+| 전통주 마셔봤어요 기능 | [[GET] ~/api/v1/eats](https://github.com/TamraZu/.github/wiki/%EC%A0%84%ED%86%B5%EC%A3%BC-%EB%A7%88%EC%85%94%EB%B4%A4%EC%96%B4%EC%9A%94-%EA%B8%B0%EB%8A%A5) |
+| 유저페이지 조회 | [[GET] ~/api/v1/members/page/{memberId}](https://github.com/TamraZu/.github/wiki/%EC%9C%A0%EC%A0%80%ED%8E%98%EC%9D%B4%EC%A7%80-%EC%A1%B0%ED%9A%8C) |
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+<br/>
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 🥫 ERD
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+<img width="1306" alt="image" src="https://user-images.githubusercontent.com/55437339/228997525-fb33736e-acb0-4e94-842a-16290c60a0da.png">
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+<br/>
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 🏗 Server Architecture
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<img width="598" alt="image" src="https://user-images.githubusercontent.com/55437339/228997276-34f2e11b-180f-4796-ac63-8a9166130110.png">

@@ -5,17 +5,12 @@ import SignIn from './pages/SignIn'
 import NotFound from './pages/NotFound'
 import MyPage from './pages/MyPage'
 import Onboard from './pages/Onboard'
-import React, { useEffect } from 'react'
 import { Route, Routes } from 'react-router-dom'
+import KakaoLogin from 'components/auth/KakaoLogin'
+
 
 function App() {
-  // useEffect(() => {
-  //     const mapScript = document.createElement('script');
-  //     mapScript.async = true;
-  //     mapScript.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.REACT_APP_KAKAO_MAP_KEY}`;
-  //
-  //     document.body.appendChild(mapScript);
-  // }, [])
+  
   return (
     <div className="App">
       <Routes>
@@ -25,7 +20,8 @@ function App() {
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/list" element={<List />} />
         <Route path="/signin" element={<SignIn />} />
-        {/* <Route path="*" element={<NotFound />} /> */}
+        <Route path="/login/kakao" element={<KakaoLogin/>}/>
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   )

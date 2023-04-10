@@ -16,6 +16,15 @@ const StyledMyPageContainer = styled.div`
   grid-template-columns: repeat(3, minmax(auto, 1fr));
   align-items: center;
   justify-content: space-around;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 70vh;
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: white;
+  }
 `
 
 export default MyPageContainer

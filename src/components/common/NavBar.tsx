@@ -3,6 +3,7 @@ import { NavLink, useLocation } from 'react-router-dom'
 import { ReactComponent as DrinkIcon } from 'atoms/icons/DrinkIcon.svg'
 import { ReactComponent as MapIcon } from 'atoms/icons/MapIcon.svg'
 import { ReactComponent as ProfileIcon } from 'atoms/icons/ProfileIcon.svg'
+import KakaoLogout from 'components/auth/KakaoLogout'
 
 function NavBar() {
   const { pathname } = useLocation()
@@ -29,6 +30,9 @@ function NavBar() {
             />
           </NavLink>
         </nav>
+        <NavLink to="/">
+          <KakaoLogout/>
+        </NavLink>
       </NavBox>
     </Container>
   )
@@ -45,7 +49,7 @@ const Container = styled.div`
   max-width: 430px;
   width: 100%;
   height: 50px;
-  /* border-top: 1px solid black; */
+  z-index: 6;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   box-shadow: 0px -2px 2px rgba(0, 0, 0, 0.04);

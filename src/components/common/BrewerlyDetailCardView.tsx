@@ -1,18 +1,13 @@
-import React from 'react';
 import styled from '@emotion/styled';
-import { alcoholType, brewerlyType } from 'types/drinkType';
-import drinkIcon from 'atoms/icons/DrinkIcon.svg';
+import { Link } from 'react-router-dom';
+import { alcoholType } from 'types/drinkType';
+import { ReactComponent as DrinkIcon } from 'atoms/icons/DrinkIcon.svg'
+
 const CardWrapper = styled.div`
     border-radius: 16px;
-    width:100%;
     margin:14px 16px 58px 16px;
-    overflow-x: scroll;
-    overflow-y: hidden;
     display: flex;
     gap:8px;
-    ::-webkit-scrollbar{
-        display:none;
-    }
 `
 
 const Card = styled.div`
@@ -31,16 +26,26 @@ width: 118px;
 height: 126px;
 border-radius: 12px;
 `
-const StampImg = styled.img`
-position: absolute;
-left:0;
-right:0;
+
+const TitleFont = styled.h1`
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: -0.003em;
+    display: inline-block; 
+    text-overflow: ellipsis;
+    overflow: hidden; 
+    white-space: nowrap; 
+`;
+
+const CardTitleWrapper = styled.div`
+    width:100%;
+    display:flex;
+    line-height: 24px;
+    gap:2px;
+    justify-content: center;
+    align-items: center;
 `
 
-const DrinkIcon = styled.img`
-width:20px;
-height: 20px;
-`
 interface BrewerlydetailCardViewProps {
     alcohols: alcoholType[]
 }
@@ -49,19 +54,19 @@ const BrewerlyDetailCardView = ({ alcohols }: BrewerlydetailCardViewProps) => {
     return (<CardWrapper>
         <>
             {alcohols.map((t: alcoholType) => {
-                return (<Card key={t.alcoholId}>
-                    
-                    <div style={{ position: 'relative' }}>
-                        <DrinkImg src={t.imageUrl} />
-                    </div>
-                    <div style={{ display: 'flex' }}>
-                        <DrinkIcon src={drinkIcon}/>
-                        <h5>{t.name}</h5>
-                    </div>
-                    <div>
+                return (<Link to={`/details/${t.alcoholId}`} key={t.alcoholId}>
+                    <Card>
 
-                    </div>
-                </Card>)
+                        <div style={{ position: 'relative' }}>
+                            <DrinkImg width={128} height={128} src={t.imageUrl} />
+                        </div>
+                        
+                            <CardTitleWrapper>
+                                <DrinkIcon width="15" fill={'#09121F'} />
+                                <TitleFont>{t.name}</TitleFont>
+                            </CardTitleWrapper>
+                    </Card>
+                </Link>)
             })}
         </>
 

@@ -1,3 +1,7 @@
+/**
+ * author : ramon K shin
+ * 소셜 로그인 연동으로 인해 이제 미사용.
+ */
 import { useMutation } from "@tanstack/react-query";
 import { memberId } from "components/atoms/atoms";
 import React, { useState } from "react";
@@ -75,17 +79,26 @@ function SignIn() {
   const setMemberId = useSetRecoilState(memberId);
 
   const loginMutation = useMutation(['login'], async () => {
-    axios.post('/api/v1/members/sign',
-      { username: id, password: password })
+    const response = await axios.post('/api/v1/members/sign', { username: id, password: password });
+    return response.data;
   })
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: any) => {
     // 로그인 버튼이 클릭되었을 때 실행될 코드
     e.preventDefault();
-
-    loginMutation.mutate()
-    setMemberId(1) // need to fix;
-    navigate('/home');
+    try {
+      const response = await loginMutation.mutateAsync();
+      if (response.success) {
+        // setMemberId(1);
+        navigate('/home');
+      }
+    } catch (error: any) {
+      if (error.response && error.response.status === 404) {
+        alert('로그인 실패\nID와 password를 확인해주세요.')
+      } else {
+        alert('로그인 중 오류가 발생했습니다.');
+      }
+    }
   }
   return <Container>
 
@@ -94,7 +107,7 @@ function SignIn() {
       탐라주에 오신걸 환영해요</Title>
 
     <form >
-      <Label>
+      <Label >
         아이디
         <Input type="text" value={id} placeholder='아이디를 입력해주세요' onChange={e => setUsername(e.target.value)} />
       </Label>

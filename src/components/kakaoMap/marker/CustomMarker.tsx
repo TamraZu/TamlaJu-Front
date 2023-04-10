@@ -1,121 +1,119 @@
-import { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MapMarker } from 'react-kakao-maps-sdk';
-import { apiConnectType, latLngType, MarkerDataType } from 'types/kakaoMapType';
-import { useQuery } from '@tanstack/react-query';
-import axios from 'services';
-import { MapContext } from 'pages/Main';
+import { MarkerDataType } from 'types/kakaoMapType';
 import markerSelectedImage from 'atoms/png/BrewerySelectedIcon.png'
 import markerAteImage from 'atoms/png/BreweryCheckedIcon.png'
 import markerDefaultImage from 'atoms/png/BreweryIcon.png'
-import { brewerlyType } from 'types/drinkType';
-import { AxiosResponse } from 'axios';
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import { bottomSheetData, bottomSheetOpened, selectedMarker } from 'components/atoms/atoms';
+import { BottomSheetDataType } from 'types/layoutControlType';
+import { getFactoryDetail } from 'apis';
+import { useQuery } from '@tanstack/react-query';
 
-const ateMarker = {
+const ATE_MARKER_IMG = {
   src: markerAteImage,
   size: {
-    width: 24,
-    height: 24,
+    width: 36,
+    height: 36,
   },
   options: {
     offset: {
-      x: 12,
-      y: 24,
+      x: 18,
+      y: 36,
     },
   },
 }
 
-const selectedMarker = {
+const SELECTED_MARKER_IMG = {
   src: markerSelectedImage,
   size: {
-    width: 24,
-    height: 24,
+    width: 36,
+    height: 36,
   },
   options: {
     offset: {
-      x: 12,
-      y: 24,
+      x: 18,
+      y: 36,
     },
   },
 }
 
 
-const defaultMarker = {
+const DEFAULT_MARKER_IMG = {
   src: markerDefaultImage,
   size: {
-    width: 24,
-    height: 24,
+    width: 36,
+    height: 36,
   },
   options: {
     offset: {
-      x: 12,
-      y: 24,
+      x: 18,
+      y: 36,
     },
   },
 }
-export default function CustomMarker({ factoryId, latitude, longitude, hasAte, address, setCenter }: MarkerDataType) {
-  const data = useContext(MapContext)
-  const [response, setResponse] = useState<apiConnectType<brewerlyType>>();
-  const [isOpen, setIsOpen] = useState(false);
-  const [enabled, setEnabled] = useState(false);
-  // const [isVisited, setIsVisited] = useState(hasAte);
-  // const [isSelected, setIsSelected] = useState(data?.data?.factoryId === factoryId);
-  // const [image, setImage] = useState(defaultMarker);
-  // useEffect(() => {
-  // setImage(isSelected ? selectedMarker : isVisited ? ateMarker : defaultMarker)
-  // })
 
+export function CustomMarker({ factoryId, latitude, longitude, hasAte, address, setCenter, setZoom }: MarkerDataType) {
 
-  // useQuery(
-  //   ['kakaomap', 'request', 'factories', 'details'],
-  //   () => {
-  //     return axios.get<apiConnectType<brewerlyType>>(`api/v1/factories/${factoryId}`);
-  //   },
-  //   {
-  //     enabled: enabled,
-  //     onSuccess: (response) => {
-  //       setResponse(response.data.data);
-  //     },
-  //   }
-  // );
+  const getImage = () => {
+    if (factoryId === marker) {
+      return SELECTED_MARKER_IMG
+    } else if (hasAte) {
+      return ATE_MARKER_IMG
+    } else {
+      return DEFAULT_MARKER_IMG
+    }
+  }
 
+  const [marker, setSelectedMarker] = useRecoilState(selectedMarker);
+  const setIsOpen = useSetRecoilState(bottomSheetOpened);
+  const [image, setImage] = useState(getImage());
+  const [data, setData] = useRecoilState<BottomSheetDataType>(bottomSheetData)
 
   useEffect(() => {
-    if (response) {
-      data?.onDataChange(response.data)
-      console.log(response, 'set')
+    setIsOpen(false);
+  }, [setIsOpen])
+
+  useEffect(() => {
+    // 마커 이미지 변경
+    setImage(getImage());
+  }, [marker, getImage])
+
+  const { refetch, isStale } = useQuery(
+    ['get', 'factory', 'detail', factoryId],
+    () => {
+      return getFactoryDetail(factoryId);
+    },
+    {
+      staleTime:0,
+      enabled: false,
+      onSuccess: (res) => {
+        setData(res);
+        setSelectedMarker(factoryId);
+      },
+      onError: (err) => {
+        console.error('GetFactoryDetail', err);
+      }
     }
-  }, [response])
+  )
 
   return (
     <MapMarker
       position={{ lat: latitude, lng: longitude }}
       clickable={true}
-      image={defaultMarker}
-      onClick={(e) => {
-        axios.get<apiConnectType<brewerlyType>>(`api/v1/factories/${factoryId}`)
-          .then(t => {
-            setResponse(t.data);
-          }).catch(e => {
-          alert('네트워크 통신 실패')
-        })
+      image={image}
+      onClick={(event) => {
+        // 클릭 시 양조장 상세정보 API 호출
+        refetch();
 
-        const pos = {
-          lat: e.getPosition().getLat(),
-          lng: e.getPosition().getLng()
-        }
-
-        setCenter({ lat: pos.lat, lng: pos.lng })
-        data?.toggleBottomSheet(isOpen);
-        setIsOpen(!isOpen);
-
+        setCenter({ lat: event.getPosition().getLat(), lng: event.getPosition().getLng() })
+        setIsOpen(true);
       }
-        // 커스텀 마커에서 클릭했을때 지도의 중심으로 이동
-        // 
-        // key 를 기반으로 DB에 디테일 정보 get 요청하기
-        // 요청한 정보 Bottomsheet에 넣어 열기 
 
       }
     >
     </MapMarker >
   );
 }
+
+export const MemoizedMarker = React.memo(CustomMarker)
