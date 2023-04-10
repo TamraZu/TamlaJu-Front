@@ -15,13 +15,13 @@ function ListCard({ drink }: ListCardProps) {
     await putEatingCount(drink.alcoholId)
   }
   return (
-    <CardContainer>
-      <CardImage onClick={() => navigate(`/details/${drink.alcoholId}`)}>
+    <CardContainer onClick={() => navigate(`/details/${drink.alcoholId}`)}>
+      <CardImage >
         <img src={drink.imageUrl} alt="술 이미지" />
       </CardImage>
       <CardContent>
         <CardLeft>
-          <CardTitle onClick={() => navigate(`/details/${drink.alcoholId}`)}>
+          <CardTitle>
             {drink.name}
           </CardTitle>
           <CardInfo>{`${drink.volume}ml | ${drink.level}도`}</CardInfo>
@@ -40,17 +40,18 @@ function ListCard({ drink }: ListCardProps) {
 
 const CardContainer = styled.div`
   position: relative;
-  width: 343px;
+  cursor: pointer;
+  width: 100%;
   height: 130px;
   display: flex;
   border-radius: 16px;
   padding: 16px;
   margin-bottom: 8px;
-  background: #ffe9d4;
+  background-color: #FFF7F1;
+  border:#FFE9D5 solid 1px;
 `
 
 const CardImage = styled.div`
-  cursor: pointer;
   width: 96px;
   height: 96px;
   img {
