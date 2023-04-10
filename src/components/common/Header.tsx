@@ -10,7 +10,7 @@ function Header({ children }: HeaderProps) {
 }
 
 const StyledHeader = styled.header`
-  margin-top: 44px;
+  display:inline-block;
   font-weight: 800;
   font-size: 28px;
   line-height: 34px;

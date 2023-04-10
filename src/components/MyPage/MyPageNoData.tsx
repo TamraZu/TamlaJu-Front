@@ -1,13 +1,15 @@
 import { ReactComponent as IsDrinkedSadIcon } from 'atoms/icons/IsDrinkedSadIcon.svg'
-import { ReactComponent as IsDrinkedIcon } from 'atoms/icons/IsDrinkedIcon.svg'
+import { ReactComponent as IsDrinkedInverse } from 'atoms/icons/IsDrinkedInversed.svg'
 import { useNavigate } from 'react-router-dom'
 import styled from '@emotion/styled'
 
 function DetailAteButton() {
   const navigate = useNavigate()
   return (
-    <StyledButton onClick={() => navigate('/home')}>
-      <IsDrinkedIcon width={24} height={24} fill="#fd6e21" />
+    <StyledButton onClick={() => navigate('/list')}>
+      {/* <StyledIconBG> */}
+        <IsDrinkedInverse width={24} height={24} fill="#fd6e21" />
+      {/* </StyledIconBG> */}
       <StyledText>제주 술 보러가기</StyledText>
     </StyledButton>
   )
@@ -16,12 +18,12 @@ function DetailAteButton() {
 function MyPageNoData() {
   return (
     <>
-    <Wrapper>
-      <IsDrinkedSadIcon width={80} height={80} />
-      <StyledHeader>술기록이 존재하지 않아요</StyledHeader>
-      <StyledParagraph>전통주를 보러 가볼까요?</StyledParagraph>
-      <DetailAteButton />
-    </Wrapper>
+      <Wrapper>
+        <IsDrinkedSadIcon width={80} height={80} />
+        <StyledHeader>술기록이 존재하지 않아요</StyledHeader>
+        <StyledParagraph>전통주를 보러 가볼까요?</StyledParagraph>
+        <DetailAteButton />
+      </Wrapper>
     </>
   )
 }
@@ -55,6 +57,14 @@ const StyledParagraph = styled.p`
   font-weight: 500;
   font-size: 16px;
   color: #858899;
+`
+
+const StyledIconBG = styled.div`
+  background-color:#ffffff;
+  border-radius:50%;
+  width:20px;
+  height:20px;
+  margin: 2px 2px;
 `
 
 const Wrapper = styled.div`
