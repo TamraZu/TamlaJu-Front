@@ -113,7 +113,7 @@ export default function BottomSheetContainer() {
     const [isOpen, setIsOpen] = useRecoilState<boolean>(bottomSheetOpened);
     const scrollRef = useHorizontalScroll();
     const { y } = useSpring({
-        y: isOpen ? 0 : 120,
+        y: isOpen ? -15 : 120,
         config: { tension: 200, friction: 30 },
     });
 

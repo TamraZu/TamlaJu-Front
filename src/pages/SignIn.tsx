@@ -1,3 +1,7 @@
+/**
+ * author : ramon K shin
+ * 소셜 로그인 연동으로 인해 이제 미사용.
+ */
 import { useMutation } from "@tanstack/react-query";
 import { memberId } from "components/atoms/atoms";
 import React, { useState } from "react";

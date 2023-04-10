@@ -2,13 +2,13 @@
 
 import { Map } from 'react-kakao-maps-sdk';
 import { css } from '@emotion/react';
-import { latLngType, MarkerDataType, mapOptionType, apiConnectType } from 'types/kakaoMapType';
+import { latLngType, MarkerDataType, mapOptionType } from 'types/kakaoMapType';
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query'
-import axios from 'services';
 import { MemoizedMarker } from "./marker/CustomMarker";
 import { bottomSheetOpened, memberId } from 'components/atoms/atoms';
 import { useSetRecoilState, useRecoilValue } from 'recoil';
+import { getFactoryList } from 'apis';
 const container = css({
     width: 'calc(100% - 32px)',
     aspectRatio: '1/1',
@@ -24,16 +24,17 @@ function KakaoMap({ center, zoom }: mapOptionType) {
     const setIsOpen = useSetRecoilState<boolean>(bottomSheetOpened);
 
     useQuery(
-        ['kakaomap', 'request', 'factories'],
+        ['get', 'factory', 'list'],
         () => {
-            return axios.get<apiConnectType<MarkerDataType[]>>(`api/v1/factories?memberId=${mId}`);
+            return getFactoryList(mId);
         },
         {
+            staleTime:1000 * 3600,
             onSuccess: (response) => {
-                setMarkers(response.data.data);
+                setMarkers(response);
             },
             onError: (err) => {
-                console.error('Failed to getting marker info', err)
+                console.error('GetFactoryList', err)
             }
         }
     );

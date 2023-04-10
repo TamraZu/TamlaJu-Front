@@ -8,8 +8,11 @@ import { DetailData, getDetailAlcohol } from 'apis'
 import { useParams } from 'react-router-dom'
 import { useRecoilState } from 'recoil'
 import { memberId } from 'components/atoms/atoms'
+import HasAuth from 'components/auth/Auth'
 
 function Detail() {
+  HasAuth();
+
   const { id } = useParams()
   const [mId] = useRecoilState(memberId)
   const [data, setData] = useState<DetailData | null>(null)

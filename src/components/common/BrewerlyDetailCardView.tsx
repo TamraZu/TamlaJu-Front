@@ -58,7 +58,7 @@ const BrewerlyDetailCardView = ({ alcohols }: BrewerlydetailCardViewProps) => {
                     <Card>
 
                         <div style={{ position: 'relative' }}>
-                            <DrinkImg src={t.imageUrl} />
+                            <DrinkImg width={128} height={128} src={t.imageUrl} />
                         </div>
                         
                             <CardTitleWrapper>
