@@ -8,14 +8,6 @@ import DetailInfoContainer from 'components/details/DetailInfoContainer'
 import { memberId } from 'components/atoms/atoms'
 import HasAuth from 'components/auth/Auth'
 import { useAlcoholDetail } from 'components/hooks/useAlcoholDetail'
-import { ToastContainer, cssTransition } from 'react-toastify'
-// import 'styles/toast.css'
-import 'react-toastify/dist/ReactToastify.css'
-
-const bounce = cssTransition({
-  enter:"Toastify__bounce-enter--top-center",
-  exit: "Toastify__bounce-exit--top-center"
-})
 
 function Detail() {
   HasAuth()
@@ -26,19 +18,7 @@ function Detail() {
 
   return (
     <>
-    <ToastContainer
-    transition={bounce}
-    position='top-center'
-    limit={1}
-    autoClose={2}
-    hideProgressBar
-    closeOnClick
-    pauseOnHover
-    closeButton={false}
-    rtl={false}
-    draggable
-    theme={'dark'}
-    />
+
       <DetailLayout>
         <DetailHeader />
         <DetailImageBox>

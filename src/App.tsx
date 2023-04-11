@@ -8,12 +8,10 @@ import Onboard from './pages/Onboard'
 import { Route, Routes } from 'react-router-dom'
 import KakaoLogin from 'components/auth/KakaoLogin'
 
-
 function App() {
-  
+
   return (
     <div className="App">
-      
       <Routes>
         <Route path="/" element={<Onboard />} />
         <Route path="/home" element={<Main />} />
@@ -21,11 +19,12 @@ function App() {
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/list" element={<List />} />
         <Route path="/signin" element={<SignIn />} />
-        <Route path="/login/kakao" element={<KakaoLogin/>}/>
+        <Route path="/login/kakao" element={<KakaoLogin />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   )
 }
+
 
 export default App

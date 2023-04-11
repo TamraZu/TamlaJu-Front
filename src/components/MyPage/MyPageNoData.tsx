@@ -36,6 +36,7 @@ const StyledButton = styled.div`
   height: 48px;
   display: flex;
   justify-content: center;
+
   align-items: center;
   padding: 14px 16px;
   gap: 10px;
