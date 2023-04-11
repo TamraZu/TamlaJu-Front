@@ -29,7 +29,7 @@ function KakaoMap({ center, zoom }: mapOptionType) {
             return getFactoryList(mId);
         },
         {
-            staleTime:1000 * 3600,
+            // staleTime:1000 * 3600,
             onSuccess: (response) => {
                 setMarkers(response);
             },

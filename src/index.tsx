@@ -14,8 +14,8 @@ const queryClient = new QueryClient({
   defaultOptions:{
     queries:{
       refetchOnWindowFocus:false,
-      refetchOnMount:false,
-      staleTime:1000 * 300, // 5분 (300초)
+      // refetchOnMount:false,
+      // staleTime:1000 * 300, // 5분 (300초)
     },
   },
 })
