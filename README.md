@@ -1,6 +1,6 @@
 # 🍊 TamraJu
 
-<img width="892" alt="image" src="https://user-images.githubusercontent.com/55437339/229000195-927525a2-d3cd-4273-beaa-93adfe43a9e1.png">
+<img width="892" alt="image" src="https://user-images.githubusercontent.com/55437339/229000195-927525a2-d3cd-4273-beaa-93adfe43a9e1.png"/>
 
 내 손안에 탐나는 제주 전통주 도감, 탐라주
 
@@ -9,11 +9,12 @@
 
 ## ☁️ Goormton - Group 5
 
-<img src="https://user-images.githubusercontent.com/51011193/230850858-5653bd2f-6f65-4821-b21c-6acda73ae111.jpg" alt="구름톤 5팀 사진">
+<img src="https://user-images.githubusercontent.com/51011193/230850858-5653bd2f-6f65-4821-b21c-6acda73ae111.jpg" alt="구름톤 5팀 사진"/>   
 <br/>
-### 구름톤 우수상 수상!
-<br/>
-### 팀원 소개
+
+## 구름톤 우수상 수상!    
+
+### 팀원 소개   
 
 
 | 프론트 개발 | 프론트 개발| 백엔드 개발 |
@@ -22,7 +23,7 @@
 | [신희상](https://github.com/ramer-dev) | [박재현](https://github.com/jaehyeon74) | [김소현](https://github.com/thguss) |
 | **기획** | **디자인** |
 | <img src="https://user-images.githubusercontent.com/51011193/231452199-0910f5fb-960a-4dbd-8202-b1be6aa494dc.jpg" width=300/> | <img src="https://user-images.githubusercontent.com/51011193/231452895-012e6a79-df81-459e-af6c-98442620ce06.png" width=300/>|
-| [한수아]() | [이설희]() |
+| [한수아](https://github.com/sssua-0928) | [이설희]() |
 
 <br/>
 
