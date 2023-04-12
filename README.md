@@ -7,12 +7,11 @@
 [탐라주 서비스 바로가기](https://tamrazu.vercel.app)
 <br/>
 
-## ☁️ Goormton - Group 5
+## ☁️ Goormton - Group 5   
 
-<img src="https://user-images.githubusercontent.com/51011193/230850858-5653bd2f-6f65-4821-b21c-6acda73ae111.jpg" alt="구름톤 5팀 사진"/>   
-<br/>
-
-## 구름톤 우수상 수상!    
+## 구름톤 우수상 수상!
+<img src="https://user-images.githubusercontent.com/51011193/230850858-5653bd2f-6f65-4821-b21c-6acda73ae111.jpg" alt="구름톤 5팀 사진" width=500/>     
+    
 
 ### 팀원 소개   
 
