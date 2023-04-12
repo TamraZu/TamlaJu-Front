@@ -1,21 +1,19 @@
 import styled from '@emotion/styled'
 import { ReactComponent as IsDrinkedDetailIcon } from 'atoms/icons/IsDrinkedWhiteIcon.svg'
-import { putEatingCount } from 'apis'
-import { useNavigate } from 'react-router-dom'
+import { usePutHasAte } from 'components/hooks/usePutHasAte'
 
 interface DetailAteButtonProps {
   alcoholId: number
-  memberId: string
   hasAte: boolean
+  category: string
 }
 
-function DetailAteButton({ alcoholId, memberId, hasAte }: DetailAteButtonProps) {
-  const navigate = useNavigate()
+function DetailAteButton({ alcoholId, hasAte, category }: DetailAteButtonProps) {
+  const mutate = usePutHasAte(category)
+
+  const detailClickHandler = () => mutate(alcoholId)
   return (
-    <StyledButton
-      hasAte={hasAte}
-      onClick={() => putEatingCount(alcoholId).then(res => navigate('/list'))}
-    >
+    <StyledButton hasAte={hasAte} onClick={detailClickHandler}>
       <IsDrinkedDetailIcon width={24} height={24} fill={hasAte ? '#fd6e21' : '#858899'} />
       <StyledText hasAte={hasAte}>{hasAte ? '마셔봤어요' : '아직 안 마셨어요'}</StyledText>
     </StyledButton>
