@@ -3,7 +3,9 @@ import { useState } from 'react';
 import { ReactComponent as IsDrinkedDetailIcon } from 'atoms/icons/IsDrinkedWhiteIcon.svg'
 import { ReactComponent as ProfileIcon } from 'atoms/icons/ProfileIcon.svg';
 import { putEatingCount } from 'apis'
-import CustomToast from 'components/common/CustomToast';
+import { useToast } from 'components/hooks/useToast';
+import { getNewUID } from 'util/getUID';
+import useDidMountEffect from 'components/hooks/useDidMountEffect';
 
 interface DetailAteButtonProps {
   alcoholId: number
@@ -11,13 +13,24 @@ interface DetailAteButtonProps {
   hasAte: boolean
 }
 
+
 function DetailAteButton({ alcoholId, memberId, hasAte }: DetailAteButtonProps) {
   const [ate, setAte] = useState(hasAte);
+  const { fireToast } = useToast();
 
+  useDidMountEffect(() => {
+    if (ate) {
+      fireToast({
+        id: getNewUID(),
+        children: '나의 기록에 추가됐어요',
+        duration: 1000,
+        ImageComponent: ProfileIcon
+      })
+    }
+  }, [ate])
 
   return (
     <>
-      <CustomToast delay={3000} ImageComponent={ProfileIcon}>나의 기록에 추가됐어요</CustomToast>
       <StyledButton
         hasAte={ate}
         onClick={() => putEatingCount(alcoholId).then(() => {

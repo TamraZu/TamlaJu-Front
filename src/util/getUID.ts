@@ -1,0 +1,1 @@
+export const getNewUID = () => String(new Date().getTime()); 
