@@ -37,7 +37,7 @@ function List() {
         <Category category={category} setCategory={setCategory} />
         <ListCardContainer>
           {alcoholListData.map(drink => {
-            return <ListCard key={drink.alcoholId} drink={drink} category={category.name} />
+            return <ListCard key={drink.alcoholId} drink={drink} />
           })}
         </ListCardContainer>
       </ListLayout>
