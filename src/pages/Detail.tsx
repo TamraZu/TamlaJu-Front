@@ -1,11 +1,9 @@
 import styled from '@emotion/styled'
 import { useParams } from 'react-router-dom'
-import { useRecoilState } from 'recoil'
 import DetailHeader from 'components/details/DetailHeader'
 import NavBar from 'components/common/NavBar'
 import DetailAteButton from 'components/details/DetailAteButton'
 import DetailInfoContainer from 'components/details/DetailInfoContainer'
-import { memberId } from 'components/atoms/atoms'
 import HasAuth from 'components/auth/Auth'
 import { useAlcoholDetail } from 'components/hooks/useAlcoholDetail'
 
@@ -13,7 +11,6 @@ function Detail() {
   HasAuth()
 
   const { id } = useParams()
-  const [mId] = useRecoilState(memberId)
   const alcoholDetail = useAlcoholDetail(Number(id))
 
   return (
@@ -44,8 +41,8 @@ function Detail() {
         </DetailTastingInfo>
         <DetailAteButton
           alcoholId={alcoholDetail.alcoholId}
-          memberId={mId}
           hasAte={alcoholDetail.hasAte}
+          category={alcoholDetail.category}
         />
       </DetailLayout>
       <NavBar />

@@ -3,16 +3,18 @@ import styled from '@emotion/styled'
 import { ReactComponent as IsDrinkedIcon } from 'atoms/icons/IsDrinkedIcon.svg'
 import { useNavigate } from 'react-router-dom'
 import { ListAlcoholData } from 'pages/List'
-import { putEatingCount } from 'apis'
+import { usePutHasAte } from 'components/hooks/usePutHasAte'
 
 export interface ListCardProps {
   drink: ListAlcoholData
+  category: string
 }
 
-function ListCard({ drink }: ListCardProps) {
+function ListCard({ drink, category }: ListCardProps) {
   const navigate = useNavigate()
-  const onClickHandler = async () => {
-    await putEatingCount(drink.alcoholId)
+  const mutate = usePutHasAte(category)
+  const onClickHandler = () => {
+    mutate(drink.alcoholId)
   }
   return (
     <CardContainer onClick={() => navigate(`/details/${drink.alcoholId}`)}>
@@ -28,10 +30,10 @@ function ListCard({ drink }: ListCardProps) {
           <CardPrice>{drink.price}원</CardPrice>
         </CardLeft>
         <CardRight>
-          <CardButton>
+          <CardButton onClick={onClickHandler}>
             <IsDrinkedIcon width={32} height={32} fill={drink.hasAte ? '#FD6E21' : '#858899'} />
           </CardButton>
-          <CardCount onClick={onClickHandler}>{drink.ateCount}</CardCount>
+          <CardCount>{drink.ateCount}</CardCount>
         </CardRight>
       </CardContent>
     </CardContainer>
