@@ -1,10 +1,5 @@
 import styled from '@emotion/styled'
-import { useEffect, useState } from 'react';
 import { ReactComponent as IsDrinkedDetailIcon } from 'atoms/icons/IsDrinkedWhiteIcon.svg'
-import { ReactComponent as ProfileIcon } from 'atoms/icons/ProfileIcon.svg';
-import { useToast } from 'components/hooks/useToast';
-import { getNewUID } from 'util/getUID';
-import useDidMountEffect from 'components/hooks/useDidMountEffect';
 import { usePutHasAte } from 'components/hooks/usePutHasAte'
 
 interface DetailAteButtonProps {
@@ -13,42 +8,15 @@ interface DetailAteButtonProps {
   category: string
 }
 
-
-function DetailAteButton({ alcoholId, memberId, hasAte }: DetailAteButtonProps) {
-  const [ate, setAte] = useState(hasAte);
-  const { fireToast } = useToast();
-  
+function DetailAteButton({ alcoholId, category, hasAte }: DetailAteButtonProps) {
   const mutate = usePutHasAte(category)
   const detailClickHandler = () => mutate(alcoholId)
 
-  useDidMountEffect(() => {
-    if (ate) {
-      fireToast({
-        id: getNewUID(),
-        children: '나의 기록에 추가됐어요',
-        duration: 1000,
-        ImageComponent: ProfileIcon
-      })
-    }
-  }, [ate])
-
-  // 이거 삭제할 예정.
-  useEffect(() => {
-    setAte(hasAte);
-  },[])
-
   return (
     <>
-      <StyledButton
-        hasAte={ate}
-        onClick={() => {
-        detailClickHandler();
-        setAte(!ate)
-        }
-      >
-
-        <IsDrinkedDetailIcon width={24} height={24} fill={ate ? '#fd6e21' : '#A9ABB8'} />
-        <StyledText hasAte={ate}>{ate ? '마셔본 술이에요' : '아직 안 마셨어요'}</StyledText>
+      <StyledButton hasAte={hasAte} onClick={detailClickHandler}>
+        <IsDrinkedDetailIcon width={24} height={24} fill={hasAte ? '#fd6e21' : '#A9ABB8'} />
+        <StyledText hasAte={hasAte}>{hasAte ? '마셔본 술이에요' : '아직 안 마셨어요'}</StyledText>
       </StyledButton>
     </>
   )
@@ -82,11 +50,11 @@ const StyledText = styled.div<DetailAteBtnTextProps>`
 `
 
 const StyledDiv = styled.div`
-  width:100%;
-  display:flex;
-  gap:8px;
-  align-items:center;
-  justify-content:center;
+  width: 100%;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
 `
 
 export default DetailAteButton
