@@ -79,7 +79,7 @@ export const CategoryLayout = styled.div`
 `
 export const CategoryList = styled.ul`
   display: flex;
-  padding: 8px 0;
+  padding: 8px 0 4px;
   align-items: center;
   overflow-x: scroll;
   overflow-y: hidden;

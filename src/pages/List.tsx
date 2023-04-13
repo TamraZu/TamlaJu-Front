@@ -33,7 +33,7 @@ function List() {
   return (
     <>
       <ListLayout>
-        <Header>제주도감</Header>
+        <Header>제주 술도감</Header>
         <Category category={category} setCategory={setCategory} />
         <ListCardContainer>
           {alcoholListData.map(drink => {

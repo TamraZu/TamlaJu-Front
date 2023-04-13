@@ -10,7 +10,7 @@ function ListCardContainer({ children }: ListCardContainerProps) {
 }
 
 const StyledListCardContainer = styled.div`
-  margin-top: 16px;
+  margin-top: 12px;
   overflow-y: scroll;
   overflow-x: hidden;
   padding-bottom:16px;

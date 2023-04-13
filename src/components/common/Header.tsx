@@ -16,6 +16,7 @@ const StyledHeader = styled.header`
   line-height: 34px;
   letter-spacing: -0.003em;
   height: 34px;
+  margin-top:12px;
 `
 
 export default Header

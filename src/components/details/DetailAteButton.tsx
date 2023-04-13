@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ReactComponent as IsDrinkedDetailIcon } from 'atoms/icons/IsDrinkedWhiteIcon.svg'
 import { ReactComponent as ProfileIcon } from 'atoms/icons/ProfileIcon.svg';
 import { putEatingCount } from 'apis'
@@ -17,7 +17,7 @@ interface DetailAteButtonProps {
 function DetailAteButton({ alcoholId, memberId, hasAte }: DetailAteButtonProps) {
   const [ate, setAte] = useState(hasAte);
   const { fireToast } = useToast();
-
+  console.log(alcoholId,hasAte);
   useDidMountEffect(() => {
     if (ate) {
       fireToast({
@@ -28,6 +28,10 @@ function DetailAteButton({ alcoholId, memberId, hasAte }: DetailAteButtonProps) 
       })
     }
   }, [ate])
+
+  useEffect(() => {
+    setAte(hasAte);
+  },[])
 
   return (
     <>
