@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
 import { alcoholType } from 'types/drinkType';
-import { ReactComponent as DrinkIcon } from 'atoms/icons/DrinkIcon.svg'
-
+import { ReactComponent as DrinkIcon } from 'atoms/icons/DrinkIcon.svg';
+import IsDrinkIcon from 'atoms/icons/IsDrinkedOrange.svg';
 const CardWrapper = styled.div`
     border-radius: 16px;
     margin:14px 16px 58px 16px;
@@ -46,6 +46,19 @@ const CardTitleWrapper = styled.div`
     align-items: center;
 `
 
+const DrinkStamp = styled.img`
+    position:absolute;
+    top:14px;
+    right:14px;
+`
+
+const StyledDrinkedSubText = styled.div`
+    font-size:13px;
+    color:#858899;
+    width:100%;
+    text-align:center;
+`
+
 interface BrewerlydetailCardViewProps {
     alcohols: alcoholType[]
 }
@@ -59,12 +72,15 @@ const BrewerlyDetailCardView = ({ alcohols }: BrewerlydetailCardViewProps) => {
 
                         <div style={{ position: 'relative' }}>
                             <DrinkImg width={128} height={128} src={t.imageUrl} />
+                            {t.hasAte ? <DrinkStamp src={IsDrinkIcon}/> : null }
                         </div>
                         
                             <CardTitleWrapper>
                                 <DrinkIcon width="15" fill={'#09121F'} />
                                 <TitleFont>{t.name}</TitleFont>
+                                
                             </CardTitleWrapper>
+                            {t.hasAte ? <StyledDrinkedSubText>마셔본 술이에요</StyledDrinkedSubText> : null}
                     </Card>
                 </Link>)
             })}

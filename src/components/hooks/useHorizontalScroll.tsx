@@ -1,6 +1,6 @@
 import {useRef, useEffect, MutableRefObject} from 'react';
 
-export function useHorizontalScroll() : MutableRefObject<HTMLDivElement | null> {
+export function useHorizontalScroll() : MutableRefObject<any> {
     const scrollRef = useRef<HTMLDivElement>(null);
     useEffect(() => {
         const el = scrollRef.current;

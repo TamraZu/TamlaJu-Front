@@ -30,9 +30,9 @@ function NavBar() {
             />
           </NavLink>
         </nav>
-        <NavLink to="/">
+        {/* <NavLink to="/">
           <KakaoLogout/>
-        </NavLink>
+        </NavLink> */}
       </NavBox>
     </Container>
   )

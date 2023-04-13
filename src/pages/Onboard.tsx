@@ -1,21 +1,18 @@
 import splash from 'atoms/png/OnboardingSplashArt.png'
 import styled from '@emotion/styled';
-import { keyframes } from '@emotion/css';
 import IconKakaoLogo from 'atoms/icons/IconKakaoLogo_sm.png'
-import { Link } from 'react-router-dom';
-import { setCookie } from 'components/auth/Cookie';
 
 const { Kakao } = window;
 
-const fadeOut = keyframes`
-    from, 50%{
-        opacity: 0;
-    }
+// const fadeOut = keyframes`
+//     from, 50%{
+//         opacity: 0;
+//     }
 
-    to, 90% {
-        opacity: 1;
-    }
-`
+//     to, 90% {
+//         opacity: 1;
+//     }
+// `
 
 const Wrapper = styled.div`
     width:100vw;
@@ -43,27 +40,27 @@ const ButtonWrapper = styled.div`
     display:flex;
     flex-direction:column;
     gap:8px;
-    bottom:5%;
+    bottom:96px;
     left:50%;
-    width: calc(80% - 64px);
+    width: calc(100% - 48px);
     transform:translateX(-50%);
 `
 const StyledButton = styled.button`
     background-color : #fee500;
     width:100%;
     height: 48px;
-    border-radius:12px;
+    border-radius:24px;
 
 `
 
-const GuestButton = styled.button`
+/* const GuestButton = styled.button`
     background-color : #e2e2e2;
     width:100%;
     height: 48px;
     color: black;
     border-radius:12px;
 
-`
+` */
 
 const Header = styled.h1`
     color:white;
@@ -75,7 +72,7 @@ const Header = styled.h1`
 
 const KakaoLogo = styled.img`
     display:inline;
-    margin: 0 6px;
+    margin: 0 10px;
 `
 
 export default function Onboard() {
@@ -88,9 +85,9 @@ export default function Onboard() {
         })
     }
 
-    const LoginviaGuest = () => {
+    /* const LoginviaGuest = () => {
         setCookie('authorization', 'guest', 1);
-    }
+    } */
 
     return (
         <Wrapper>
@@ -107,7 +104,7 @@ export default function Onboard() {
                     <StyledButton onClick={LoginviaKakao}>
                         <Header>
                             <KakaoLogo src={IconKakaoLogo} alt="Kakao Logo" />
-                            카카오 로그인
+                            카카오로 시작하기
                         </Header>
                     </StyledButton>
                 </ButtonWrapper>

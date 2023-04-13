@@ -10,10 +10,11 @@ function ListCardContainer({ children }: ListCardContainerProps) {
 }
 
 const StyledListCardContainer = styled.div`
-  margin-top: 16px;
+  margin-top: 12px;
   overflow-y: scroll;
   overflow-x: hidden;
-  height: 65vh;
+  padding-bottom:16px;
+  height: calc(100vh - 210px);
   ::-webkit-scrollbar {
     width: 5px;
   }

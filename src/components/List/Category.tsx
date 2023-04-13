@@ -1,6 +1,7 @@
 import { SetStateAction, Dispatch } from 'react'
 import styled from '@emotion/styled'
 import { CategoryData } from 'pages/List'
+import { useHorizontalScroll } from 'components/hooks/useHorizontalScroll'
 
 interface CategoryProps {
   category: CategoryData
@@ -48,9 +49,11 @@ export default function Category({ category, setCategory }: CategoryProps) {
     },
   ]
 
+  const scrollRef = useHorizontalScroll();
+
   return (
     <CategoryLayout>
-      <CategoryList>
+      <CategoryList ref={scrollRef}>
         {categoryList.map((item, index) => {
           return (
             <CategoryItem
@@ -71,12 +74,12 @@ export default function Category({ category, setCategory }: CategoryProps) {
 }
 
 export const CategoryLayout = styled.div`
-  width: 340px;
+  width: 100%;
   margin-top: 24px;
 `
 export const CategoryList = styled.ul`
   display: flex;
-  padding: 8px 0;
+  padding: 8px 0 4px;
   align-items: center;
   overflow-x: scroll;
   overflow-y: hidden;

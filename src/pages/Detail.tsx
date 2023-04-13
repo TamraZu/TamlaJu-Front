@@ -15,6 +15,7 @@ function Detail() {
 
   return (
     <>
+
       <DetailLayout>
         <DetailHeader />
         <DetailImageBox>
@@ -53,7 +54,7 @@ const DetailLayout = styled.div`
   padding: 0 16px;
   overflow-y: scroll;
   overflow-x: hidden;
-  height: 90vh;
+  height: calc(100vh - 50px);
   ::-webkit-scrollbar {
     width: 5px;
   }
@@ -131,13 +132,13 @@ const DetailTastingImage = styled.div`
 `
 
 const DetailTastingDescription = styled.div`
+  padding:10px 16px 13px 16px;
   font-weight: 500;
   font-size: 14px;
   line-height: 22px;
-  width: 320px;
-  margin-top: 10px;
-  margin-bottom: 13px;
+  width: 100%;
   white-space: pre-line;
+  word-break:keep-all;
 `
 
 export default Detail

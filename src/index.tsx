@@ -8,6 +8,7 @@ import App from './App'
 import Layout from 'components/common/Layout'
 import reportWebVitals from './reportWebVitals'
 import { RecoilRoot } from 'recoil';
+import ToastList from 'components/common/toast/List'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 const queryClient = new QueryClient({
@@ -24,7 +25,9 @@ root.render(
       <BrowserRouter>
         <RecoilRoot>
           <Layout>
+            <ToastList/>
             <App />
+            
           </Layout>
         </RecoilRoot>
       </BrowserRouter>
