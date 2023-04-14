@@ -1,36 +1,28 @@
-import React from 'react'
 import styled from '@emotion/styled'
 import { ReactComponent as IsDrinkedIcon } from 'atoms/icons/IsDrinkedIcon.svg'
 import { useNavigate } from 'react-router-dom'
 import { ListAlcoholData } from 'pages/List'
-import { usePutHasAte } from 'components/hooks/usePutHasAte'
 
 export interface ListCardProps {
   drink: ListAlcoholData
-  category: string
 }
 
-function ListCard({ drink, category }: ListCardProps) {
+function ListCard({ drink }: ListCardProps) {
   const navigate = useNavigate()
-  const mutate = usePutHasAte(category)
-  const onClickHandler = () => {
-    mutate(drink.alcoholId)
-  }
+
   return (
     <CardContainer onClick={() => navigate(`/details/${drink.alcoholId}`)}>
-      <CardImage >
+      <CardImage>
         <img src={drink.imageUrl} alt="술 이미지" />
       </CardImage>
       <CardContent>
         <CardLeft>
-          <CardTitle>
-            {drink.name}
-          </CardTitle>
+          <CardTitle>{drink.name}</CardTitle>
           <CardInfo>{`${drink.volume}ml | ${drink.level}도`}</CardInfo>
           <CardPrice>{drink.price}원</CardPrice>
         </CardLeft>
         <CardRight>
-          <CardButton onClick={onClickHandler}>
+          <CardButton>
             <IsDrinkedIcon width={32} height={32} fill={drink.hasAte ? '#FD6E21' : '#858899'} />
           </CardButton>
           <CardCount>{drink.ateCount}</CardCount>
@@ -49,8 +41,8 @@ const CardContainer = styled.div`
   border-radius: 16px;
   padding: 16px;
   margin-bottom: 8px;
-  background-color: #FFF7F1;
-  border:#FFE9D5 solid 1px;
+  background-color: #fff7f1;
+  border: #ffe9d5 solid 1px;
 `
 
 const CardImage = styled.div`
