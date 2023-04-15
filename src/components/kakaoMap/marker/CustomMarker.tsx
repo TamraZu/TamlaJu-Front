@@ -1,61 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { MapMarker } from 'react-kakao-maps-sdk';
-import { MarkerDataType } from 'types/kakaoMapType';
-import markerSelectedImage from 'atoms/png/BrewerySelectedIcon.png'
-import markerAteImage from 'atoms/png/BreweryCheckedIcon.png'
-import markerDefaultImage from 'atoms/png/BreweryIcon.png'
+import { MarkerDataType, MarkerImageType } from 'types/KakaoMapType';
+
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { bottomSheetData, bottomSheetOpened, selectedMarker } from 'components/atoms/atoms';
-import { BottomSheetDataType } from 'types/layoutControlType';
-import { getFactoryDetail } from 'apis';
-import { useQuery } from '@tanstack/react-query';
-
-const ATE_MARKER_IMG = {
-  src: markerAteImage,
-  size: {
-    width: 36,
-    height: 36,
-  },
-  options: {
-    offset: {
-      x: 18,
-      y: 36,
-    },
-  },
-}
-
-const SELECTED_MARKER_IMG = {
-  src: markerSelectedImage,
-  size: {
-    width: 36,
-    height: 36,
-  },
-  options: {
-    offset: {
-      x: 18,
-      y: 36,
-    },
-  },
-}
-
-
-const DEFAULT_MARKER_IMG = {
-  src: markerDefaultImage,
-  size: {
-    width: 36,
-    height: 36,
-  },
-  options: {
-    offset: {
-      x: 18,
-      y: 36,
-    },
-  },
-}
+import { BottomSheetDataType } from 'types/LayoutControlType';
+import { useFactoryDetail } from 'components/hooks/useFactoryDetail';
+import { ATE_MARKER_IMG, DEFAULT_MARKER_IMG, SELECTED_MARKER_IMG } from './MarkerSprite';
 
 export function CustomMarker({ factoryId, latitude, longitude, hasAte, address, setCenter, setZoom }: MarkerDataType) {
 
-  const getImage = () => {
+  const setIsOpen = useSetRecoilState(bottomSheetOpened);
+  const setData = useSetRecoilState<BottomSheetDataType>(bottomSheetData)
+  const [active, setActive] = useState(false);
+  const [marker, setSelectedMarker] = useRecoilState(selectedMarker);
+  const [image, setImage] = useState<MarkerImageType>();
+
+  const data = useFactoryDetail(factoryId)
+
+  const getImage = useCallback((): MarkerImageType => {
     if (factoryId === marker) {
       return SELECTED_MARKER_IMG
     } else if (hasAte) {
@@ -63,12 +26,7 @@ export function CustomMarker({ factoryId, latitude, longitude, hasAte, address, 
     } else {
       return DEFAULT_MARKER_IMG
     }
-  }
-
-  const [marker, setSelectedMarker] = useRecoilState(selectedMarker);
-  const setIsOpen = useSetRecoilState(bottomSheetOpened);
-  const [image, setImage] = useState(getImage());
-  const [data, setData] = useRecoilState<BottomSheetDataType>(bottomSheetData)
+  }, [factoryId, hasAte, marker])
 
   useEffect(() => {
     setIsOpen(false);
@@ -79,39 +37,19 @@ export function CustomMarker({ factoryId, latitude, longitude, hasAte, address, 
     setImage(getImage());
   }, [marker, getImage])
 
-  const { refetch, isStale } = useQuery(
-    ['get', 'factory', 'detail', factoryId],
-    () => {
-      return getFactoryDetail(factoryId);
-    },
-    {
-      staleTime:0,
-      enabled: false,
-      onSuccess: (res) => {
-        setData(res);
-        setSelectedMarker(factoryId);
-      },
-      onError: (err) => {
-        console.error('GetFactoryDetail', err);
-      }
-    }
-  )
-
   return (
     <MapMarker
       position={{ lat: latitude, lng: longitude }}
       clickable={true}
       image={image}
-      onClick={(event) => {
+      onClick={async (event) => {
         // 클릭 시 양조장 상세정보 API 호출
-        refetch();
-
+        // setActive(true);
+        await setData(data)
+        await setSelectedMarker(factoryId);
+        await setIsOpen(true);
         setCenter({ lat: event.getPosition().getLat(), lng: event.getPosition().getLng() })
-        setIsOpen(true);
-      }
-
-      }
-    >
+      }}>
     </MapMarker >
   );
 }

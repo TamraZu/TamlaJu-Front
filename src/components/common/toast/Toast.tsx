@@ -1,9 +1,8 @@
 import { keyframes } from '@emotion/react'
 import styled from '@emotion/styled'
 import { css } from '@emotion/react'
-import React, { ReactNode, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ToastInterface } from 'types/ToastInterface'
-import { useToast } from 'components/hooks/useToast'
 
 type ToastAnimationProps = {
   isClosing: boolean
@@ -57,21 +56,20 @@ const SlideOut = keyframes`
 
 const Toast = ({ children, duration, ImageComponent }: ToastInterface) => {
   const [isClosing, setIsClosing] = useState(false)
-  const handleClose = () => {
-    setIsClosing(true)
-  }
+  // const handleClose = () => {
+  //   setIsClosing(true)
+  // }
 
-  const handleOpen = () => {
-    setIsClosing(true)
-  }
+  // const handleOpen = () => {
+  //   setIsClosing(true)
+  // }
 
   useEffect(() => {
     const setExistTimeout = setTimeout(() => {
       setIsClosing(true)
       clearTimeout(setExistTimeout)
-      console.log('close!', duration)
     }, duration ?? 1000)
-  }, [])
+  }, [duration])
 
   return (
     <StyledContainer

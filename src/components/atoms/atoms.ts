@@ -1,5 +1,5 @@
 import { atom } from 'recoil';
-import { BottomSheetDataType } from 'types/layoutControlType';
+import { BottomSheetDataType } from 'types/LayoutControlType';
 import { ToastInterface } from 'types/ToastInterface';
 
 export const memberId = atom<string>({

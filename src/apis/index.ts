@@ -1,7 +1,7 @@
 import axios from 'services'
-import { drinkType } from 'types/drinkType'
-import { apiConnectType, MarkerDataType } from 'types/kakaoMapType'
-import { BottomSheetDataType } from 'types/layoutControlType'
+import { DrinkType } from 'types/DrinkType'
+import { ApiConnectType, MarkerDataType } from 'types/KakaoMapType'
+import { BottomSheetDataType } from 'types/LayoutControlType'
 
 export interface MyPageData {
   memberId: number
@@ -68,7 +68,7 @@ export const putEatingCount = async (alcoholId: number) => {
  * @returns 음료 순위 TOP 3 반환
  */
 export const getRanking = async () => {
-  const response = await axios.get<apiConnectType<drinkType[]>>('/api/v1/alcohols/rank')
+  const response = await axios.get<ApiConnectType<DrinkType[]>>('/api/v1/alcohols/rank')
   return response.data.data
 }
 
@@ -78,7 +78,7 @@ export const getRanking = async () => {
  * @returns 공장 상세정보 배열
  */
 export const getFactoryList = async (mId: string) => {
-  const response = await axios.get<apiConnectType<MarkerDataType[]>>(
+  const response = await axios.get<ApiConnectType<MarkerDataType[]>>(
     `api/v1/factories?memberId=${mId}`,
   )
   return response.data.data
@@ -90,7 +90,7 @@ export const getFactoryList = async (mId: string) => {
  * @returns 바텀 시트에 쓰일 정보들 (이름, 주소, 술 목록)
  */
 export const getFactoryDetail = async (factoryId: number) => {
-  const response = await axios.get<apiConnectType<BottomSheetDataType>>(
+  const response = await axios.get<ApiConnectType<BottomSheetDataType>>(
     `api/v1/factories/${factoryId}`,
   )
   return response.data.data

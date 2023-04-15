@@ -1,18 +1,16 @@
 /** @jsxImportSource @emotion/react */
 
-import { useState, useEffect, useContext } from 'react';
+import { useEffect } from 'react';
 import { css } from '@emotion/react';
 import styled from '@emotion/styled'
 import { ReactComponent as BreweryIcon } from 'atoms/icons/BreweryIcon.svg';
 import { useSpring, animated } from 'react-spring';
-import { MapContext } from 'pages/Main';
 import BrewerlyDetailCardView from './BrewerlyDetailCardView';
-import { brewerlyType } from 'types/drinkType';
 import close from 'atoms/icons/CloseIcon.svg'
 import { useRecoilState } from 'recoil';
 import { bottomSheetData, bottomSheetOpened } from 'components/atoms/atoms';
 import { useHorizontalScroll } from 'components/hooks/useHorizontalScroll';
-import { BottomSheetDataType } from 'types/layoutControlType';
+import { BottomSheetDataType } from 'types/LayoutControlType';
 
 const container = css({
     maxWidth: 375,
@@ -116,14 +114,12 @@ export default function BottomSheetContainer() {
         y: isOpen ? -15 : 120,
         config: { tension: 200, friction: 30 },
     });
-
-    const contextData = useContext(MapContext);
     
     useEffect(() => {
         if (data) {
             setData(data)
         }
-    }, [data]);
+    }, [data, setData]);
 
 
     return (
