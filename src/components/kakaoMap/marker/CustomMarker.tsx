@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { MapMarker } from 'react-kakao-maps-sdk';
-import { MarkerDataType } from 'types/kakaoMapType';
+import { MarkerDataType, MarkerImageType } from 'types/kakaoMapType';
 
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { bottomSheetData, bottomSheetOpened, selectedMarker } from 'components/atoms/atoms';
@@ -10,7 +10,12 @@ import { ATE_MARKER_IMG, DEFAULT_MARKER_IMG, SELECTED_MARKER_IMG } from './Marke
 
 export function CustomMarker({ factoryId, latitude, longitude, hasAte, address, setCenter, setZoom }: MarkerDataType) {
   // 마커의 이미지 상태 결정
-  const getImage = () => {
+
+
+  const [marker, setSelectedMarker] = useRecoilState(selectedMarker);
+  const [image, setImage] = useState<MarkerImageType>();
+
+  const getImage = useCallback((): MarkerImageType => {
     if (factoryId === marker) {
       return SELECTED_MARKER_IMG
     } else if (hasAte) {
@@ -18,10 +23,7 @@ export function CustomMarker({ factoryId, latitude, longitude, hasAte, address, 
     } else {
       return DEFAULT_MARKER_IMG
     }
-  }
-
-  const [marker, setSelectedMarker] = useRecoilState(selectedMarker);
-  const [image, setImage] = useState(getImage());
+  }, [factoryId, hasAte, marker])
 
   const setIsOpen = useSetRecoilState(bottomSheetOpened);
   const setData = useSetRecoilState<BottomSheetDataType>(bottomSheetData)
@@ -35,10 +37,8 @@ export function CustomMarker({ factoryId, latitude, longitude, hasAte, address, 
     setImage(getImage());
   }, [marker, getImage])
 
-
   const data = useFactoryDetail(factoryId)
-
-  const markerClick = () => {
+  const markerClick = (data: BottomSheetDataType) => {
     setSelectedMarker(factoryId);
     setData(data);
     setIsOpen(true);
@@ -51,12 +51,9 @@ export function CustomMarker({ factoryId, latitude, longitude, hasAte, address, 
       image={image}
       onClick={(event) => {
         // 클릭 시 양조장 상세정보 API 호출
-        markerClick();
+        markerClick(data);
         setCenter({ lat: event.getPosition().getLat(), lng: event.getPosition().getLng() })
-      }
-
-      }
-    >
+      }}>
     </MapMarker >
   );
 }
