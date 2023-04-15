@@ -12,7 +12,7 @@ export function CustomMarker({ factoryId, latitude, longitude, hasAte, address, 
 
   const setIsOpen = useSetRecoilState(bottomSheetOpened);
   const setData = useSetRecoilState<BottomSheetDataType>(bottomSheetData)
-  const [active, setActive] = useState(false);
+  // const [active, setActive] = useState(false);
   const [marker, setSelectedMarker] = useRecoilState(selectedMarker);
   const [image, setImage] = useState<MarkerImageType>();
 
