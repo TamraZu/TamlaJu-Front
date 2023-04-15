@@ -1,4 +1,5 @@
 import { LatLngType } from "./KakaoMapType";
+
 /**
  * Ranking 조회 시 사용
  * DrinkType이랑 같아서 추후 하나로 통일하여 써도 될듯.

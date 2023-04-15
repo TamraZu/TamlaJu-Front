@@ -49,12 +49,4 @@ const StyledText = styled.div<DetailAteBtnTextProps>`
   color: white;
 `
 
-const StyledDiv = styled.div`
-  width: 100%;
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  justify-content: center;
-`
-
 export default DetailAteButton
