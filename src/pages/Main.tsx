@@ -5,7 +5,7 @@ import KakaoMap from "components/kakaoMap/KakaoMap";
 import BottomSheetContainer from "components/common/BottomSheet";
 import NavBar from "components/common/NavBar";
 import styled from '@emotion/styled';
-import { brewerlyType } from "types/drinkType";
+import { BrewerlyType } from "types/drinkType";
 import RankingContainer from "components/common/ranking/RankingContainer";
 import HasAuth from "components/auth/Auth";
 
@@ -42,7 +42,7 @@ const Header = styled.h1`
 
 function Main() {
     // const data: BottomSheetRecoilPropType | null = null;
-    const [btmSheetData, setBtmSheetData] = useState<brewerlyType>();
+    const [btmSheetData, setBtmSheetData] = useState<BrewerlyType>();
     HasAuth();
 
 

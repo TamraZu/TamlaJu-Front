@@ -1,6 +1,6 @@
 import { latLngType } from "./kakaoMapType";
 
-export type rankingType = {
+export type RankingType = {
     alcoholId: number;
     name: string;
     imageUrl: string;
@@ -9,7 +9,7 @@ export type rankingType = {
 }
 
 /** 상세 조회때 사용 */
-export type drinkType = {
+export type DrinkType = {
     alcoholId: number;
     name: string;
     imageUrl: string;
@@ -19,21 +19,21 @@ export type drinkType = {
 }
 
 /** 목록 조회때 사용하는게 알코올 타입*/
-export type alcoholType = {
+export type AlcoholType = {
     alcoholId:number;
     imageUrl:string;
     name:string;
     hasAte?:boolean|undefined;
 }
 
-export type drinkRankingType = {
-    data: drinkType[]
+export type DrinkRankingType = {
+    data: DrinkType[]
 }
 
-export type brewerlyType = {
+export type BrewerlyType = {
     factoryId: number;
     name: string;
     address: string;
     latLng?:latLngType;
-    alcohols: alcoholType[];
+    alcohols: AlcoholType[];
 }

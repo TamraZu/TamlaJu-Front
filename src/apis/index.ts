@@ -1,5 +1,5 @@
 import axios from 'services'
-import { drinkType } from 'types/drinkType'
+import { DrinkType } from 'types/drinkType'
 import { apiConnectType, MarkerDataType } from 'types/kakaoMapType'
 import { BottomSheetDataType } from 'types/layoutControlType'
 
@@ -68,7 +68,7 @@ export const putEatingCount = async (alcoholId: number) => {
  * @returns 음료 순위 TOP 3 반환
  */
 export const getRanking = async () => {
-  const response = await axios.get<apiConnectType<drinkType[]>>('/api/v1/alcohols/rank')
+  const response = await axios.get<apiConnectType<DrinkType[]>>('/api/v1/alcohols/rank')
   return response.data.data
 }
 
