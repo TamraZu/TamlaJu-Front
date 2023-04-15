@@ -7,7 +7,6 @@ import { ReactComponent as BreweryIcon } from 'atoms/icons/BreweryIcon.svg';
 import { useSpring, animated } from 'react-spring';
 import { MapContext } from 'pages/Main';
 import BrewerlyDetailCardView from './BrewerlyDetailCardView';
-import { brewerlyType } from 'types/drinkType';
 import close from 'atoms/icons/CloseIcon.svg'
 import { useRecoilState } from 'recoil';
 import { bottomSheetData, bottomSheetOpened } from 'components/atoms/atoms';

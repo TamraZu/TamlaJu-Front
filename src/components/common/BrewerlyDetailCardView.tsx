@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
-import { alcoholType } from 'types/drinkType';
+import { AlcoholType } from 'types/drinkType';
 import { ReactComponent as DrinkIcon } from 'atoms/icons/DrinkIcon.svg';
 import IsDrinkIcon from 'atoms/icons/IsDrinkedOrange.svg';
 const CardWrapper = styled.div`
@@ -60,13 +60,13 @@ const StyledDrinkedSubText = styled.div`
 `
 
 interface BrewerlydetailCardViewProps {
-    alcohols: alcoholType[]
+    alcohols: AlcoholType[]
 }
 
 const BrewerlyDetailCardView = ({ alcohols }: BrewerlydetailCardViewProps) => {
     return (<CardWrapper>
         <>
-            {alcohols.map((t: alcoholType) => {
+            {alcohols.map((t: AlcoholType) => {
                 return (<Link to={`/details/${t.alcoholId}`} key={t.alcoholId}>
                     <Card>
 

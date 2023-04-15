@@ -1,12 +1,12 @@
 import { ReactNode, SetStateAction } from 'react';
-import { alcoholType, brewerlyType } from './drinkType';
+import { AlcoholType, BrewerlyType } from './drinkType';
 import { latLngType } from './kakaoMapType';
 
 export interface BottomSheetControlType {
     children: ReactNode;
     onClose?: () => void;
     onOpen?: () => void;
-    data?:brewerlyType;
+    data?:BrewerlyType;
 }
 
 export interface BottomSheetDataType {
@@ -14,11 +14,11 @@ export interface BottomSheetDataType {
     name?:string;
     address?:string;
     LatLng?:latLngType
-    alcohols: alcoholType[];
+    alcohols: AlcoholType[];
 }
 
 export interface BottomSheetRecoilPropType {
-    data:SetStateAction<brewerlyType|undefined>;
-    onDataChange:(data:brewerlyType) => void;
+    data:SetStateAction<BrewerlyType|undefined>;
+    onDataChange:(data:BrewerlyType) => void;
     children?:ReactNode;
 }
