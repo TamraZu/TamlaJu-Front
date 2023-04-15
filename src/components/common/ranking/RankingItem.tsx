@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import { Link } from 'react-router-dom'
-import { drinkType } from 'types/drinkType'
+import { DrinkType } from 'types/drinkType'
 import  DrinkIcon from 'atoms/icons/IsDrinkedIcon.svg'
 
 const CardContainer = styled.div`
@@ -84,7 +84,7 @@ const IsDrinkIcon = styled.img`
 `
 
 interface RankingItemInterface {
-  prop: drinkType,
+  prop: DrinkType,
   index: number
 }
 
