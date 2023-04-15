@@ -2,7 +2,7 @@ import { LatLngType } from "types/KakaoMapType";
 import { useState, createContext } from 'react'
 import { BottomSheetRecoilPropType } from "types/LayoutControlType";
 import KakaoMap from "components/kakaoMap/KakaoMap";
-import BottomSheetContainer from "components/common/BottomSheet";
+import BottomSheetContainer from "components/home/BottomSheet";
 import NavBar from "components/common/NavBar";
 import styled from '@emotion/styled';
 import { BrewerlyType } from "types/DrinkType";
