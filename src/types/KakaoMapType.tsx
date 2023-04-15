@@ -1,8 +1,8 @@
 import { ReactNode } from 'react';
 
 export interface LatLngType {
-  lat: number;
-  lng: number;
+  lat: number
+  lng: number
 };
 
 export type PointType = {
