@@ -9,6 +9,7 @@ import { bottomSheetData, bottomSheetOpened, selectedMarker } from 'components/a
 import { BottomSheetDataType } from 'types/layoutControlType';
 import { getFactoryDetail } from 'apis';
 import { useQuery } from '@tanstack/react-query';
+import { useFactoryDetail } from 'components/hooks/useFactoryDetail';
 
 const ATE_MARKER_IMG = {
   src: markerAteImage,
@@ -68,7 +69,7 @@ export function CustomMarker({ factoryId, latitude, longitude, hasAte, address, 
   const [marker, setSelectedMarker] = useRecoilState(selectedMarker);
   const setIsOpen = useSetRecoilState(bottomSheetOpened);
   const [image, setImage] = useState(getImage());
-  const [data, setData] = useRecoilState<BottomSheetDataType>(bottomSheetData)
+  const [btmData, setData] = useRecoilState<BottomSheetDataType>(bottomSheetData)
 
   useEffect(() => {
     setIsOpen(false);
@@ -79,23 +80,14 @@ export function CustomMarker({ factoryId, latitude, longitude, hasAte, address, 
     setImage(getImage());
   }, [marker, getImage])
 
-  const { refetch, isStale } = useQuery(
-    ['get', 'factory', 'detail', factoryId],
-    () => {
-      return getFactoryDetail(factoryId);
-    },
-    {
-      staleTime:0,
-      enabled: false,
-      onSuccess: (res) => {
-        setData(res);
-        setSelectedMarker(factoryId);
-      },
-      onError: (err) => {
-        console.error('GetFactoryDetail', err);
-      }
-    }
-  )
+
+  const data = useFactoryDetail(factoryId)
+
+  const markerClick = () => {
+    setSelectedMarker(factoryId);
+    setData(data);
+    setIsOpen(true);
+  }
 
   return (
     <MapMarker
@@ -104,10 +96,8 @@ export function CustomMarker({ factoryId, latitude, longitude, hasAte, address, 
       image={image}
       onClick={(event) => {
         // 클릭 시 양조장 상세정보 API 호출
-        refetch();
-
+        markerClick();
         setCenter({ lat: event.getPosition().getLat(), lng: event.getPosition().getLng() })
-        setIsOpen(true);
       }
 
       }
