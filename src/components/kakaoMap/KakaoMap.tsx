@@ -3,12 +3,13 @@
 import { Map } from 'react-kakao-maps-sdk';
 import { css } from '@emotion/react';
 import { latLngType, MarkerDataType, mapOptionType } from 'types/kakaoMapType';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query'
 import { MemoizedMarker } from "./marker/CustomMarker";
 import { bottomSheetOpened, memberId } from 'components/atoms/atoms';
 import { useSetRecoilState, useRecoilValue } from 'recoil';
 import { getFactoryList } from 'apis';
+import { useFactoryList } from 'components/hooks/useFactoryList';
 const container = css({
     width: 'calc(100% - 32px)',
     aspectRatio: '1/1',
@@ -19,26 +20,12 @@ const container = css({
 function KakaoMap({ center, zoom }: mapOptionType) {
     const [zoomLevel, setZoom] = useState(zoom);
     const [position, setPosition] = useState<latLngType>(center)
-    const [markers, setMarkers] = useState<MarkerDataType[]>([]);
-    const mId = useRecoilValue(memberId)
+
+    const markers = useFactoryList();
+
     const setIsOpen = useSetRecoilState<boolean>(bottomSheetOpened);
 
-    useQuery(
-        ['get', 'factory', 'list'],
-        () => {
-            return getFactoryList(mId);
-        },
-        {
-            // staleTime:1000 * 3600,
-            onSuccess: (response) => {
-                setMarkers(response);
-            },
-            onError: (err) => {
-                console.error('GetFactoryList', err)
-            }
-        }
-    );
-
+    
     return (
         <Map css={container} center={position}
             level={zoomLevel}
