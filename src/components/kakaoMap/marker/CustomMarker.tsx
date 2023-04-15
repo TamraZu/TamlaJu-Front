@@ -1,61 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { MapMarker } from 'react-kakao-maps-sdk';
 import { MarkerDataType } from 'types/kakaoMapType';
-import markerSelectedImage from 'atoms/png/BrewerySelectedIcon.png'
-import markerAteImage from 'atoms/png/BreweryCheckedIcon.png'
-import markerDefaultImage from 'atoms/png/BreweryIcon.png'
+
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { bottomSheetData, bottomSheetOpened, selectedMarker } from 'components/atoms/atoms';
 import { BottomSheetDataType } from 'types/layoutControlType';
-import { getFactoryDetail } from 'apis';
-import { useQuery } from '@tanstack/react-query';
 import { useFactoryDetail } from 'components/hooks/useFactoryDetail';
-
-const ATE_MARKER_IMG = {
-  src: markerAteImage,
-  size: {
-    width: 36,
-    height: 36,
-  },
-  options: {
-    offset: {
-      x: 18,
-      y: 36,
-    },
-  },
-}
-
-const SELECTED_MARKER_IMG = {
-  src: markerSelectedImage,
-  size: {
-    width: 36,
-    height: 36,
-  },
-  options: {
-    offset: {
-      x: 18,
-      y: 36,
-    },
-  },
-}
-
-
-const DEFAULT_MARKER_IMG = {
-  src: markerDefaultImage,
-  size: {
-    width: 36,
-    height: 36,
-  },
-  options: {
-    offset: {
-      x: 18,
-      y: 36,
-    },
-  },
-}
+import { ATE_MARKER_IMG, DEFAULT_MARKER_IMG, SELECTED_MARKER_IMG } from './MarkerSprite';
 
 export function CustomMarker({ factoryId, latitude, longitude, hasAte, address, setCenter, setZoom }: MarkerDataType) {
-
+  // 마커의 이미지 상태 결정
   const getImage = () => {
     if (factoryId === marker) {
       return SELECTED_MARKER_IMG
@@ -67,9 +21,10 @@ export function CustomMarker({ factoryId, latitude, longitude, hasAte, address, 
   }
 
   const [marker, setSelectedMarker] = useRecoilState(selectedMarker);
-  const setIsOpen = useSetRecoilState(bottomSheetOpened);
   const [image, setImage] = useState(getImage());
-  const [btmData, setData] = useRecoilState<BottomSheetDataType>(bottomSheetData)
+
+  const setIsOpen = useSetRecoilState(bottomSheetOpened);
+  const setData = useSetRecoilState<BottomSheetDataType>(bottomSheetData)
 
   useEffect(() => {
     setIsOpen(false);

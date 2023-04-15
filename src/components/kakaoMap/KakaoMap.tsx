@@ -4,11 +4,9 @@ import { Map } from 'react-kakao-maps-sdk';
 import { css } from '@emotion/react';
 import { latLngType, MarkerDataType, mapOptionType } from 'types/kakaoMapType';
 import { useState, useEffect } from 'react';
-import { useQuery } from '@tanstack/react-query'
 import { MemoizedMarker } from "./marker/CustomMarker";
-import { bottomSheetOpened, memberId } from 'components/atoms/atoms';
-import { useSetRecoilState, useRecoilValue } from 'recoil';
-import { getFactoryList } from 'apis';
+import { bottomSheetOpened } from 'components/atoms/atoms';
+import { useSetRecoilState } from 'recoil';
 import { useFactoryList } from 'components/hooks/useFactoryList';
 const container = css({
     width: 'calc(100% - 32px)',
@@ -25,20 +23,26 @@ function KakaoMap({ center, zoom }: mapOptionType) {
 
     const setIsOpen = useSetRecoilState<boolean>(bottomSheetOpened);
 
-    
+
     return (
-        <Map css={container} center={position}
+        <Map css={container} 
+            center={position}
             level={zoomLevel}
             isPanto
-            onClick={(_t, mouseEvent) => {
-                setIsOpen(false);
-            }
-            }>
+            onClick={() => {setIsOpen(false);}}>
 
             {markers.map((t: MarkerDataType) => {
                 return (
                     <MemoizedMarker
-                        key={t.factoryId} factoryId={t.factoryId} address={t.address} latitude={t.latitude} longitude={t.longitude} hasAte={t.hasAte} setCenter={setPosition} setZoom={setZoom} children={undefined} />
+                        key={t.factoryId}
+                        factoryId={t.factoryId}
+                        address={t.address}
+                        latitude={t.latitude}
+                        longitude={t.longitude}
+                        hasAte={t.hasAte}
+                        setCenter={setPosition}
+                        setZoom={setZoom}
+                        children={undefined} />
                 );
             })}
         </Map>
