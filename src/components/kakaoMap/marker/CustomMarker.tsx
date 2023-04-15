@@ -16,7 +16,7 @@ export function CustomMarker({ factoryId, latitude, longitude, hasAte, address, 
   const [marker, setSelectedMarker] = useRecoilState(selectedMarker);
   const [image, setImage] = useState<MarkerImageType>();
 
-  const data = useFactoryDetail(factoryId, active)
+  const data = useFactoryDetail(factoryId)
 
   const getImage = useCallback((): MarkerImageType => {
     if (factoryId === marker) {
@@ -44,10 +44,10 @@ export function CustomMarker({ factoryId, latitude, longitude, hasAte, address, 
       image={image}
       onClick={async (event) => {
         // 클릭 시 양조장 상세정보 API 호출
-        setActive(true);
-        setSelectedMarker(factoryId);
-        setData(data);
-        setIsOpen(true);
+        // setActive(true);
+        await setData(data)
+        await setSelectedMarker(factoryId);
+        await setIsOpen(true);
         setCenter({ lat: event.getPosition().getLat(), lng: event.getPosition().getLng() })
       }}>
     </MapMarker >
