@@ -1,11 +1,10 @@
-import { AxiosResponse, InternalAxiosRequestConfig } from "axios";
+import { InternalAxiosRequestConfig } from "axios";
 import { memberId } from "components/atoms/atoms";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import axios from "services";
 import styled from '@emotion/styled';
-import { getCookie, setCookie } from "./Cookie";
 
 const { Kakao } = window;
 
@@ -47,7 +46,8 @@ const loginViaKakao = async (setMemberId: (a: string) => void, Navto: (a: string
     }).catch((err: any) => { console.error('getUser', err) })
 
     // 추후 HTTP Only 쿠키로 수정 필요
-    setCookie('authorization', getUser.data.data.accessToken, 1);
+    // setCookie('authorization', getUser.data.data.accessToken, 1);
+    localStorage.setItem('authorization', getUser.data.data.accessToken)
     axios.interceptors.request.use(
         (config: InternalAxiosRequestConfig<any>) => {
             config.headers.Authorization = getUser.data.data.accessToken;
@@ -68,12 +68,12 @@ const loginViaKakao = async (setMemberId: (a: string) => void, Navto: (a: string
 }
 
 const KakaoLogin = () => {
-    const [mId, setMid] = useRecoilState<string>(memberId)
+    const setMid = useSetRecoilState<string>(memberId)
     const navigate = useNavigate();
 
     useEffect(() => {
         loginViaKakao(setMid, navigate)
-    }, [])
+    }, [navigate, setMid])
 
     return <StyledText>kakao login 진행중</StyledText>
 }

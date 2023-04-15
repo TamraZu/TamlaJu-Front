@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { getCookie } from "./Cookie";
-import ModalAuth from "components/common/ModalAuth";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+// import ModalAuth from "components/common/ModalAuth";
+import axios from "services";
+import { InternalAxiosRequestConfig } from "axios";
 
 const HasAuth = () => {
     const navigate = useNavigate();
-    const token = getCookie('authorization');
-    const { pathname } = useLocation();
+    const loggedInfo = localStorage.getItem('authorization');
+    // const { pathname } = useLocation();
     // const [isOpen, setIsOpen] = useState(false);
     // console.log(token);
 
@@ -21,13 +22,24 @@ const HasAuth = () => {
         //     }
         // }
 
-        if (!token) {
+        if (!loggedInfo) {
             alert('로그인 정보를 불러올 수 없습니다.\n로그인 화면으로 이동합니다.')
             navigate('/');
+        } else {
+            axios.interceptors.request.use(
+                (config: InternalAxiosRequestConfig<any>) => {
+                    config.headers.Authorization = loggedInfo;
+                    config.headers["Content-Type"] = "application/json"
+                    return config;
+                },
+                (error) => {
+                    console.error(error);
+                    return Promise.reject(error);
+                })
         }
-    }, [])
-    
-    return <ModalAuth isOpen></ModalAuth>
+
+
+    }, [loggedInfo, navigate])
 }
 
 export default HasAuth;

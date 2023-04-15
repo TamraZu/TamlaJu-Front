@@ -4,15 +4,16 @@ import IconKakaoLogo from 'atoms/icons/IconKakaoLogo_sm.png'
 
 const { Kakao } = window;
 
-// const fadeOut = keyframes`
-//     from, 50%{
-//         opacity: 0;
-//     }
+/*
+ const fadeOut = keyframes`
+     from, 50%{
+         opacity: 0;
+     }
 
-//     to, 90% {
-//         opacity: 1;
-//     }
-// `
+     to, 90% {
+         opacity: 1;
+     }
+*/
 
 const Wrapper = styled.div`
     width:100vw;
