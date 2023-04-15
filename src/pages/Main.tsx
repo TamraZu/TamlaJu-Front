@@ -1,15 +1,15 @@
-import { latLngType } from "types/kakaoMapType";
-import { useState, createContext, useEffect } from 'react'
-import { BottomSheetRecoilPropType } from "types/layoutControlType";
+import { LatLngType } from "types/KakaoMapType";
+import { useState, createContext } from 'react'
+import { BottomSheetRecoilPropType } from "types/LayoutControlType";
 import KakaoMap from "components/kakaoMap/KakaoMap";
 import BottomSheetContainer from "components/common/BottomSheet";
 import NavBar from "components/common/NavBar";
 import styled from '@emotion/styled';
-import { BrewerlyType } from "types/drinkType";
+import { BrewerlyType } from "types/DrinkType";
 import RankingContainer from "components/common/ranking/RankingContainer";
 import HasAuth from "components/auth/Auth";
 
-const defaultPosition: latLngType = { lat: 33.3764, lng: 126.5377 };
+const defaultPosition: LatLngType = { lat: 33.3764, lng: 126.5377 };
 
 export const MapContext = createContext<BottomSheetRecoilPropType | null>(null);
 

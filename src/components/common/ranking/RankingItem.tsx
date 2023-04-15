@@ -1,7 +1,27 @@
 import styled from '@emotion/styled'
 import { Link } from 'react-router-dom'
-import { DrinkType } from 'types/drinkType'
+import { DrinkType } from 'types/DrinkType'
 import  DrinkIcon from 'atoms/icons/IsDrinkedIcon.svg'
+
+export default function RankingItem({ prop, index }: RankingItemInterface) {
+  return (
+    <Link to={`/details/${prop.alcoholId}`}>
+      <CardContainer>
+        <CardNumber>{index}</CardNumber>
+        <CardImage src={prop.imageUrl} width={64} height={64}/>
+        <CardContent>
+          <CardTitle>{prop.name}</CardTitle>
+          <CardInfo>{prop.address}</CardInfo>
+          <CardDetail>
+            <IsDrinkIcon src={DrinkIcon} width={13} />
+            <CardCount>{prop.ateCount ? prop.ateCount + '명이 즐겼어요' : prop.ateCount}</CardCount>
+          </CardDetail>
+
+        </CardContent>
+      </CardContainer>
+    </Link>
+  )
+}
 
 const CardContainer = styled.div`
   width: 100%;
@@ -86,24 +106,4 @@ const IsDrinkIcon = styled.img`
 interface RankingItemInterface {
   prop: DrinkType,
   index: number
-}
-
-export default function RankingItem({ prop, index }: RankingItemInterface) {
-  return (
-    <Link to={`/details/${prop.alcoholId}`}>
-      <CardContainer>
-        <CardNumber>{index}</CardNumber>
-        <CardImage src={prop.imageUrl} width={64} height={64}/>
-        <CardContent>
-          <CardTitle>{prop.name}</CardTitle>
-          <CardInfo>{prop.address}</CardInfo>
-          <CardDetail>
-            <IsDrinkIcon src={DrinkIcon} width={13} />
-            <CardCount>{prop.ateCount ? prop.ateCount + '명이 즐겼어요' : prop.ateCount}</CardCount>
-          </CardDetail>
-
-        </CardContent>
-      </CardContainer>
-    </Link>
-  )
 }

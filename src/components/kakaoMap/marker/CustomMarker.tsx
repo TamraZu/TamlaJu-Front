@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { MapMarker } from 'react-kakao-maps-sdk';
-import { MarkerDataType, MarkerImageType } from 'types/kakaoMapType';
+import { MarkerDataType, MarkerImageType } from 'types/KakaoMapType';
 
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { bottomSheetData, bottomSheetOpened, selectedMarker } from 'components/atoms/atoms';
-import { BottomSheetDataType } from 'types/layoutControlType';
+import { BottomSheetDataType } from 'types/LayoutControlType';
 import { useFactoryDetail } from 'components/hooks/useFactoryDetail';
 import { ATE_MARKER_IMG, DEFAULT_MARKER_IMG, SELECTED_MARKER_IMG } from './MarkerSprite';
 

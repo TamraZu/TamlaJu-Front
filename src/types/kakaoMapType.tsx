@@ -1,23 +1,23 @@
 import { ReactNode } from 'react';
 
-export interface latLngType {
+export interface LatLngType {
   lat: number;
   lng: number;
 };
 
-export type pointType = {
+export type PointType = {
   x: number;
   y: number;
 };
 
-export interface mapOptionType {
-  center: latLngType;
+export interface MapOptionType {
+  center: LatLngType;
   zoom: number
 }
 
-export type locationDataType = {
-  latLng: latLngType;
-  point: pointType;
+export type LocationDataType = {
+  latLng: LatLngType;
+  point: PointType;
 };
 
 export type MarkerDataType = {
@@ -28,19 +28,26 @@ export type MarkerDataType = {
   address: string;
   hasAte: boolean;
   onClick?: () => void;
-  setCenter: (pos: latLngType) => void;
+  setCenter: (pos: LatLngType) => void;
   setZoom: (zoom: number) => void;
 };
 
-export type tempType = {
-  factoryId: number;
-  name: string;
-  address: string;
-  latLng?: latLngType;
-  // alcohols: alcoholType[];
+
+export type MarkerImageType = {
+  src:string;
+  size: {
+    width:number;
+    height:number;
+  };
+  options: {
+    offset:{
+      x:number;
+      y:number;
+    };
+  };
 }
 
-export interface apiConnectType<T> {
+export interface ApiConnectType<T> {
   success: boolean,
   message: string,
   data: T

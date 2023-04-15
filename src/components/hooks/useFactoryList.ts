@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query'
 import { getFactoryList } from 'apis'
 import { useRecoilValue } from 'recoil'
 import { memberId } from 'components/atoms/atoms'
-import { MarkerDataType } from 'types/kakaoMapType'
+import { MarkerDataType } from 'types/KakaoMapType'
 
 export function useFactoryList(): MarkerDataType[] {
   const fallback : MarkerDataType[] = []

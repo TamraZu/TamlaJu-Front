@@ -2,7 +2,7 @@
 
 import { Map } from 'react-kakao-maps-sdk';
 import { css } from '@emotion/react';
-import { LatLngType, MarkerDataType, MapOptionType } from 'types/kakaoMapType';
+import { LatLngType, MarkerDataType, MapOptionType } from 'types/KakaoMapType';
 import { useState } from 'react';
 import { MemoizedMarker } from "./marker/CustomMarker";
 import { bottomSheetOpened } from 'components/atoms/atoms';

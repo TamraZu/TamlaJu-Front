@@ -1,6 +1,6 @@
 import markerSelectedImage from 'atoms/png/BrewerySelectedIcon.png'
 import markerAteImage from 'atoms/png/BreweryCheckedIcon.png'
-import markerDefaultImage from 'atoms/png/BreweryIcon.png' 
+import markerDefaultImage from 'atoms/png/BreweryIcon.png'
 
 export const ATE_MARKER_IMG = {
     src: markerAteImage,

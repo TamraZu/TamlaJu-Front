@@ -1,6 +1,6 @@
 import { ReactNode, SetStateAction } from 'react';
-import { AlcoholType, BrewerlyType } from './drinkType';
-import { latLngType } from './kakaoMapType';
+import { AlcoholType, BrewerlyType } from './DrinkType';
+import { LatLngType } from './KakaoMapType';
 
 export interface BottomSheetControlType {
     children: ReactNode;
@@ -13,7 +13,7 @@ export interface BottomSheetDataType {
     selectedId:number;
     name?:string;
     address?:string;
-    LatLng?:latLngType
+    LatLng?:LatLngType
     alcohols: AlcoholType[];
 }
 
