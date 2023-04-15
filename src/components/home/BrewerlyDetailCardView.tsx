@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { AlcoholType } from 'types/DrinkType';
 import { ReactComponent as DrinkIcon } from 'atoms/icons/DrinkIcon.svg';
 import IsDrinkIcon from 'atoms/icons/IsDrinkedOrange.svg';
+import ImageComp, { ImageInterface } from 'components/common/ImageComp';
 const CardWrapper = styled.div`
     border-radius: 16px;
     margin:14px 16px 58px 16px;
@@ -20,9 +21,9 @@ const Card = styled.div`
     background-color: #fff7f0;
 `
 
-const DrinkImg = styled.img`
+const DrinkImg = styled(ImageComp)<ImageInterface>`
 margin:10px;
-width: 118px;
+width: 128px;
 height: 126px;
 border-radius: 12px;
 `
@@ -71,7 +72,7 @@ const BrewerlyDetailCardView = ({ alcohols }: BrewerlydetailCardViewProps) => {
                     <Card>
 
                         <div style={{ position: 'relative' }}>
-                            <DrinkImg width={128} height={128} src={t.imageUrl} />
+                            <DrinkImg alt={'test'} size={{width:128, height:128}} src={t.imageUrl} />
                             {t.hasAte ? <DrinkStamp src={IsDrinkIcon}/> : null }
                         </div>
                         
