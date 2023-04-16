@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
-import { AlcoholType } from 'types/DrinkType';
+import { AlcoholType, BrewerlydetailCardViewProps } from 'types/DrinkType';
 import { ReactComponent as DrinkIcon } from 'atoms/icons/DrinkIcon.svg';
 import IsDrinkIcon from 'atoms/icons/IsDrinkedOrange.svg';
 import ImageComp from 'components/common/ImageComp';
@@ -58,10 +58,6 @@ const StyledDrinkedSubText = styled.div`
     width:100%;
     text-align:center;
 `
-
-interface BrewerlydetailCardViewProps {
-    alcohols: AlcoholType[]
-}
 
 const BrewerlyDetailCardView = ({ alcohols }: BrewerlydetailCardViewProps) => {
     return (<CardWrapper>
