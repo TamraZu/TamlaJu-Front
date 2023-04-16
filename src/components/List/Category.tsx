@@ -49,7 +49,7 @@ export default function Category({ category, setCategory }: CategoryProps) {
     },
   ]
 
-  const scrollRef = useHorizontalScroll();
+  const scrollRef = useHorizontalScroll()
 
   return (
     <CategoryLayout>
@@ -89,7 +89,7 @@ export const CategoryList = styled.ul`
     height: 5px;
   }
   &::-webkit-scrollbar-thumb {
-    background: #ffe9d4;
+    background: #fff;
     border-radius: 10px;
   }
   &::-webkit-scrollbar-track {
