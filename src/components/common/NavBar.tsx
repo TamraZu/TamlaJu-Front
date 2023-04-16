@@ -3,7 +3,6 @@ import { NavLink, useLocation } from 'react-router-dom'
 import { ReactComponent as DrinkIcon } from 'atoms/icons/DrinkIcon.svg'
 import { ReactComponent as MapIcon } from 'atoms/icons/MapIcon.svg'
 import { ReactComponent as ProfileIcon } from 'atoms/icons/ProfileIcon.svg'
-import KakaoLogout from 'components/auth/KakaoLogout'
 
 function NavBar() {
   const { pathname } = useLocation()
