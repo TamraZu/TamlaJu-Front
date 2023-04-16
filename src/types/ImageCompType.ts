@@ -3,6 +3,7 @@ export interface BoxStyleInterface {
     height: number | string;
     borderRadius?:number | string;
     margin?:number | string;
+    padding?: number | string;
 }
 
 export interface ImageInterface {

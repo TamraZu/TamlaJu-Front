@@ -2,13 +2,14 @@ import styled from '@emotion/styled'
 import { Link } from 'react-router-dom'
 import { DrinkType } from 'types/DrinkType'
 import  DrinkIcon from 'atoms/icons/IsDrinkedIcon.svg'
+import ImageComp from '../ImageComp'
 
 export default function RankingItem({ prop, index }: RankingItemInterface) {
   return (
     <Link to={`/details/${prop.alcoholId}`}>
       <CardContainer>
         <CardNumber>{index}</CardNumber>
-        <CardImage src={prop.imageUrl} width={64} height={64}/>
+        <ImageComp src={prop.imageUrl} alt={prop.name} size={{width:72, height:72, borderRadius:12, margin:'0 10px 0 0 '}}/>
         <CardContent>
           <CardTitle>{prop.name}</CardTitle>
           <CardInfo>{prop.address}</CardInfo>
@@ -41,14 +42,6 @@ const CardNumber = styled.div`
     font-weight:700;
     font-size:28px;
     letter-spacing: -0.003em;
-`
-
-const CardImage = styled.img`
-  cursor: pointer;
-  flex-shrink:0;
-  width: 64px;
-  height: 64px;
-  margin-right: 14px;
 `
 
 const CardContent = styled.div`
