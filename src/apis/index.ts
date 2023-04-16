@@ -3,36 +3,6 @@ import { DrinkType } from 'types/DrinkType'
 import { ApiConnectType, MarkerDataType } from 'types/KakaoMapType'
 import { BottomSheetDataType } from 'types/LayoutControlType'
 
-export interface MyPageData {
-  memberId: number
-  nickname: string
-  count: number
-  alcohols: alcoholData[]
-}
-
-interface alcoholData {
-  alcoholId: number
-  name: string
-  imageUrl: string
-}
-
-export interface DetailData {
-  address: string
-  alcoholId: number
-  ateCount: number
-  category: string
-  description: string
-  hasAte: boolean
-  imageUrl: string
-  level: number
-  name: string
-  price: number
-  region: string
-  tasteImage: string | null
-  volume: number
-  factory: string
-}
-
 // 4.6 소셜 로그인 백엔드 개편 이후로부터
 // 반드시 header에 authorization:{accessToken}이 있어야 합니다.
 // service에 있는 axios는 로그인 시 interceptor를 통해

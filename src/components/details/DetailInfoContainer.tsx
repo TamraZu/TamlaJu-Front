@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import { DetailData } from 'apis'
+import { DetailPageAlcoholType } from 'types/DrinkType'
 
 interface DetailInfoContainerProps {
-  detailData: DetailData
+  detailData: DetailPageAlcoholType
 }
 
 function DetailInfoContainer({ detailData }: DetailInfoContainerProps) {
