@@ -1,7 +1,8 @@
 export interface BoxStyleInterface {
-    width: number;
-    height: number;
-    borderRadius:number;
+    width: number | string;
+    height: number | string;
+    borderRadius?:number | string;
+    margin?:number | string;
 }
 
 export interface ImageInterface {

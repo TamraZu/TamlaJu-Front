@@ -19,11 +19,11 @@ const SkeletonBox = styled.div(() => ({
 
 }))
 
-const Wrapper = styled.div(({ width, height, borderRadius }: BoxStyleInterface) => ({
-    margin: 10,
-    width: width - 10,
+const Wrapper = styled.div(({ width, height, borderRadius, margin }: BoxStyleInterface) => ({
+    width: `calc(${width}px)`,
     height: height,
     borderRadius: borderRadius,
+    margin: margin,
 }))
 
 const Image = React.memo(({ src, alt, onload }: ImageInterface) => {
@@ -37,7 +37,7 @@ const ImageComp = ({ src, alt, size }: ImageInterface) => {
         setIsLoading(false);
     }
     return (
-        <Wrapper width={size.width} height={size.height} borderRadius={12}>
+        <Wrapper width={size.width} height={size.height} borderRadius={size.borderRadius} margin={size.margin}>
             {
             isLoading && 
             <SkeletonBox>
