@@ -1,59 +1,53 @@
 import React, { useState } from "react";
 import styled from "@emotion/styled";
-import { keyframes } from "@emotion/react";
+import Spinner from "./Spinner";
+import { BoxStyleInterface, isLoadedType, ImageInterface } from "types/ImageCompType";
 
-interface BoxInterface {
-    width?: number;
-    height?: number;
-}
-
-export interface ImageInterface {
-    src: string;
-    alt: string;
-    size: BoxInterface;
-    onload?: () => void;
-    isLoaded?: boolean;
-}
-
-type Temp = {
-    isLoaded: boolean;
-}
-
-const spin = keyframes`
-  to {
-    transform:rotate(360deg)
-  }
-`
-const LoadedView = styled.div((props: Temp) => ({
+const LoadedView = styled.div((props: isLoadedType) => ({
     display: `${props.isLoaded ? 'block' : 'none'}`
 }))
 
-const SkeletonBox = styled.div(({ width, height }: BoxInterface) => ({
-    width: width,
-    height: height,
-    display: 'block',
-    backgroundColor:'#dadada',
-    margin:'inherit',
+const SkeletonBox = styled.div(() => ({
+    width: '100%',
+    height: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    background: '#eeeeee',
+    borderRadius: 'inherit',
+    cursor: 'progress',
+
 }))
 
+const Wrapper = styled.div(({ width, height, borderRadius }: BoxStyleInterface) => ({
+    margin: 10,
+    width: width - 10,
+    height: height,
+    borderRadius: borderRadius,
+}))
 
 const Image = React.memo(({ src, alt, onload }: ImageInterface) => {
-    return <img src={src} alt={alt} className={'test'} onLoad={onload} />
+    return <img src={src} alt={alt} onLoad={onload} />
 })
 
 const ImageComp = ({ src, alt, size }: ImageInterface) => {
     const [isLoading, setIsLoading] = useState(true);
 
     const handleImageLoad = () => {
-        setIsLoading(false)
+        setIsLoading(false);
     }
     return (
-        <>
-            {isLoading && <SkeletonBox width={size.width} height={size.height}/>}
+        <Wrapper width={size.width} height={size.height} borderRadius={12}>
+            {
+            isLoading && 
+            <SkeletonBox>
+                <Spinner />
+            </SkeletonBox>
+            }
             <LoadedView isLoaded={!isLoading}>
                 <Image src={src} alt={alt} size={size} onload={handleImageLoad} />
             </LoadedView>
-        </>
+        </Wrapper>
     )
 }
 
