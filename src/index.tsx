@@ -9,7 +9,7 @@ import Layout from 'components/common/Layout'
 import reportWebVitals from './reportWebVitals'
 import { RecoilRoot } from 'recoil'
 import ToastList from 'components/common/toast/List'
-import Loading from 'components/common/Loading'
+import Loading from 'components/common/loader/Loading'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 

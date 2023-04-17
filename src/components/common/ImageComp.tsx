@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "@emotion/styled";
-import Spinner from "./Spinner";
+import Spinner from "./loader/Spinner";
 import { BoxStyleInterface, isLoadedType, ImageInterface } from "types/ImageCompType";
 
 const LoadedView = styled.div((props: isLoadedType) => ({

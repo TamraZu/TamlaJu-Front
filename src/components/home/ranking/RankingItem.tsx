@@ -2,7 +2,7 @@ import styled from '@emotion/styled'
 import { Link } from 'react-router-dom'
 import { DrinkType } from 'types/DrinkType'
 import  DrinkIcon from 'atoms/icons/IsDrinkedIcon.svg'
-import ImageComp from '../ImageComp'
+import ImageComp from 'components/common/ImageComp'
 
 export default function RankingItem({ prop, index }: RankingItemInterface) {
   return (
