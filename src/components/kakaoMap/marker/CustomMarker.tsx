@@ -16,7 +16,7 @@ export function CustomMarker({ factoryId, latitude, longitude, hasAte, address, 
   const [marker, setSelectedMarker] = useRecoilState(selectedMarker);
   const [image, setImage] = useState<MarkerImageType>();
 
-  const { data, refetch } = useFactoryDetail(factoryId)
+  const { refetch } = useFactoryDetail(factoryId)
 
   const getImage = useCallback((): MarkerImageType => {
     if (factoryId === marker) {
@@ -36,7 +36,7 @@ export function CustomMarker({ factoryId, latitude, longitude, hasAte, address, 
         console.error(e);
       })
     }
-  }, [refetch, setData])
+  }, [refetch, setData, factoryId, marker])
 
   useEffect(() => {
     // 마커 이미지 변경
