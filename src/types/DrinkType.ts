@@ -33,6 +33,10 @@ export type DrinkRankingType = {
   data: RankingType[]
 }
 
+export interface BrewerlydetailCardViewProps {
+  alcohols: AlcoholType[]
+}
+
 export type BrewerlyType = {
   factoryId: number
   name: string

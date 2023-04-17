@@ -16,7 +16,7 @@ export function CustomMarker({ factoryId, latitude, longitude, hasAte, address, 
   const [marker, setSelectedMarker] = useRecoilState(selectedMarker);
   const [image, setImage] = useState<MarkerImageType>();
 
-  const data = useFactoryDetail(factoryId)
+  const { refetch } = useFactoryDetail(factoryId)
 
   const getImage = useCallback((): MarkerImageType => {
     if (factoryId === marker) {
@@ -29,8 +29,14 @@ export function CustomMarker({ factoryId, latitude, longitude, hasAte, address, 
   }, [factoryId, hasAte, marker])
 
   useEffect(() => {
-    setIsOpen(false);
-  }, [setIsOpen])
+    if (factoryId === marker) {
+      refetch().then((res) => {
+        setData(res.data!)
+      }).catch(e => {
+        console.error(e);
+      })
+    }
+  }, [refetch, setData, factoryId, marker])
 
   useEffect(() => {
     // 마커 이미지 변경
@@ -44,11 +50,19 @@ export function CustomMarker({ factoryId, latitude, longitude, hasAte, address, 
       image={image}
       onClick={async (event) => {
         // 클릭 시 양조장 상세정보 API 호출
-        // setActive(true);
-        await setData(data)
-        await setSelectedMarker(factoryId);
-        await setIsOpen(true);
-        setCenter({ lat: event.getPosition().getLat(), lng: event.getPosition().getLng() })
+        if (factoryId !== marker) {
+
+          const res = await refetch();
+          await setIsOpen(true);
+          await setSelectedMarker(factoryId);
+          setCenter({ lat: event.getPosition().getLat(), lng: event.getPosition().getLng() })
+
+          if (res.data) {
+            await setData(res.data);
+          } else {
+            console.error(res.error);
+          }
+        }
       }}>
     </MapMarker >
   );

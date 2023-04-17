@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import { Link } from 'react-router-dom'
+import ImageComp from 'components/common/ImageComp'
 
 interface MyPageCardProps {
   imageUrl: string
@@ -13,7 +14,7 @@ function MyPageCard({ imageUrl, name, alcoholId }: MyPageCardProps) {
     <Link to={`/details/${alcoholId}`}>
       <MyPageCardLayout>
         <MyPageImageBox>
-          <img src={imageUrl} alt="기본 이미지" />
+          <ImageComp src={imageUrl} alt="기본 이미지" size={{width:90, height:90}} />
           <StyledImage src="/stamp.png" width={10} height={10} alt="이밎" />
         </MyPageImageBox>
         <MyPageAlcoholName>{name}</MyPageAlcoholName>
@@ -44,7 +45,7 @@ const MyPageImageBox = styled.div`
   border-radius: 12px;
   width: 90px;
   height: 110px;
-  border-radius: 24px;
+  padding: 12px 0 9px 0;
   img {
     width: 100%;
     height: 100%;

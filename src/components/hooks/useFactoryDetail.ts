@@ -7,12 +7,12 @@ export function useFactoryDetail(factoryId: number /*active: boolean*/) {
         selectedId: -1,
         alcohols: []
     }
-    const { data = fallback } = useQuery(['factory', 'detail', factoryId], () => getFactoryDetail(factoryId),
+    const { data = fallback, refetch } = useQuery(['factory', 'detail', factoryId], () => getFactoryDetail(factoryId),
         {
-            staleTime: 3000 * 300,
+            // staleTime: 3000 * 300,
             // 추후 변경 예정
             suspense:false,
-            // enabled: active,
+            enabled: false,
         })
-    return data;
+    return {data, refetch};
 }
