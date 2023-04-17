@@ -5,7 +5,7 @@ import { css } from '@emotion/react';
 import styled from '@emotion/styled'
 import { ReactComponent as BreweryIcon } from 'atoms/icons/BreweryIcon.svg';
 import { useSpring, animated } from 'react-spring';
-import BrewerlyDetailCardView from '../home/BrewerlyDetailCardView';
+import BrewerlyDetailCardView from './BottomSheetCard';
 import close from 'atoms/icons/CloseIcon.svg'
 import { useRecoilState } from 'recoil';
 import { bottomSheetData, bottomSheetOpened } from 'components/atoms/atoms';

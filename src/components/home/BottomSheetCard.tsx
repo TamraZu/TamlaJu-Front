@@ -61,13 +61,13 @@ const StyledDrinkedSubText = styled.div`
 
 const BrewerlyDetailCardView = ({ alcohols }: BrewerlydetailCardViewProps) => {
     return (<CardWrapper>
-        <>
-            {alcohols.map((t: AlcoholType) => {
-                return (<Link to={`/details/${t.alcoholId}`} key={t.alcoholId}>
+        
+            {alcohols.map((t: AlcoholType) => (
+                <Link to={`/details/${t.alcoholId}`} key={t.alcoholId}>
                     <Card>
 
                         <div style={{ position: 'relative' }}>
-                            <DrinkImg alt={'test'} size={{ width: 118, height: 128, borderRadius: 12, margin:'10px 10px 0 10px' }} src={t.imageUrl} />
+                            <DrinkImg alt={t.name} size={{ width: 118, height: 128, borderRadius: 12, margin: '10px 10px 0 10px' }} src={t.imageUrl} />
                             {t.hasAte ? <DrinkStamp src={IsDrinkIcon} /> : null}
                         </div>
 
@@ -79,8 +79,8 @@ const BrewerlyDetailCardView = ({ alcohols }: BrewerlydetailCardViewProps) => {
                         {t.hasAte ? <StyledDrinkedSubText>마셔본 술이에요</StyledDrinkedSubText> : null}
                     </Card>
                 </Link>)
-            })}
-        </>
+            )}
+        
 
     </CardWrapper>)
 }
