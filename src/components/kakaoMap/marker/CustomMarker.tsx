@@ -50,15 +50,19 @@ export function CustomMarker({ factoryId, latitude, longitude, hasAte, address, 
       image={image}
       onClick={async (event) => {
         // 클릭 시 양조장 상세정보 API 호출
-        const res = await refetch();
-        await setIsOpen(true);
-        await setSelectedMarker(factoryId);
-        if(res.data){
-          await setData(res.data);
-        } else {
-          console.error(res.error);
+        if (factoryId !== marker) {
+
+          const res = await refetch();
+          await setIsOpen(true);
+          await setSelectedMarker(factoryId);
+          setCenter({ lat: event.getPosition().getLat(), lng: event.getPosition().getLng() })
+
+          if (res.data) {
+            await setData(res.data);
+          } else {
+            console.error(res.error);
+          }
         }
-        setCenter({ lat: event.getPosition().getLat(), lng: event.getPosition().getLng() })
       }}>
     </MapMarker >
   );
