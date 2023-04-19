@@ -1,3 +1,4 @@
+import { CategoryData } from 'pages/List';
 import { atom } from 'recoil';
 import { BottomSheetDataType } from 'types/LayoutControlType';
 import { ToastInterface } from 'types/ToastInterface';
@@ -20,6 +21,11 @@ export const bottomSheetOpened = atom<boolean>({
 export const selectedMarker = atom<number>({
     key: "selectedMarkerID",
     default: -1
+})
+
+export const selectedCategory = atom<CategoryData>({
+    key:"selectedCategory",
+    default:{ name: 'Makgeolli', id: 0 }
 })
 
 export const bottomSheetData = atom<BottomSheetDataType>({

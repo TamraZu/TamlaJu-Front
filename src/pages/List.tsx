@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import Category from 'components/List/Category'
 import Header from 'components/common/Header'
 import NavBar from 'components/common/NavBar'
@@ -6,6 +5,8 @@ import ListCard from 'components/List/ListCard'
 import styled from '@emotion/styled'
 import ListCardContainer from 'components/List/ListCardContainer'
 import HasAuth from 'components/auth/Auth'
+import { selectedCategory } from 'components/atoms/atoms'
+import { useRecoilState } from 'recoil'
 import { useAlcoholList } from 'components/hooks/useAlcoholList'
 
 export interface ListAlcoholData {
@@ -27,7 +28,7 @@ export interface CategoryData {
 function List() {
   HasAuth()
 
-  const [category, setCategory] = useState<CategoryData>({ name: 'Makgeolli', id: 0 })
+  const [category, setCategory] = useRecoilState<CategoryData>(selectedCategory)
   const alcoholListData = useAlcoholList(category.name)
 
   return (
