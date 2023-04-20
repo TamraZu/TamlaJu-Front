@@ -9,17 +9,6 @@ import { selectedCategory } from 'components/atoms/atoms'
 import { useRecoilState } from 'recoil'
 import { useAlcoholList } from 'components/hooks/useAlcoholList'
 
-export interface ListAlcoholData {
-  alcoholId: number
-  name: string
-  imageUrl: string
-  volume: number
-  level: number
-  price: number
-  ateCount: number
-  hasAte: boolean
-}
-
 export interface CategoryData {
   name: string
   id: number

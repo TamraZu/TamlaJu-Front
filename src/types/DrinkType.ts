@@ -75,3 +75,14 @@ export interface DetailPageAlcoholType {
   volume: number
   factory: string
 }
+
+export interface ListAlcoholDataType {
+  alcoholId: number
+  name: string
+  imageUrl: string
+  volume: number
+  level: number
+  price: number
+  ateCount: number
+  hasAte: boolean
+}

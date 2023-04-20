@@ -1,11 +1,11 @@
 import styled from '@emotion/styled'
 import { ReactComponent as IsDrinkedIcon } from 'atoms/icons/IsDrinkedIcon.svg'
 import { useNavigate } from 'react-router-dom'
-import { ListAlcoholData } from 'pages/List'
+import { ListAlcoholDataType } from 'types/DrinkType'
 import ImageComp from 'components/common/ImageComp'
 
 export interface ListCardProps {
-  drink: ListAlcoholData
+  drink: ListAlcoholDataType
 }
 
 function ListCard({ drink }: ListCardProps) {
@@ -14,7 +14,11 @@ function ListCard({ drink }: ListCardProps) {
   return (
     <CardContainer onClick={() => navigate(`/details/${drink.alcoholId}`)}>
       <CardImage>
-        <ImageComp src={drink.imageUrl} alt="술 이미지" size={{ width: 96, height: 96, borderRadius: 12 }} />
+        <ImageComp
+          src={drink.imageUrl}
+          alt="술 이미지"
+          size={{ width: 96, height: 96, borderRadius: 12 }}
+        />
       </CardImage>
       <CardContent>
         <CardLeft>
