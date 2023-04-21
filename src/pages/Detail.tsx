@@ -15,7 +15,6 @@ function Detail() {
 
   return (
     <>
-
       <DetailLayout>
         <DetailHeader />
         <DetailImageBox>
@@ -29,13 +28,7 @@ function Detail() {
         <DetailTestingNote>테이스팅 노트</DetailTestingNote>
         <DetailTastingInfo>
           <DetailTastingImage>
-            <img
-              src={
-                alcoholDetail?.tasteImage ||
-                'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZzkaK3E-cG2KkquhpAL_ukNA9RSRmVmiNxg&usqp=CAU'
-              }
-              alt="테이스팅 노트 이미지"
-            />
+            <img src={alcoholDetail.tasteImage} alt="테이스팅 노트 이미지" />
           </DetailTastingImage>
           <DetailTastingDescription>{alcoholDetail.description}</DetailTastingDescription>
         </DetailTastingInfo>
@@ -132,13 +125,13 @@ const DetailTastingImage = styled.div`
 `
 
 const DetailTastingDescription = styled.div`
-  padding:10px 16px 13px 16px;
+  padding: 10px 16px 13px 16px;
   font-weight: 500;
   font-size: 14px;
   line-height: 22px;
   width: 100%;
   white-space: pre-line;
-  word-break:keep-all;
+  word-break: keep-all;
 `
 
 export default Detail

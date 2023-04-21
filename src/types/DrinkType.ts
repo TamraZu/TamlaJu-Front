@@ -71,7 +71,7 @@ export interface DetailPageAlcoholType {
   name: string
   price: number
   region: string
-  tasteImage: string | null
+  tasteImage: string
   volume: number
   factory: string
 }
