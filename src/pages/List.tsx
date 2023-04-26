@@ -1,13 +1,14 @@
+import { Suspense } from 'react'
 import Category from 'components/List/Category'
 import Header from 'components/common/Header'
 import NavBar from 'components/common/NavBar'
-import ListCard from 'components/List/ListCard'
 import styled from '@emotion/styled'
 import ListCardContainer from 'components/List/ListCardContainer'
 import HasAuth from 'components/auth/Auth'
 import { selectedCategory } from 'components/atoms/atoms'
 import { useRecoilState } from 'recoil'
-import { useAlcoholList } from 'components/hooks/useAlcoholList'
+import ListItem from 'components/List/ListItem'
+import SkeletonCardList from 'components/List/SkeletonCardList'
 
 export interface CategoryData {
   name: string
@@ -18,7 +19,6 @@ function List() {
   HasAuth()
 
   const [category, setCategory] = useRecoilState<CategoryData>(selectedCategory)
-  const alcoholListData = useAlcoholList(category.name)
 
   return (
     <>
@@ -26,9 +26,9 @@ function List() {
         <Header>제주 술도감</Header>
         <Category category={category} setCategory={setCategory} />
         <ListCardContainer>
-          {alcoholListData.map(drink => {
-            return <ListCard key={drink.alcoholId} drink={drink} />
-          })}
+          <Suspense fallback={<SkeletonCardList />}>
+            <ListItem category={category} />
+          </Suspense>
         </ListCardContainer>
       </ListLayout>
       <NavBar />

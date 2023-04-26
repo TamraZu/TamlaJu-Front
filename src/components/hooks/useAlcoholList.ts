@@ -4,6 +4,8 @@ import { ListAlcoholDataType } from 'types/DrinkType'
 
 export function useAlcoholList(category: string): ListAlcoholDataType[] {
   const fallback: ListAlcoholDataType[] = []
-  const { data = fallback } = useQuery([category], () => getListAlcohol(category))
+  const { data = fallback } = useQuery([category], () => getListAlcohol(category), {
+    suspense: true,
+  })
   return data
 }
