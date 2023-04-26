@@ -13,8 +13,7 @@ const StyledMyPageContainer = styled.div`
   margin-top: 16px;
   display: grid;
   grid-gap: 6px;
-  grid-template-columns: repeat(3, minmax(auto, 1fr));
-  align-items: center;
+  grid-template-columns: repeat(3, 108px);
   justify-content: space-around;
   overflow-y: scroll;
   overflow-x: hidden;
