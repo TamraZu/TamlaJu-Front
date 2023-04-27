@@ -4,6 +4,8 @@ import { DetailPageAlcoholType } from 'types/DrinkType'
 
 export function useAlcoholDetail(alcoholId: number): DetailPageAlcoholType {
   const fallback = {}
-  const { data = fallback } = useQuery(['detail', alcoholId], () => getDetailAlcohol(alcoholId))
+  const { data = fallback } = useQuery(['detail', alcoholId], () => getDetailAlcohol(alcoholId), {
+    suspense: true,
+  })
   return data
 }
