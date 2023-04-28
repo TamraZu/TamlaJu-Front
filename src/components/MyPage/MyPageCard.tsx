@@ -26,6 +26,7 @@ function MyPageCard({ imageUrl, name, alcoholId }: MyPageCardProps) {
 }
 
 const MyPageCardLayout = styled.div`
+  cursor: pointer;
   box-sizing: border-box;
   width: 108px;
   height: 180px;

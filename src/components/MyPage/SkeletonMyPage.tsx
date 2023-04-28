@@ -33,9 +33,9 @@ const SkeletonMyPageHeader = styled(Skeleton)`
 const SkeletonMyPageCardContainer = styled.div`
   margin-top: 16px;
   display: grid;
-  grid-gap: 6px;
+  grid-gap: 8px;
   grid-template-columns: repeat(3, 108px);
-  align-items: center;
+  grid-template-rows: repeat(3, 180px);
   justify-content: space-around;
   overflow-y: scroll;
   overflow-x: hidden;
