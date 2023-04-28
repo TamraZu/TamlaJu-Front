@@ -14,6 +14,7 @@ const StyledMyPageContainer = styled.div`
   display: grid;
   grid-gap: 6px;
   grid-template-columns: repeat(3, 108px);
+  grid-template-rows: repeat(3, 180px);
   justify-content: space-around;
   overflow-y: scroll;
   overflow-x: hidden;

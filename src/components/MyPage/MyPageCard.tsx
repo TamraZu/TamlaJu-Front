@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import { Link } from 'react-router-dom'
 import ImageComp from 'components/common/ImageComp'
+import { useNavigate } from 'react-router-dom'
 
 interface MyPageCardProps {
   imageUrl: string
@@ -10,16 +10,18 @@ interface MyPageCardProps {
 }
 
 function MyPageCard({ imageUrl, name, alcoholId }: MyPageCardProps) {
+  const navigate = useNavigate()
+  const onClickHandler = () => {
+    navigate(`/details/${alcoholId}`)
+  }
   return (
-    <Link to={`/details/${alcoholId}`}>
-      <MyPageCardLayout>
-        <MyPageImageBox>
-          <ImageComp src={imageUrl} alt="기본 이미지" size={{width:90, height:90}} />
-          <StyledImage src="/stamp.png" width={10} height={10} alt="이밎" />
-        </MyPageImageBox>
-        <MyPageAlcoholName>{name}</MyPageAlcoholName>
-      </MyPageCardLayout>
-    </Link>
+    <MyPageCardLayout onClick={onClickHandler}>
+      <MyPageImageBox>
+        <ImageComp src={imageUrl} alt="기본 이미지" size={{ width: 90, height: 90 }} />
+        <StyledImage src="/stamp.png" width={10} height={10} alt="이밎" />
+      </MyPageImageBox>
+      <MyPageAlcoholName>{name}</MyPageAlcoholName>
+    </MyPageCardLayout>
   )
 }
 
@@ -27,8 +29,8 @@ const MyPageCardLayout = styled.div`
   box-sizing: border-box;
   width: 108px;
   height: 180px;
-  background: #fff8e1;
-  border: 1px solid #fbeec3;
+  background: #fff7f0;
+  border: 1px solid #ffe9d4;
   border-radius: 16px;
   padding: 10px 10px 0px 10px;
 `

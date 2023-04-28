@@ -16,7 +16,12 @@ function MyPageItem() {
         ) : (
           myPageData.alcohols?.map(elem => {
             return (
-              <MyPageCard imageUrl={elem.imageUrl} name={elem.name} alcoholId={elem.alcoholId} />
+              <MyPageCard
+                key={elem.name}
+                imageUrl={elem.imageUrl}
+                name={elem.name}
+                alcoholId={elem.alcoholId}
+              />
             )
           })
         )}
