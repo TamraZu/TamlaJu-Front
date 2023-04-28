@@ -16,7 +16,6 @@ const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      suspense: true,
       refetchOnWindowFocus: false,
       // refetchOnMount:false,
       // staleTime:1000 * 300, // 5분 (300초)
@@ -30,9 +29,7 @@ root.render(
       <RecoilRoot>
         <Layout>
           <ToastList />
-          <Suspense fallback={<Loading />}>
-            <App />
-          </Suspense>
+          <App />
         </Layout>
       </RecoilRoot>
     </BrowserRouter>

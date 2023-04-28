@@ -12,9 +12,9 @@ function MyPageContainer({ children }: MyPageContainerProps) {
 const StyledMyPageContainer = styled.div`
   margin-top: 16px;
   display: grid;
-  grid-gap: 6px;
-  grid-template-columns: repeat(3, minmax(auto, 1fr));
-  align-items: center;
+  grid-gap: 8px;
+  grid-template-columns: repeat(3, 108px);
+  grid-template-rows: repeat(3, 180px);
   justify-content: space-around;
   overflow-y: scroll;
   overflow-x: hidden;

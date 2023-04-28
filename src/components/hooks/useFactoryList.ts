@@ -5,8 +5,10 @@ import { memberId } from 'components/atoms/atoms'
 import { MarkerDataType } from 'types/KakaoMapType'
 
 export function useFactoryList(): MarkerDataType[] {
-  const fallback : MarkerDataType[] = []
+  const fallback: MarkerDataType[] = []
   const mId = useRecoilValue(memberId)
-  const { data = fallback } = useQuery(['factory', 'list'], () => getFactoryList(mId))
+  const { data = fallback } = useQuery(['factory', 'list'], () => getFactoryList(mId), {
+    suspense: true,
+  })
   return data
 }

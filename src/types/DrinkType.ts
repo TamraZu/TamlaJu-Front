@@ -71,7 +71,18 @@ export interface DetailPageAlcoholType {
   name: string
   price: number
   region: string
-  tasteImage: string | null
+  tasteImage: string
   volume: number
   factory: string
+}
+
+export interface ListAlcoholDataType {
+  alcoholId: number
+  name: string
+  imageUrl: string
+  volume: number
+  level: number
+  price: number
+  ateCount: number
+  hasAte: boolean
 }
