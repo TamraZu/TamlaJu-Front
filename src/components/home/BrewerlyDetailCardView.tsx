@@ -1,7 +1,10 @@
 import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
-import { alcoholType } from 'types/drinkType';
-import { ReactComponent as DrinkIcon } from 'atoms/icons/DrinkIcon.svg'
+import { AlcoholType, BrewerlydetailCardViewProps } from 'types/DrinkType';
+import { ReactComponent as DrinkIcon } from 'atoms/icons/DrinkIcon.svg';
+import IsDrinkIcon from 'atoms/icons/IsDrinkedOrange.svg';
+import ImageComp from 'components/common/ImageComp';
+import { ImageInterface } from 'types/ImageCompType';
 
 const CardWrapper = styled.div`
     border-radius: 16px;
@@ -20,11 +23,8 @@ const Card = styled.div`
     background-color: #fff7f0;
 `
 
-const DrinkImg = styled.img`
-margin:10px;
-width: 118px;
-height: 126px;
-border-radius: 12px;
+const DrinkImg = styled(ImageComp) <ImageInterface>`
+
 `
 
 const TitleFont = styled.h1`
@@ -46,25 +46,37 @@ const CardTitleWrapper = styled.div`
     align-items: center;
 `
 
-interface BrewerlydetailCardViewProps {
-    alcohols: alcoholType[]
-}
+const DrinkStamp = styled.img`
+    position:absolute;
+    top:14px;
+    right:14px;
+`
+
+const StyledDrinkedSubText = styled.div`
+    font-size:13px;
+    color:#858899;
+    width:100%;
+    text-align:center;
+`
 
 const BrewerlyDetailCardView = ({ alcohols }: BrewerlydetailCardViewProps) => {
     return (<CardWrapper>
         <>
-            {alcohols.map((t: alcoholType) => {
+            {alcohols.map((t: AlcoholType) => {
                 return (<Link to={`/details/${t.alcoholId}`} key={t.alcoholId}>
                     <Card>
 
                         <div style={{ position: 'relative' }}>
-                            <DrinkImg width={128} height={128} src={t.imageUrl} />
+                            <DrinkImg alt={'test'} size={{ width: 118, height: 128, borderRadius: 12, margin:'10px 10px 0 10px' }} src={t.imageUrl} />
+                            {t.hasAte ? <DrinkStamp src={IsDrinkIcon} /> : null}
                         </div>
-                        
-                            <CardTitleWrapper>
-                                <DrinkIcon width="15" fill={'#09121F'} />
-                                <TitleFont>{t.name}</TitleFont>
-                            </CardTitleWrapper>
+
+                        <CardTitleWrapper>
+                            <DrinkIcon width="15" fill={'#09121F'} />
+                            <TitleFont>{t.name}</TitleFont>
+
+                        </CardTitleWrapper>
+                        {t.hasAte ? <StyledDrinkedSubText>마셔본 술이에요</StyledDrinkedSubText> : null}
                     </Card>
                 </Link>)
             })}

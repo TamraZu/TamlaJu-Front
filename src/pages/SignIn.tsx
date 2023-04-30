@@ -3,9 +3,7 @@
  * 소셜 로그인 연동으로 인해 이제 미사용.
  */
 import { useMutation } from "@tanstack/react-query";
-import { memberId } from "components/atoms/atoms";
-import React, { useState } from "react";
-import { useSetRecoilState } from 'recoil';
+import { useState } from "react";
 import axios from "services";
 import { useNavigate } from 'react-router-dom';
 import styled from '@emotion/styled';
@@ -76,7 +74,6 @@ function SignIn() {
   const [id, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const navigate = useNavigate();
-  const setMemberId = useSetRecoilState(memberId);
 
   const loginMutation = useMutation(['login'], async () => {
     const response = await axios.post('/api/v1/members/sign', { username: id, password: password });

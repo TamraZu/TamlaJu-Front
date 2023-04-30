@@ -1,25 +1,14 @@
-import React, { useState, useEffect } from 'react'
+import { Suspense } from 'react'
 import Category from 'components/List/Category'
 import Header from 'components/common/Header'
 import NavBar from 'components/common/NavBar'
-import ListCard from 'components/List/ListCard'
 import styled from '@emotion/styled'
 import ListCardContainer from 'components/List/ListCardContainer'
-import { getListAlcohol } from 'apis'
-import { useRecoilState } from 'recoil'
-import { memberId } from 'components/atoms/atoms'
 import HasAuth from 'components/auth/Auth'
-
-export interface ListAlcoholData {
-  alcoholId: number
-  name: string
-  imageUrl: string
-  volume: number
-  level: number
-  price: number
-  ateCount: number
-  hasAte: boolean
-}
+import { selectedCategory } from 'components/atoms/atoms'
+import { useRecoilState } from 'recoil'
+import ListItem from 'components/List/ListItem'
+import SkeletonCardList from 'components/List/SkeletonCardList'
 
 export interface CategoryData {
   name: string
@@ -27,29 +16,19 @@ export interface CategoryData {
 }
 
 function List() {
-  HasAuth();
+  HasAuth()
 
-  const [category, setCategory] = useState<CategoryData>({ name: 'Makgeolli', id: 0 })
-  const [data, setData] = useState<ListAlcoholData[]>([])
-  const [mId] = useRecoilState(memberId)
-
-  useEffect(() => {
-    async function fetchListData() {
-      const response = await getListAlcohol(mId, category.name)
-      setData(response)
-    }
-    fetchListData()
-  }, [category.name, category.id, mId])
+  const [category, setCategory] = useRecoilState<CategoryData>(selectedCategory)
 
   return (
     <>
       <ListLayout>
-        <Header>제주도감</Header>
+        <Header>제주 술도감</Header>
         <Category category={category} setCategory={setCategory} />
         <ListCardContainer>
-          {data.map(elem => {
-            return <ListCard key={elem.alcoholId} drink={elem} />
-          })}
+          <Suspense fallback={<SkeletonCardList />}>
+            <ListItem category={category} />
+          </Suspense>
         </ListCardContainer>
       </ListLayout>
       <NavBar />

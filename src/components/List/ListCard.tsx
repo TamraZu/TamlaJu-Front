@@ -1,32 +1,28 @@
-import React from 'react'
 import styled from '@emotion/styled'
 import { ReactComponent as IsDrinkedIcon } from 'atoms/icons/IsDrinkedIcon.svg'
 import { useNavigate } from 'react-router-dom'
-import { ListAlcoholData } from 'pages/List'
-import { postEatingCount } from 'apis'
-import { useRecoilState } from 'recoil'
-import { memberId } from 'components/atoms/atoms'
+import { ListAlcoholDataType } from 'types/DrinkType'
+import ImageComp from 'components/common/ImageComp'
 
 export interface ListCardProps {
-  drink: ListAlcoholData
+  drink: ListAlcoholDataType
 }
 
 function ListCard({ drink }: ListCardProps) {
-  const [mId] = useRecoilState(memberId)
   const navigate = useNavigate()
-  const onClickHandler = async () => {
-    await postEatingCount(mId, drink.alcoholId)
-  }
+
   return (
-    <CardContainer>
-      <CardImage onClick={() => navigate(`/details/${drink.alcoholId}`)}>
-        <img src={drink.imageUrl} alt="술 이미지" />
+    <CardContainer onClick={() => navigate(`/details/${drink.alcoholId}`)}>
+      <CardImage>
+        <ImageComp
+          src={drink.imageUrl}
+          alt="술 이미지"
+          size={{ width: 96, height: 96, borderRadius: 12 }}
+        />
       </CardImage>
       <CardContent>
         <CardLeft>
-          <CardTitle onClick={() => navigate(`/details/${drink.alcoholId}`)}>
-            {drink.name}
-          </CardTitle>
+          <CardTitle>{drink.name}</CardTitle>
           <CardInfo>{`${drink.volume}ml | ${drink.level}도`}</CardInfo>
           <CardPrice>{drink.price}원</CardPrice>
         </CardLeft>
@@ -34,7 +30,7 @@ function ListCard({ drink }: ListCardProps) {
           <CardButton>
             <IsDrinkedIcon width={32} height={32} fill={drink.hasAte ? '#FD6E21' : '#858899'} />
           </CardButton>
-          <CardCount onClick={onClickHandler}>{drink.ateCount}</CardCount>
+          <CardCount>{drink.ateCount}</CardCount>
         </CardRight>
       </CardContent>
     </CardContainer>
@@ -43,17 +39,18 @@ function ListCard({ drink }: ListCardProps) {
 
 const CardContainer = styled.div`
   position: relative;
-  width: 343px;
+  cursor: pointer;
+  width: 100%;
   height: 130px;
   display: flex;
   border-radius: 16px;
   padding: 16px;
   margin-bottom: 8px;
-  background: #ffe9d4;
+  background-color: #fff7f1;
+  border: #ffe9d5 solid 1px;
 `
 
 const CardImage = styled.div`
-  cursor: pointer;
   width: 96px;
   height: 96px;
   img {

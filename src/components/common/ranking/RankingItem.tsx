@@ -1,7 +1,28 @@
 import styled from '@emotion/styled'
 import { Link } from 'react-router-dom'
-import { drinkType } from 'types/drinkType'
+import { DrinkType } from 'types/DrinkType'
 import  DrinkIcon from 'atoms/icons/IsDrinkedIcon.svg'
+import ImageComp from '../ImageComp'
+
+export default function RankingItem({ prop, index }: RankingItemInterface) {
+  return (
+    <Link to={`/details/${prop.alcoholId}`}>
+      <CardContainer>
+        <CardNumber>{index}</CardNumber>
+        <ImageComp src={prop.imageUrl} alt={prop.name} size={{width:72, height:72, borderRadius:12, margin:'0 10px 0 0 '}}/>
+        <CardContent>
+          <CardTitle>{prop.name}</CardTitle>
+          <CardInfo>{prop.address}</CardInfo>
+          <CardDetail>
+            <IsDrinkIcon src={DrinkIcon} width={13} />
+            <CardCount>{prop.ateCount ? prop.ateCount + '명이 즐겼어요' : prop.ateCount}</CardCount>
+          </CardDetail>
+
+        </CardContent>
+      </CardContainer>
+    </Link>
+  )
+}
 
 const CardContainer = styled.div`
   width: 100%;
@@ -21,14 +42,6 @@ const CardNumber = styled.div`
     font-weight:700;
     font-size:28px;
     letter-spacing: -0.003em;
-`
-
-const CardImage = styled.img`
-  cursor: pointer;
-  flex-shrink:0;
-  width: 64px;
-  height: 64px;
-  margin-right: 14px;
 `
 
 const CardContent = styled.div`
@@ -84,26 +97,6 @@ const IsDrinkIcon = styled.img`
 `
 
 interface RankingItemInterface {
-  prop: drinkType,
+  prop: DrinkType,
   index: number
-}
-
-export default function RankingItem({ prop, index }: RankingItemInterface) {
-  return (
-    <Link to={`/details/${prop.alcoholId}`}>
-      <CardContainer>
-        <CardNumber>{index}</CardNumber>
-        <CardImage src={prop.imageUrl} width={64} height={64}/>
-        <CardContent>
-          <CardTitle>{prop.name}</CardTitle>
-          <CardInfo>{prop.address}</CardInfo>
-          <CardDetail>
-            <IsDrinkIcon src={DrinkIcon} width={13} />
-            <CardCount>{prop.ateCount ? prop.ateCount + '명이 즐겼어요' : prop.ateCount}</CardCount>
-          </CardDetail>
-
-        </CardContent>
-      </CardContainer>
-    </Link>
-  )
 }

@@ -10,12 +10,13 @@ function Header({ children }: HeaderProps) {
 }
 
 const StyledHeader = styled.header`
-  margin-top: 44px;
+  display:inline-block;
   font-weight: 800;
   font-size: 28px;
   line-height: 34px;
   letter-spacing: -0.003em;
   height: 34px;
+  margin-top:12px;
 `
 
 export default Header
