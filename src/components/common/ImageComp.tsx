@@ -28,30 +28,23 @@ const Wrapper = styled.div(({ width, height, borderRadius, margin, padding }: Bo
     flexShrink: 0,
 }))
 
-const Image = React.memo(({ src, alt, onload }: ImageInterface) => {
-    return <img src={src} alt={alt} onLoad={onload} />
-})
+// const Image = React.memo(({ src, alt, onload }: ImageInterface) => {
+//     return <img src={src} alt={alt} onLoad={onload} />
+// })
 
-const ImageComp = ({ src, alt, size }: ImageInterface) => {
-    const [isLoading, setIsLoading] = useState(true);
+const Image = ({ src, alt, onload }: ImageInterface) => {
+    return <img src={src} alt={alt}/>
+}
 
-    const handleImageLoad = () => {
-        setIsLoading(false);
-    }
+const ImageComp = React.memo(({ src, alt, size }: ImageInterface) => {
     return (
         <Wrapper width={size.width} height={size.height} borderRadius={size.borderRadius} margin={size.margin}>
-            {
-                isLoading &&
                 <SkeletonBox>
-                    {/* <Spinner /> */}
+                    <Image src={src} alt={alt} size={size}/>
                 </SkeletonBox>
-            }
-            <LoadedView isLoaded={!isLoading}>
-                <Image src={src} alt={alt} size={size} onload={handleImageLoad} />
-            </LoadedView>
         </Wrapper>
     )
-}
+})
 
 
 export default ImageComp;
