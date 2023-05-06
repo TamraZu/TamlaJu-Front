@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "@emotion/styled";
-import Spinner from "./Spinner";
+// import Spinner from "./Spinner";
 import { BoxStyleInterface, isLoadedType, ImageInterface } from "types/ImageCompType";
 
 const LoadedView = styled.div((props: isLoadedType) => ({
@@ -13,7 +13,7 @@ const SkeletonBox = styled.div(() => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    background: '#eeeeee',
+    background: '#ffffff',
     borderRadius: 'inherit',
     cursor: 'progress',
 
@@ -43,7 +43,7 @@ const ImageComp = ({ src, alt, size }: ImageInterface) => {
             {
                 isLoading &&
                 <SkeletonBox>
-                    <Spinner />
+                    {/* <Spinner /> */}
                 </SkeletonBox>
             }
             <LoadedView isLoaded={!isLoading}>
